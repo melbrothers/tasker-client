@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="1773b1dad3e4b72bca77621985366b9e6a92ae28" datatype="html">
+        <source>Explore</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="075b196fe00bb108ef6b2f6e57dba782cb889773" datatype="html">
+        <source>Browse tasks</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="601360dcb0e46da6b619da435c7f569e9c4c7fde" datatype="html">
+        <source>How it works</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -43,7 +43,7 @@ let defaultConfig = require('tailwindcss/defaultConfig')()
 |
 */
 
-let colors = {
+const colors = {
   'transparent': 'transparent',
 
   'black': '#22292f',

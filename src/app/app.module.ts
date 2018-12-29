@@ -1,15 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import localeZh from '@angular/common/locales/zh-Hans';
+import {registerLocaleData} from '@angular/common';
+
+registerLocaleData(localeZh, 'zh-Hans');
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WelcomeComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -17,7 +25,9 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [
+    {provide: LOCALE_ID, useValue: 'zh-Hans'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
