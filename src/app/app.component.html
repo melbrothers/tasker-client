@@ -1,22 +1,30 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="p-6 bg-grey-darkest body bg-cover bg-left-top bg-no-repeat sm:bg-center sm:bg-no-repeat">
   <div class="container mx-auto w-full h-full">
-    <ul class="list-reset flex">
-      <li class="mr-3">
-        <a class="inline-block  rounded-full py-1 px-3 bg-blue text-white no-underline font-sans text-xs"  href="#">Post a task</a>
-      </li>
-      <li class="mr-3">
-        <a class="inline-block  rounded-full hover:border-grey-lighter text-white hover:bg-grey-lighter py-1 px-3 no-underline font-sans text-xs" href="#" i18n>Explore</a>
-      </li>
-      <li class="mr-3">
-        <a class="inline-block rounded-full hover:border-grey-lighter text-white hover:bg-grey-lighter py-1 px-3 no-underline font-sans text-xs" href="#" i18n>Browse tasks</a>
-      </li>
-      <li class="mr-3">
-        <a class="inline-block rounded-full hover:border-grey-lighter text-white hover:bg-grey-lighter py-1 px-3 no-underline font-sans text-xs" href="#" i18n>How it works</a>
-      </li>
-    </ul>
-    <router-outlet></router-outlet>
+    <div class="nav flex justify-between">
+      <ul class="list-reset flex">
+        <li class="mr-3">
+          <a class="inline-block  rounded-full py-1 px-3 bg-blue text-white no-underline font-sans text-xs"  href="#" i18n>Post a task</a>
+        </li>
+        <li class="mr-3">
+          <a class="inline-block  rounded-full hover:border-grey-lighter text-white hover:bg-grey-lighter py-1 px-3 no-underline font-sans text-xs" href="#" i18n>Explore</a>
+        </li>
+        <li class="mr-3">
+          <a class="inline-block rounded-full hover:border-grey-lighter text-white hover:bg-grey-lighter py-1 px-3 no-underline font-sans text-xs" href="#" i18n>Browse tasks</a>
+        </li>
+        <li class="mr-3">
+          <a class="inline-block rounded-full hover:border-grey-lighter text-white hover:bg-grey-lighter py-1 px-3 no-underline font-sans text-xs" href="#" i18n>How it works</a>
+        </li>
+      </ul>
+      <ul class="list-reset flex">
+        <li class="mr-3">
+          <a class="inline-block py-1 px-3 text-white no-underline font-sans text-xs"  href="#" i18n>Help</a>
+          <a class="inline-block py-1 px-3 text-white no-underline font-sans text-xs"  i18n (click)="openDialog()">Join us/Log in</a>
+        </li>
+      </ul>
+    </div>
 
+    <router-outlet></router-outlet>
 
   </div>
 </div>

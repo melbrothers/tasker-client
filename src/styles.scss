@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@angular/material/theming';
+@import url('//fonts.googleapis.com/icon?family=Material+Icons');
 body {
   margin: 0;
 }
@@ -9,3 +12,24 @@ h1, h2 {
 .xs-bg {
   background: url("./assets/img/carpenter-sm.jpg");
 }
+
+.stroke-through:before {
+  width: 100%;
+  content: "";
+  height: 1px;
+  display: block;
+  background-color: #e0e0e0;
+  position: absolute;
+  top: 0;
+  span {
+    background-color: #fff;
+    top: 0;
+    position: absolute;
+    line-height: 10px;
+    top: -5px;
+    margin-left: -15px;
+    padding: 0 10px;
+    color: gray;
+  }
+}
+
