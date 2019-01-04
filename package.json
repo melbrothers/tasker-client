@@ -4,14 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "local-start": "serve ./dist --single && ngtw watch",
-    "build": "ngtw build && ng build --prod",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --aot --prod",
-    "prestart": "ngtw build",
-    "now-start": "serve ./dist --single"
+    "postinstall": "ng build --aot --prod"
   },
   "private": true,
   "dependencies": {
