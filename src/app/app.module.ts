@@ -12,6 +12,8 @@ import {registerLocaleData} from '@angular/common';
 import {SharedModule} from './shared/shared.module';
 import {RegisterComponent} from './register/register.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 registerLocaleData(localeZh, 'zh-Hans');
 
@@ -21,7 +23,9 @@ registerLocaleData(localeZh, 'zh-Hans');
     AppComponent,
     WelcomeComponent,
     PageNotFoundComponent,
-    RegisterComponent
+    RegisterComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

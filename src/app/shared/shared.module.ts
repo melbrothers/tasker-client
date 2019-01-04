@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  MatButton,
   MatButtonModule,
   MatDialogModule, MatDividerModule,
   MatFormFieldModule, MatIconModule,
   MatInputModule,
   MatOptionModule, MatProgressSpinnerModule,
-  MatSelectModule, MatTableModule, MatTabsModule
+  MatSelectModule, MatTabsModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    NgbModule,
     FormsModule,
     MatButtonModule,
     MatDialogModule,
@@ -31,6 +32,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   exports: [
     ReactiveFormsModule,
     FormsModule,
+    NgbModule,
     MatButtonModule,
     MatDialogModule,
     MatDividerModule,
