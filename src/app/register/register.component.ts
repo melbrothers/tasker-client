@@ -9,12 +9,13 @@ import {AuthService} from '../providers/auth.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
 
+export class RegisterComponent implements OnInit {
   name: string;
   loginForm: FormGroup;
   registerForm: FormGroup;
-  isPassMatch = false;
+  isPassMatch = true;
+  isEmailTaken: boolean;
   errorMsgs = {
     emailErrorMsg: '',
     passwordErrorMsg: '',
@@ -31,15 +32,23 @@ export class RegisterComponent implements OnInit {
                ) {
     iconRegistry.addSvgIcon('facebook-icon', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/fb.svg'));
     iconRegistry.addSvgIcon('google-icon', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/google.svg'));
-    this.createForm();
+    this.createRegForm();
+    this.createLoginForm();
   }
-  createForm(): void {
+  createRegForm(): void {
     const controlsConfig = {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      cPassword: ['', [Validators.required, Validators.minLength(8)]]
+      password_confirmation: ['', [Validators.required, Validators.minLength(8)]]
     };
     this.registerForm = this.fb.group(controlsConfig);
+  }
+  createLoginForm(): void {
+    const controlsConfig = {
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]]
+    };
+    this.loginForm = this.fb.group(controlsConfig);
   }
   getErrorMessage() {
     if (this.registerForm.controls.email == null) {
@@ -51,7 +60,7 @@ export class RegisterComponent implements OnInit {
     if (!this.registerForm.controls.password.valid) {
       this.errorMsgs.passwordErrorMsg = 'Please supply a legal password';
     }
-    if (!this.registerForm.controls.cPassword.valid) {
+    if (!this.registerForm.controls.password_confirmation.valid) {
       this.errorMsgs.cPasswordErrorMsg = 'Please supply a legal password';
     }
     return this.errorMsgs;
@@ -59,16 +68,46 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
+  checkPassMatch(): void {
+    this.isPassMatch = this.registerForm.value.password === this.registerForm.value.password_confirmation;
+    this.getErrorMessage();
+  }
+
   signup(): void {
+    const self  = this;
+    self.isEmailTaken = false;
     if (this.registerForm.valid) {
-      if (this.registerForm.value.password === this.registerForm.value.cPassword) {
-        this.isPassMatch = true;
+      if (this.registerForm.value.password === this.registerForm.value.password_confirmation) {
         this.registerForm.value.email = this.registerForm.value.email.toLowerCase();
+        this.registerForm.value.name = this.registerForm.value.email;
         this.inProcess = true;
-        this.authService.register(this.registerForm.value).subscribe(res => {
+        this.authService.register(this.registerForm.value).subscribe((res: any) => {
           console.log(res);
+          this.inProcess = false;
+          localStorage.setItem('access_token', res.access_token);
+          localStorage.setItem('refresh_token', res.refresh_token);
+        }, error => {
+          self.inProcess = false;
+          if (error.status === 422) {
+            self.isEmailTaken = true;
+            self.errorMsgs.emailErrorMsg = 'This email is already taken!';
+          }
         });
+      } else {
+        this.isPassMatch = false;
+        this.inProcess = false;
+        this.errorMsgs.cPasswordErrorMsg = 'Passwords do not match!';
+        // return;
       }
+    }
+  }
+
+  login(): void {
+    const self  = this;
+    self.isEmailTaken = false;
+    if (this.registerForm.valid) {
+      this.registerForm.value.email = this.registerForm.value.email.toLowerCase();
+      this.inProcess = true;
     }
   }
 
