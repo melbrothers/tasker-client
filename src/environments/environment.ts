@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  dataUrl: 'https://www.techiediaries.com/api/data.json',
   apiUrl: 'http://taskerapi.herokuapp.com'
 };
 
