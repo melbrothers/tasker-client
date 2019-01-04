@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatIconRegistry} from '@angula
 import {DomSanitizer} from '@angular/platform-browser';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../providers/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -27,6 +28,7 @@ export class RegisterComponent implements OnInit {
                private iconRegistry: MatIconRegistry,
                private sanitizer: DomSanitizer,
                private fb: FormBuilder,
+               private router: Router,
                private authService: AuthService,
                @Inject(MAT_DIALOG_DATA) public data: any,
                ) {
@@ -105,9 +107,25 @@ export class RegisterComponent implements OnInit {
   login(): void {
     const self  = this;
     self.isEmailTaken = false;
-    if (this.registerForm.valid) {
-      this.registerForm.value.email = this.registerForm.value.email.toLowerCase();
+    if (this.loginForm.valid) {
+      this.loginForm.value.email = this.loginForm.value.email.toLowerCase();
       this.inProcess = true;
+      this.authService.login(this.loginForm.value).subscribe((res: any) => {
+        localStorage.setItem('access_token', res.access_token);
+        localStorage.setItem('refresh_token', res.refresh_token);
+        self.authService.currentUser = {
+          id: res.access_token,
+          userName: this.loginForm.value.email,
+          isAdmin: false,
+          type: ''
+        };
+        self.dialogRef.close();
+        if (self.authService.redirectUrl) {
+          this.router.navigateByUrl(this.authService.redirectUrl);
+        } else {
+          this.router.navigate(['/welcome']);
+        }
+      });
     }
   }
 

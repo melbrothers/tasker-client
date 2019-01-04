@@ -3,11 +3,14 @@ import {HttpHeaders, HttpParams} from '@angular/common/http';
 import {ApiService} from './api.service';
 import {shareReplay} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {IUser} from '../model/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  currentUser: IUser;
+  redirectUrl: string;
   constructor(private api: ApiService) { }
   register(signinForm): Observable<any> {
     const endpointTag = 'register';
@@ -22,5 +25,8 @@ export class AuthService {
     headers.append('Access-Control-Allow-Origin', '*');
     const body = new HttpParams({fromObject: loginForm });
     return  this.api.post(endpointTag, body, headers).pipe(shareReplay(1));
+  }
+  logout(): void {
+    localStorage.clear();
   }
 }

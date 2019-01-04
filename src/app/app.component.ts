@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {RegisterComponent} from './register/register.component';
+import {AuthService} from './providers/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent {
   title = 'tasker-client';
   animal: string;
   name: string;
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private authService: AuthService) {}
   openDialog(): void {
     const dialogRef = this.dialog.open(RegisterComponent, {
       width: '480px',
