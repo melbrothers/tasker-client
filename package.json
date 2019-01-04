@@ -29,10 +29,10 @@
     "core-js": "^2.5.4",
     "enhanced-resolve": "^4.1.0",
     "express": "^4.16.4",
-    "tailwindcss": "^0.7.3",
     "path": "^0.12.7",
     "rxjs": "~6.3.3",
     "serve": "^10.1.1",
+    "tailwindcss": "^0.7.3",
     "tslib": "^1.9.0",
     "typescript": "~3.1.6",
     "zone.js": "~0.8.26"
