@@ -9,8 +9,6 @@ import {MatDialog} from '@angular/material';
 })
 export class HeaderComponent implements OnInit {
   loggedIn = false;
-  animal: string;
-  name: string;
   constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
@@ -19,7 +17,7 @@ export class HeaderComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(RegisterComponent, {
       width: '480px',
-      data: {name: this.name, animal: this.animal}
+      panelClass: 'registerDialog'
     });
 
     dialogRef.afterClosed().subscribe(result => {
