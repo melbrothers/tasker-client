@@ -1,86 +1,138 @@
 <mat-tab-group>
   <mat-tab label="Join us">
     <form class="register" [formGroup]="registerForm">
-      <h3 class="text-center p-2 font-sans text-base">Join us</h3>
+      <div class="welcome-text margin-top-20">
+        <h3>Let's create your account!</h3>
+      </div>
       <mat-form-field hideRequiredMarker = "false" floatLabel="auto">
-        <input matInput placeholder="Email" type="email" required formControlName="email">
+        <mat-icon matPrefix>email</mat-icon>
+        <input matInput placeholder="Email Address" type="email" required formControlName="email">
         <mat-error *ngIf="!registerForm.controls.email.valid">{{getErrorMessage().emailErrorMsg}}</mat-error>
       </mat-form-field>
 
       <mat-form-field hideRequiredMarker="false" floatLabel="auto">
+        <mat-icon matPrefix>lock</mat-icon>
         <input matInput placeholder="Password" type="password" required formControlName="password">
         <mat-error *ngIf="!registerForm.controls.password.valid">{{getErrorMessage().passwordErrorMsg}}</mat-error>
       </mat-form-field>
 
       <mat-form-field hideRequiredMarker="false" floatLabel="auto">
-        <input matInput placeholder="Confirm Password" type="password" required formControlName="password_confirmation" (blur)="checkPassMatch();">
+        <mat-icon matPrefix>lock</mat-icon>
+        <input matInput placeholder="Repeat Password" type="password" required formControlName="password_confirmation" (blur)="checkPassMatch();">
         <mat-error *ngIf="!registerForm.controls.password_confirmation.valid">{{getErrorMessage().cPasswordErrorMsg}}</mat-error>
         <p *ngIf="!isPassMatch" class="mat-error">Passwords do not match!</p>
       </mat-form-field>
 
-      <button mat-raised-button
-              color="primary"
-              class="p-3 my-4 rounded-full text-base font-sans"
-              type="submit"
-              [disabled]="!registerForm.valid || isPassMatch===false"
-              (click)="signup();">Join</button>
+      <button class="margin-top-10 button full-width button-sliding-icon ripple-effect" type="submit" [disabled]="!registerForm.valid || isPassMatch===false" (click)="signup();">Register <i class="icon-material-outline-arrow-right-alt"></i></button>
+
+      <!--<button mat-raised-button-->
+              <!--color="primary"-->
+              <!--class="p-3 my-4 rounded-full text-base font-sans"-->
+              <!--type="submit"-->
+              <!--[disabled]="!registerForm.valid || isPassMatch===false"-->
+              <!--(click)="signup();">Register</button>-->
       <p *ngIf="isEmailTaken" class="mat-error">This email is already taken, please choose another one.</p>
+
       <mat-progress-spinner class="spinner justify-center text-center mx-auto" mode="indeterminate" color="accent" value="10" diameter="20" *ngIf="inProcess"></mat-progress-spinner>
     </form>
 
-    <p class="text-center font-sans text-base stroke-through my-3">
-      <span>or</span>
-    </p>
+    <div class="social-login-separator"><span>or</span></div>
 
-    <div class="flex">
-      <button mat-stroked-button color="primary" class="p-3 m-2 font-sans text-sm w-1/2 rounded-full">
-        <mat-icon svgIcon="facebook-icon" class="fb-icon"></mat-icon>
-        Signup via Facebook
-      </button>
-      <button mat-stroked-button color="accent" class="p-3 m-2 font-sans text-sm w-1/2 rounded-full">
-        <mat-icon svgIcon="google-icon" class="google-icon"></mat-icon>
-        Signup via Google+
-      </button>
+    <div class="social-login-buttons">
+      <button class="facebook-login ripple-effect"><i class="icon-brand-facebook-f"></i> Register via Facebook</button>
+      <button class="google-login ripple-effect"><i class="icon-brand-google-plus-g"></i> Register via Google+</button>
     </div>
-    <p class="font-sans text-xs my-2">By signing up, I agree to Airtasker's <a href="#">Terms & Conditions</a>, and <a
+    <p class="mat-small my-2">By signing up, I agree to Airtasker's <a href="#">Terms & Conditions</a>, and <a
       href="#">Community Guidelines</a>. <a href="#">Privacy Policy</a>.</p>
   </mat-tab>
 
   <mat-tab label="Log in">
     <form class="login" [formGroup]="loginForm">
-      <h3 class="text-center p-2 font-sans text-base">Log in</h3>
+      <div class="welcome-text margin-top-20">
+        <h3>We're glad to see you again!</h3>
+        <span>Don't have an account? <a href="#" class="register-tab">Sign Up!</a></span>
+      </div>
       <mat-form-field>
-        <input matInput placeholder="Email" type="email" required formControlName="email">
+        <mat-icon matPrefix>email</mat-icon>
+        <input matInput placeholder="Email Address" type="email" required formControlName="email">
         <mat-error *ngIf="!registerForm.controls.email.valid">{{getErrorMessage().emailErrorMsg}}</mat-error>
       </mat-form-field>
 
       <mat-form-field>
+        <mat-icon matPrefix>lock</mat-icon>
         <input matInput placeholder="Password" type="password" required formControlName="password">
         <mat-error *ngIf="!registerForm.controls.password.valid">{{getErrorMessage().passwordErrorMsg}}</mat-error>
       </mat-form-field>
-      <a href="#" class="font-sans text-sm">Forget password?</a>
-      <button mat-raised-button color="primary" class="p-3 my-2 rounded-full text-base font-sans my-4" (click)="login()">Log in</button>
-      <p class="text-center font-sans text-base stroke-through my-3">
-        <span>or</span>
-      </p>
+      <a href="#" class="forgot-password">Forgot Password?</a>
+      <button class="button full-width button-sliding-icon ripple-effect margin-top-20" type="submit" (click)="login();">Log In <i class="icon-material-outline-arrow-right-alt"></i></button>
+      <div class="social-login-separator"><span>or</span></div>
 
-      <div class="flex">
-        <button mat-stroked-button color="primary" class="p-3 m-2 font-sans text-sm w-1/2 rounded-full">
-          <mat-icon svgIcon="facebook-icon" class="fb-icon"></mat-icon>
-          Login via Facebook
-        </button>
-        <button mat-stroked-button color="accent" class="p-3 m-2 font-sans text-sm w-1/2 rounded-full">
-          <mat-icon svgIcon="google-icon" class="google-icon"></mat-icon>
-          Login via Google+
-        </button>
+      <div class="social-login-buttons">
+        <button class="facebook-login ripple-effect"><i class="icon-brand-facebook-f"></i> Log In via Facebook</button>
+        <button class="google-login ripple-effect"><i class="icon-brand-google-plus-g"></i> Log In via Google+</button>
       </div>
       <mat-divider></mat-divider>
-      <div class="flex justify-between text-sm font-sans my-2">
-        <p>Don't have an account?</p>
-        <a href="#">Sign up</a>
-      </div>
     </form>
 
   </mat-tab>
 </mat-tab-group>
+
+<!-- Page Content
+================================================== -->
+<!--<div class="container">-->
+  <!--<div class="row">-->
+    <!--<div class="col-12">-->
+
+      <!--<div class="login-register-page">-->
+        <!--&lt;!&ndash; Welcome Text &ndash;&gt;-->
+        <!--<div class="welcome-text">-->
+          <!--<h3 style="font-size: 26px;">Let's create your account!</h3>-->
+          <!--<span>Already have an account? <a href="pages-login.html">Log In!</a></span>-->
+        <!--</div>-->
+
+        <!--&lt;!&ndash; Account Type &ndash;&gt;-->
+        <!--<div class="account-type">-->
+          <!--<div>-->
+            <!--<input type="radio" name="account-type-radio" id="freelancer-radio" class="account-type-radio" checked/>-->
+            <!--<label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Freelancer</label>-->
+          <!--</div>-->
+
+          <!--<div>-->
+            <!--<input type="radio" name="account-type-radio" id="employer-radio" class="account-type-radio"/>-->
+            <!--<label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Employer</label>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--&lt;!&ndash; Form &ndash;&gt;-->
+        <!--<form method="post" id="register-account-form">-->
+          <!--<div class="input-with-icon-left">-->
+            <!--<i class="icon-material-baseline-mail-outline"></i>-->
+            <!--<input type="text" class="input-text with-border" name="emailaddress-register" id="emailaddress-register" placeholder="Email Address" required/>-->
+          <!--</div>-->
+
+          <!--<div class="input-with-icon-left" title="Should be at least 8 characters long" data-tippy-placement="bottom">-->
+            <!--<i class="icon-material-outline-lock"></i>-->
+            <!--<input type="password" class="input-text with-border" name="password-register" id="password-register" placeholder="Password" required/>-->
+          <!--</div>-->
+
+          <!--<div class="input-with-icon-left">-->
+            <!--<i class="icon-material-outline-lock"></i>-->
+            <!--<input type="password" class="input-text with-border" name="password-repeat-register" id="password-repeat-register" placeholder="Repeat Password" required/>-->
+          <!--</div>-->
+        <!--</form>-->
+
+        <!--&lt;!&ndash; Button &ndash;&gt;-->
+        <!--<button class="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit" form="login-form">Register <i class="icon-material-outline-arrow-right-alt"></i></button>-->
+
+        <!--&lt;!&ndash; Social Login &ndash;&gt;-->
+        <!--<div class="social-login-separator"><span>or</span></div>-->
+        <!--<div class="social-login-buttons">-->
+          <!--<button class="facebook-login ripple-effect"><i class="icon-brand-facebook-f"></i> Register via Facebook</button>-->
+          <!--<button class="google-login ripple-effect"><i class="icon-brand-google-plus-g"></i> Register via Google+</button>-->
+        <!--</div>-->
+      <!--</div>-->
+
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 
