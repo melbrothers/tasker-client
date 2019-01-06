@@ -14,6 +14,7 @@ import {RegisterComponent} from './register/register.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { JobListComponent } from './job-list/job-list.component';
 
 registerLocaleData(localeZh, 'zh-Hans');
 
@@ -25,7 +26,8 @@ registerLocaleData(localeZh, 'zh-Hans');
     PageNotFoundComponent,
     RegisterComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    JobListComponent
   ],
   imports: [
     BrowserModule,
