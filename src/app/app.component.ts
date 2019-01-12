@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {RegisterComponent} from './register/register.component';
 import {AuthService} from './providers/auth.service';
 
 @Component({
@@ -8,20 +7,26 @@ import {AuthService} from './providers/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'tasker-client';
-  animal: string;
   name: string;
-  constructor(public dialog: MatDialog, private authService: AuthService) {}
-  openDialog(): void {
-    const dialogRef = this.dialog.open(RegisterComponent, {
-      width: '480px',
-      data: {name: this.name, animal: this.animal}
-    });
+  constructor() {}
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
+  ngOnInit(): void {
+    window.addEventListener('scroll', this.stickyHeader);
+  }
+
+  stickyHeader(): void {
+    const number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const header = document.getElementById('header-container');
+    if (number > 82) {
+      header.classList.remove('transparent-header');
+      header.classList.add('sticky');
+    } else if (number === 0) {
+      header.classList.add('transparent-header');
+    } else {
+      header.classList.remove('sticky');
+      header.classList.add('transparent-header');
+    }
   }
 }

@@ -44,3 +44,15 @@ input, input[type=email], input[type=number], input[type=password], input[type=t
   line-height: inherit;
   height: auto;
 }
+
+::ng-deep {
+  .mat-tab-label {
+    .mat-tab-label-content {
+      font-size: 16px;
+      font-family: nunito,helveticaneue,helvetica neue,Helvetica,Arial,sans-serif;
+      font-weight: 500;
+    }
+  }
+}
+
+

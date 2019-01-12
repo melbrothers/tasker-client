@@ -6,10 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
-
+  stickyClass: string;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  stickyHeader(): void {
+    if (document.body.scrollTop > 100) {
+      this.stickyClass = 'clone sticky';
+    } else {
+      this.stickyClass = 'unsticky';
+    }
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {RegisterComponent} from '../register/register.component';
 import {MatDialog} from '@angular/material';
 
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(RegisterComponent, {
-      width: '480px',
+      width: '36%',
       panelClass: 'registerDialog'
     });
 
