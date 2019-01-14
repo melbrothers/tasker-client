@@ -1,10 +1,15 @@
 #header-container {
   position: fixed;
   top: 0;
+
+}
+.transparent-header {
+  color: white;
 }
 #header-container.sticky {
   opacity: 1;
   background: white;
   transition: .3s;
+
 }
 

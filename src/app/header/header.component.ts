@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {RegisterComponent} from '../register/register.component';
 import {MatDialog} from '@angular/material';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,9 +10,23 @@ import {MatDialog} from '@angular/material';
 })
 export class HeaderComponent implements OnInit {
   loggedIn = false;
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog,
+              private activatedRouter: ActivatedRoute) { }
 
   ngOnInit() {
+    const header = document.getElementById('header-container');
+    header.classList.add('transparent-header');
+    this.activatedRouter.url.subscribe(url => {
+      console.log(url);
+      if (url.length) {
+        const pathName = url[0].path;
+        switch (pathName) {
+          case 'jobs':
+            header.classList.remove('transparent-header');
+            break;
+        }
+      }
+    });
   }
 
   openDialog(): void {

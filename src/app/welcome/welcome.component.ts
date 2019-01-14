@@ -12,12 +12,4 @@ export class WelcomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  stickyHeader(): void {
-    if (document.body.scrollTop > 100) {
-      this.stickyClass = 'clone sticky';
-    } else {
-      this.stickyClass = 'unsticky';
-    }
-  }
-
 }
