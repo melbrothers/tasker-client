@@ -15,6 +15,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { JobListComponent } from './job-list/job-list.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 registerLocaleData(localeZh, 'zh-Hans');
 
@@ -27,7 +28,8 @@ registerLocaleData(localeZh, 'zh-Hans');
     RegisterComponent,
     HeaderComponent,
     FooterComponent,
-    JobListComponent
+    JobListComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

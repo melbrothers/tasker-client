@@ -22,8 +22,8 @@ export class AppComponent implements OnInit{
     if (number > 82) {
         header.classList.remove('transparent-header');
         header.classList.add('sticky');
-    }  else {
-      if (document.location.pathname !== '/jobs') {
+    } else {
+      if (document.location.pathname == null) {
         header.classList.remove('sticky');
         header.classList.add('transparent-header');
       } else {

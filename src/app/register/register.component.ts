@@ -123,7 +123,7 @@ export class RegisterComponent implements OnInit {
         if (self.authService.redirectUrl) {
           this.router.navigateByUrl(this.authService.redirectUrl);
         } else {
-          this.router.navigate(['/welcome']);
+          this.router.navigate(['/dashboard']);
         }
       });
     }

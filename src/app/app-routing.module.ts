@@ -3,9 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import {WelcomeComponent} from './welcome/welcome.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {JobListComponent} from './job-list/job-list.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
+  {path: 'dashboard', component: DashboardComponent},
   {path: 'jobs', component: JobListComponent},
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }

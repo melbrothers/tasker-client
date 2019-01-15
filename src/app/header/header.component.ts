@@ -15,16 +15,22 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     const header = document.getElementById('header-container');
-    header.classList.add('transparent-header');
     this.activatedRouter.url.subscribe(url => {
       console.log(url);
       if (url.length) {
         const pathName = url[0].path;
-        switch (pathName) {
-          case 'jobs':
-            header.classList.remove('transparent-header');
-            break;
+        if (pathName == null) {
+          header.classList.add('transparent-header');
         }
+
+        // switch (pathName) {
+        //   case 'jobs':
+        //     header.classList.remove('transparent-header');
+        //     break;
+        //   case 'dashboard':
+        //     header.classList.remove('transparent-header');
+        //     break;
+        // }
       }
     });
   }
