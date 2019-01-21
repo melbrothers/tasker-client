@@ -88,6 +88,20 @@ export class RegisterComponent implements OnInit {
           this.inProcess = false;
           localStorage.setItem('access_token', res.access_token);
           localStorage.setItem('refresh_token', res.refresh_token);
+          self.authService.currentUser = {
+            id: res.access_token,
+            userName: this.registerForm.value.email,
+            isAdmin: false,
+            type: ''
+          };
+          localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
+          self.authService.loggedIn = true;
+          self.dialogRef.close();
+          if (self.authService.redirectUrl) {
+            this.router.navigateByUrl(this.authService.redirectUrl);
+          } else {
+            this.router.navigate(['/dashboard']);
+          }
         }, error => {
           self.inProcess = false;
           if (error.status === 422) {
@@ -119,6 +133,8 @@ export class RegisterComponent implements OnInit {
           isAdmin: false,
           type: ''
         };
+        localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
+        self.authService.loggedIn = true;
         self.dialogRef.close();
         if (self.authService.redirectUrl) {
           this.router.navigateByUrl(this.authService.redirectUrl);

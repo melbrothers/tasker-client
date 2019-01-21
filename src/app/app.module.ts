@@ -16,6 +16,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { JobListComponent } from './job-list/job-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserNotificationsComponent } from './user-notifications/user-notifications.component';
 
 registerLocaleData(localeZh, 'zh-Hans');
 
@@ -29,7 +30,8 @@ registerLocaleData(localeZh, 'zh-Hans');
     HeaderComponent,
     FooterComponent,
     JobListComponent,
-    DashboardComponent
+    DashboardComponent,
+    UserNotificationsComponent
   ],
   imports: [
     BrowserModule,

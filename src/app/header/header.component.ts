@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {RegisterComponent} from '../register/register.component';
 import {MatDialog} from '@angular/material';
 import {ActivatedRoute} from '@angular/router';
+import {IUser} from '../model/user';
+import {AuthService} from '../providers/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,12 +11,14 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  loggedIn = false;
+  currentUser: IUser;
   constructor(private dialog: MatDialog,
-              private activatedRouter: ActivatedRoute) { }
+              private activatedRouter: ActivatedRoute,
+              private authService: AuthService) { }
 
   ngOnInit() {
     const header = document.getElementById('header-container');
+    this.currentUser = JSON.parse(localStorage.getItem('current_user'));
     this.activatedRouter.url.subscribe(url => {
       console.log(url);
       if (url.length) {
@@ -37,7 +41,7 @@ export class HeaderComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(RegisterComponent, {
-      width: '36%',
+      width: '540px',
       panelClass: 'registerDialog'
     });
 
