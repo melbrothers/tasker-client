@@ -11,7 +11,7 @@ import {IUser} from '../model/user';
 export class AuthService {
   currentUser: IUser;
   redirectUrl: string;
-  loggedIn: boolean;
+  isLoggedIn: boolean;
   constructor(private api: ApiService) { }
   register(signinForm): Observable<any> {
     const endpointTag = 'register';

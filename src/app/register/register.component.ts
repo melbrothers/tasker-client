@@ -96,7 +96,7 @@ export class RegisterComponent implements OnInit {
             type: ''
           };
           localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
-          self.authService.loggedIn = true;
+          self.authService.isLoggedIn = true;
           self.dialogRef.close();
           if (self.authService.redirectUrl) {
             this.router.navigateByUrl(this.authService.redirectUrl);
@@ -135,7 +135,7 @@ export class RegisterComponent implements OnInit {
           type: ''
         };
         localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
-        self.authService.loggedIn = true;
+        self.authService.isLoggedIn = true;
         self.dialogRef.close();
         if (self.authService.redirectUrl) {
           this.router.navigateByUrl(this.authService.redirectUrl);

@@ -12,14 +12,14 @@ import {AuthService} from '../providers/auth.service';
 })
 export class HeaderComponent implements OnInit {
   currentUser: IUser;
-  loggedIn: boolean;
+  isLoggedIn: boolean;
   constructor(private dialog: MatDialog,
               private activatedRouter: ActivatedRoute,
               private authService: AuthService) { }
 
   ngOnInit() {
     const header = document.getElementById('header-container');
-    this.loggedIn = this.authService.loggedIn;
+    this.isLoggedIn = this.authService.isLoggedIn;
     this.currentUser = JSON.parse(localStorage.getItem('current_user'));
     this.activatedRouter.url.subscribe(url => {
       console.log(url);
