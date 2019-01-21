@@ -20,7 +20,8 @@ export class RegisterComponent implements OnInit {
   errorMsgs = {
     emailErrorMsg: '',
     passwordErrorMsg: '',
-    cPasswordErrorMsg: ''
+    cPasswordErrorMsg: '',
+    credentialErrorMsg: ''
   };
   inProcess = false;
 
@@ -141,6 +142,10 @@ export class RegisterComponent implements OnInit {
         } else {
           this.router.navigate(['/dashboard']);
         }
+      }, error => {
+        console.log(error);
+        this.inProcess = false;
+        this.errorMsgs.credentialErrorMsg = error.error.message;
       });
     }
   }

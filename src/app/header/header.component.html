@@ -291,7 +291,7 @@
           </div>
 
           <!-- login/register-->
-          <a class="popup-with-zoom-anim log-in-button" (click)="openDialog();" *ngIf="currentUser == null"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
+          <a class="popup-with-zoom-anim log-in-button" (click)="openDialog();" *ngIf="!loggedIn"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
 
         </div>
         <!-- User Menu / End -->
