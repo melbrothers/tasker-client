@@ -28,6 +28,7 @@
     "@angular/service-worker": "~7.1.0",
     "@ng-bootstrap/ng-bootstrap": "^4.0.1",
     "@ngrx/store": "^7.0.0",
+    "angularx-social-login": "^1.2.6",
     "core-js": "^2.5.4",
     "enhanced-resolve": "^4.1.0",
     "express": "^4.16.4",

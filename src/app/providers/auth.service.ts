@@ -4,6 +4,8 @@ import {ApiService} from './api.service';
 import {shareReplay} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {IUser} from '../model/user';
+import * as googleAuthService from 'angularx-social-login';
+import {GoogleLoginProvider} from 'angularx-social-login';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,10 @@ export class AuthService {
   currentUser: IUser;
   redirectUrl: string;
   isLoggedIn: boolean;
-  constructor(private api: ApiService) { }
+  constructor(
+    private api: ApiService,
+    private googleAuth: googleAuthService.AuthService
+              ) { }
   register(signinForm): Observable<any> {
     const endpointTag = 'register';
     const headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded');
@@ -27,7 +32,14 @@ export class AuthService {
     const body = new HttpParams({fromObject: loginForm });
     return  this.api.post(endpointTag, body, headers).pipe(shareReplay(1));
   }
+
+  signInWithGoogle(): void {
+    this.googleAuth.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+
   logout(): void {
     localStorage.clear();
+    this.googleAuth.signOut();
   }
 }

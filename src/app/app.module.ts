@@ -18,8 +18,35 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {StoreModule} from '@ngrx/store';
 import { ShellComponent } from './shell/shell.component';
 import {UserModule} from './user/user.module';
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+  LinkedInLoginProvider
+} from 'angularx-social-login';
 
 registerLocaleData(localeZh, 'zh-Hans');
+
+const config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider(environment.googleClientId)
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('Facebook-App-Id')
+  },
+  {
+    id: LinkedInLoginProvider.PROVIDER_ID,
+    provider: new LinkedInLoginProvider('LinkedIn-client-Id', false, 'en_US')
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
+
 
 @NgModule({
   entryComponents: [],
@@ -41,11 +68,13 @@ registerLocaleData(localeZh, 'zh-Hans');
     BrowserAnimationsModule,
     SharedModule,
     UserModule,
+    SocialLoginModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     StoreModule.forRoot({})
   ],
   providers: [
-    {provide: LOCALE_ID, useValue: 'zh-Hans'}
+    {provide: LOCALE_ID, useValue: 'zh-Hans', multi: true},
+    {provide: AuthServiceConfig, useFactory: provideConfig, multi: true}
   ],
   bootstrap: [AppComponent]
 })
