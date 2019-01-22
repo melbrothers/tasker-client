@@ -1,25 +1,38 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {RegisterComponent} from '../register/register.component';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {RegisterComponent} from '../user/register/register.component';
 import {MatDialog} from '@angular/material';
 import {ActivatedRoute} from '@angular/router';
 import {IUser} from '../model/user';
 import {AuthService} from '../providers/auth.service';
+import {select, Store} from '@ngrx/store';
+import * as fromUser from '../user/state/user.reducer';
+import {takeWhile} from 'rxjs/operators';
+
+/* NgRx */
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   currentUser: IUser;
   isLoggedIn: boolean;
+  componentActive = true;
   constructor(private dialog: MatDialog,
               private activatedRouter: ActivatedRoute,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private store: Store<fromUser.UserState>) { }
 
   ngOnInit() {
     const header = document.getElementById('header-container');
-    this.isLoggedIn = this.authService.isLoggedIn;
+    // this.isLoggedIn = this.authService.isLoggedIn;
+    this.store.pipe(select(fromUser.getLoginStatus), takeWhile(() => this.componentActive)).subscribe(
+      (isLoggedIn) => {
+        this.isLoggedIn = isLoggedIn;
+      }
+    );
+    console.log(this.isLoggedIn);
     this.currentUser = JSON.parse(localStorage.getItem('current_user'));
     this.activatedRouter.url.subscribe(url => {
       console.log(url);
@@ -28,17 +41,12 @@ export class HeaderComponent implements OnInit {
         if (pathName == null) {
           header.classList.add('transparent-header');
         }
-
-        // switch (pathName) {
-        //   case 'jobs':
-        //     header.classList.remove('transparent-header');
-        //     break;
-        //   case 'dashboard':
-        //     header.classList.remove('transparent-header');
-        //     break;
-        // }
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.componentActive = false;
   }
 
   openDialog(): void {

@@ -1,9 +1,14 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../providers/auth.service';
+import {AuthService} from '../../providers/auth.service';
 import {Router} from '@angular/router';
+import {select, Store} from '@ngrx/store';
+import * as fromUser from '../state/user.reducer';
+import * as userActions from '../state/user.actions';
+import * as fromRoot from '../../state/app.state';
+import {takeWhile} from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +16,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./register.component.scss']
 })
 
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   name: string;
   loginForm: FormGroup;
   registerForm: FormGroup;
@@ -23,13 +28,16 @@ export class RegisterComponent implements OnInit {
     cPasswordErrorMsg: '',
     credentialErrorMsg: ''
   };
+  componentActive = true;
   inProcess = false;
+  isLoggedIn: boolean;
 
   constructor( public dialogRef: MatDialogRef<RegisterComponent>,
                private iconRegistry: MatIconRegistry,
                private sanitizer: DomSanitizer,
                private fb: FormBuilder,
                private router: Router,
+               private store: Store<fromRoot.State>,
                private authService: AuthService,
                @Inject(MAT_DIALOG_DATA) public data: any,
                ) {
@@ -68,7 +76,14 @@ export class RegisterComponent implements OnInit {
     }
     return this.errorMsgs;
   }
-  ngOnInit() {
+  ngOnInit(): void {
+    this.store.pipe(select(fromUser.getLoginStatus), takeWhile(() => this.componentActive)).subscribe(
+      isLoggedIn => this.isLoggedIn = isLoggedIn
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.componentActive = false;
   }
 
   checkPassMatch(): void {
@@ -96,7 +111,8 @@ export class RegisterComponent implements OnInit {
             type: ''
           };
           localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
-          self.authService.isLoggedIn = true;
+          // self.authService.isLoggedIn = true;
+          this.store.dispatch(new userActions.SetLoginStatus(true));
           self.dialogRef.close();
           if (self.authService.redirectUrl) {
             this.router.navigateByUrl(this.authService.redirectUrl);
@@ -135,7 +151,8 @@ export class RegisterComponent implements OnInit {
           type: ''
         };
         localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
-        self.authService.isLoggedIn = true;
+        // self.authService.isLoggedIn = true;
+        this.store.dispatch(new userActions.SetLoginStatus(true));
         self.dialogRef.close();
         if (self.authService.redirectUrl) {
           this.router.navigateByUrl(this.authService.redirectUrl);
