@@ -4,36 +4,37 @@ import { User } from '../user';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { UserActions, UserActionTypes } from './user.actions';
 
+
 // State for this feature (User)
 export interface UserState {
-  maskUserName: boolean;
+  isLoggedIn: boolean;
   currentUser: User;
 }
 
 const initialState: UserState = {
-  maskUserName: true,
+  isLoggedIn: false,
   currentUser: null
 };
 
 // Selector functions
 const getUserFeatureState = createFeatureSelector<UserState>('users');
 
-export const getMaskUserName = createSelector(
+export const getLoginStatus = createSelector(
   getUserFeatureState,
-  state => state.maskUserName
+  (state: UserState) => state.isLoggedIn
 );
 
 export const getCurrentUser = createSelector(
   getUserFeatureState,
-  state => state.currentUser
+  (state: UserState) => state.currentUser
 );
 
 export function reducer(state = initialState, action: UserActions): UserState {
   switch (action.type) {
-    case UserActionTypes.MaskUserName:
+    case UserActionTypes.SetLoginStatus:
       return {
         ...state,
-        maskUserName: action.payload
+        isLoggedIn: action.payload
       };
 
     default:

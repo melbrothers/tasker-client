@@ -7,19 +7,19 @@
       <mat-form-field hideRequiredMarker = "false" floatLabel="auto">
         <mat-icon matPrefix>email</mat-icon>
         <input matInput placeholder="Email Address" type="email" required formControlName="email">
-        <mat-error *ngIf="!registerForm.controls.email.valid">{{getErrorMessage().emailErrorMsg}}</mat-error>
+        <mat-error>{{getErrorMessage().emailErrorMsg}}</mat-error>
       </mat-form-field>
 
       <mat-form-field hideRequiredMarker="false" floatLabel="auto">
         <mat-icon matPrefix>lock</mat-icon>
         <input matInput placeholder="Password" type="password" required formControlName="password">
-        <mat-error *ngIf="!registerForm.controls.password.valid">{{getErrorMessage().passwordErrorMsg}}</mat-error>
+        <mat-error>{{getErrorMessage().passwordErrorMsg}}</mat-error>
       </mat-form-field>
 
       <mat-form-field hideRequiredMarker="false" floatLabel="auto">
         <mat-icon matPrefix>lock</mat-icon>
         <input matInput placeholder="Repeat Password" type="password" required formControlName="password_confirmation" (blur)="checkPassMatch();">
-        <mat-error *ngIf="!registerForm.controls.password_confirmation.valid">{{getErrorMessage().cPasswordErrorMsg}}</mat-error>
+        <mat-error>{{getErrorMessage().cPasswordErrorMsg}}</mat-error>
         <p *ngIf="!isPassMatch" class="mat-error">Passwords do not match!</p>
       </mat-form-field>
 
@@ -55,13 +55,13 @@
       <mat-form-field>
         <mat-icon matPrefix>email</mat-icon>
         <input matInput placeholder="Email Address" type="email" required formControlName="email">
-        <mat-error *ngIf="!registerForm.controls.email.valid">{{getErrorMessage().emailErrorMsg}}</mat-error>
+        <mat-error>{{getErrorMessage().emailErrorMsg}}</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-icon matPrefix>lock</mat-icon>
         <input matInput placeholder="Password" type="password" required formControlName="password">
-        <mat-error *ngIf="!registerForm.controls.password.valid">{{getErrorMessage().passwordErrorMsg}}</mat-error>
+        <mat-error>{{getErrorMessage().passwordErrorMsg}}</mat-error>
       </mat-form-field>
       <a href="#" class="forgot-password">Forgot Password?</a>
       <button class="button full-width button-sliding-icon ripple-effect margin-top-20" type="submit" (click)="login();">Log In <i class="icon-material-outline-arrow-right-alt"></i></button>

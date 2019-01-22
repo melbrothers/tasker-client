@@ -14,7 +14,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     NgbModule,
     FormsModule,
