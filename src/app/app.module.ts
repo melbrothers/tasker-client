@@ -19,6 +19,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserNotificationsComponent } from './user-notifications/user-notifications.component';
 import {StoreModule} from '@ngrx/store';
 import { ShellComponent } from './shell/shell.component';
+import { TaskListComponent } from './account/tasks/task-list/task-list.component';
+import { LayoutComponent } from './container/layout/layout.component';
+import { UiModule } from './ui/ui.module';
 
 registerLocaleData(localeZh, 'zh-Hans');
 
@@ -34,7 +37,9 @@ registerLocaleData(localeZh, 'zh-Hans');
     JobListComponent,
     DashboardComponent,
     UserNotificationsComponent,
-    ShellComponent
+    ShellComponent,
+    TaskListComponent,
+    LayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,8 @@ registerLocaleData(localeZh, 'zh-Hans');
     BrowserAnimationsModule,
     SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    StoreModule.forRoot({})
+    StoreModule.forRoot({}),
+    UiModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'zh-Hans'}
