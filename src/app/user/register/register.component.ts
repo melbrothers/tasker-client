@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   registerForm: FormGroup;
   isPassMatch = true;
   isEmailTaken: boolean;
+  tabIndex = 0;
   errorMsgs = {
     emailErrorMsg: '',
     passwordErrorMsg: '',
@@ -89,6 +90,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
   checkPassMatch(): void {
     this.isPassMatch = this.registerForm.value.password === this.registerForm.value.password_confirmation;
     this.getErrorMessage();
+  }
+
+  moveToSignup(): void {
+    this.tabIndex = 1;
   }
 
   signup(): void {

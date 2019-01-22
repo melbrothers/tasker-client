@@ -52,6 +52,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   openDialog(): void {
     const dialogRef = this.dialog.open(RegisterComponent, {
       width: '540px',
+      height: '600px',
       panelClass: 'registerDialog'
     });
 
