@@ -32,14 +32,6 @@ const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
     provider: new GoogleLoginProvider(environment.googleClientId)
-  },
-  {
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider('Facebook-App-Id')
-  },
-  {
-    id: LinkedInLoginProvider.PROVIDER_ID,
-    provider: new LinkedInLoginProvider('LinkedIn-client-Id', false, 'en_US')
   }
 ]);
 
@@ -73,8 +65,8 @@ export function provideConfig() {
     StoreModule.forRoot({})
   ],
   providers: [
-    {provide: LOCALE_ID, useValue: 'zh-Hans', multi: true},
-    {provide: AuthServiceConfig, useFactory: provideConfig, multi: true}
+    {provide: LOCALE_ID, useValue: 'zh-Hans'},
+    {provide: AuthServiceConfig, useFactory: provideConfig}
   ],
   bootstrap: [AppComponent]
 })

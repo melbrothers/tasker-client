@@ -96,6 +96,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.tabIndex = 1;
   }
 
+  googleSignIn(): void {
+    this.authService.signInWithGoogle();
+  }
+
   signup(): void {
     const self  = this;
     self.isEmailTaken = false;
