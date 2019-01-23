@@ -1,0 +1,58 @@
+@import "../../../../styles.css";
+.register,
+.login {
+  display: flex;
+  flex-direction: column;
+}
+
+.fb-icon,
+.google-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.stroke-through {
+  position: relative;
+}
+
+.stroke-through:before {
+  width: 100%;
+  content: "";
+  height: 1px;
+  display: block;
+  background-color: #e0e0e0;
+  position: absolute;
+  top: 0;
+
+}
+
+.stroke-through span {
+    background-color: #fff;
+    top: 0;
+    position: absolute;
+    line-height: 10px;
+    top: -5px;
+    margin-left: -15px;
+    padding: 0 10px;
+    color: gray;
+}
+
+input, input[type=email], input[type=number], input[type=password], input[type=text], textarea {
+  box-shadow: none;
+  margin: inherit;
+  padding: inherit;
+  line-height: inherit;
+  height: auto;
+}
+
+::ng-deep {
+  .mat-tab-label {
+    .mat-tab-label-content {
+      font-size: 16px;
+      font-family: nunito,helveticaneue,helvetica neue,Helvetica,Arial,sans-serif;
+      font-weight: 500;
+    }
+  }
+}
+
+

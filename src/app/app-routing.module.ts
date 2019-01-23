@@ -1,23 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {WelcomeComponent} from './welcome/welcome.component';
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
-import {JobListComponent} from './job/job-list/job-list.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
-import {ShellComponent} from './shell/shell.component';
+import {HomeComponent} from './shared/pages/home/home.component';
+import {Error404Component} from './shared/pages/error-404/error-404.component';
+import {TaskListComponent} from './modules/tasks/task-list/task-list.component';
+import {DashboardComponent} from './modules/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ShellComponent,
+    component: HomeComponent,
     children: [
-      {path: 'welcome', component: WelcomeComponent},
+      {path: '', component: HomeComponent},
       {path: 'dashboard', component: DashboardComponent},
-      {path: 'jobs', component: JobListComponent},
-      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+      {path: 'tasks', component: TaskListComponent},
+      { path: '', redirectTo: '/', pathMatch: 'full' },
     ]
   },
-  { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: Error404Component }
 ];
 
 @NgModule({
