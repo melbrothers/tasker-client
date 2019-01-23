@@ -1,47 +1,36 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {
-  MatButtonModule,
-  MatDialogModule, MatDividerModule,
-  MatFormFieldModule, MatIconModule,
-  MatInputModule,
-  MatOptionModule, MatProgressSpinnerModule,
-  MatSelectModule, MatTabsModule
-} from '@angular/material';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgModule} from '@angular/core';
+import {MaterialModule} from './modules/material.module';
+import {CommonModule} from '@angular/common';
+import {FooterComponent} from './components/footer/footer.component';
+import {HeaderComponent} from './components/header/header.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {HomeComponent} from './pages/home/home.component';
+import {Error404Component} from './pages/error-404/error-404.component';
+import { RouterModule } from '@angular/router';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    ReactiveFormsModule,
-    NgbModule,
-    FormsModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatTabsModule,
-    MatIconModule,
-    MatProgressSpinnerModule,
-  ],
-  exports: [
-    ReactiveFormsModule,
-    FormsModule,
-    NgbModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatTabsModule,
-    MatIconModule,
-    MatProgressSpinnerModule
-  ]
-})
-export class SharedModule { }
+    imports: [
+      CommonModule,
+      MaterialModule,
+      ReactiveFormsModule,
+      RouterModule,
+    ],
+    declarations: [
+      HomeComponent,
+      Error404Component,
+      HeaderComponent,
+      FooterComponent,
+      RegisterComponent
+    ],
+    exports: [
+      CommonModule,
+      MaterialModule,
+      HeaderComponent,
+      FooterComponent,
+      RegisterComponent
+    ],
+    entryComponents: [RegisterComponent],
+  })
+export class SharedModule {
+}
