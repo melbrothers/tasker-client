@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from 'app/core/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,8 +9,7 @@ import {AuthService} from 'app/core/services/auth.service';
 })
 export class DashboardComponent implements OnInit {
   constructor( private authService: AuthService) { }
-  isLoggedIn: boolean;
+  isAuthenticated$: Observable<boolean>;
   ngOnInit() {
-    this.isLoggedIn = this.authService.isLoggedIn;
   }
 }

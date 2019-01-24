@@ -171,5 +171,8 @@
       }
     }
   },
-  "defaultProject": "tasker-client"
+  "defaultProject": "tasker-client",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

@@ -11,9 +11,10 @@ import {MaterialModule} from './shared/modules/material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import {StoreModule} from '@ngrx/store';
-import { TaskListComponent } from './modules/tasks/task-list/task-list.component';
 import {SharedModule} from './shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { reducers } from './app.reducer';
+import { TaskModule } from 'app/modules/tasks/task.module';
 
 registerLocaleData(localeZh, 'zh-Hans');
 
@@ -22,7 +23,6 @@ registerLocaleData(localeZh, 'zh-Hans');
   declarations: [
     AppComponent,
     DashboardComponent,
-    TaskListComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,9 +32,9 @@ registerLocaleData(localeZh, 'zh-Hans');
     BrowserAnimationsModule,
     MaterialModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(reducers),
     SharedModule,
-    RouterModule
+    RouterModule,
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'zh-Hans'}
