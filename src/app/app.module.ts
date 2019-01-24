@@ -9,20 +9,36 @@ import localeZh from '@angular/common/locales/zh-Hans';
 import {CommonModule, registerLocaleData} from '@angular/common';
 import {MaterialModule} from './shared/modules/material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import {StoreModule} from '@ngrx/store';
 import {SharedModule} from './shared/shared.module';
-import { RouterModule } from '@angular/router';
-import { reducers } from './app.reducer';
-import { TaskModule } from 'app/modules/tasks/task.module';
+import {UserModule} from './modules/user/user.module';
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+} from 'angularx-social-login';
+import {HomeComponent} from './shared/pages/home/home.component';
+import {DashboardComponent} from './modules/dashboard/dashboard.component';
 
 registerLocaleData(localeZh, 'zh-Hans');
+
+const config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider(environment.googleClientId)
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
+
 
 @NgModule({
   entryComponents: [],
   declarations: [
     AppComponent,
-    DashboardComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -31,13 +47,15 @@ registerLocaleData(localeZh, 'zh-Hans');
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    StoreModule.forRoot(reducers),
     SharedModule,
-    RouterModule,
+    UserModule,
+    SocialLoginModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    StoreModule.forRoot({})
   ],
   providers: [
-    {provide: LOCALE_ID, useValue: 'zh-Hans'}
+    {provide: LOCALE_ID, useValue: 'zh-Hans'},
+    {provide: AuthServiceConfig, useFactory: provideConfig}
   ],
   bootstrap: [AppComponent]
 })

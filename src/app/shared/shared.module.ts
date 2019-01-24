@@ -21,7 +21,7 @@ import { RegisterComponent } from './components/register/register.component';
       Error404Component,
       HeaderComponent,
       FooterComponent,
-      RegisterComponent
+      RegisterComponent,
     ],
     exports: [
       CommonModule,

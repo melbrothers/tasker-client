@@ -53,6 +53,11 @@ input, input[type=email], input[type=number], input[type=password], input[type=t
       font-weight: 500;
     }
   }
+  .mat-tab-body {
+    .mat-tab-body-content {
+      overflow: hidden;
+    }
+  }
 }
 
 
