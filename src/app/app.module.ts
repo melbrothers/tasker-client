@@ -5,26 +5,20 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
-import { WelcomeComponent } from './welcome/welcome.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import localeZh from '@angular/common/locales/zh-Hans';
 import {CommonModule, registerLocaleData} from '@angular/common';
-import {SharedModule} from './shared/shared.module';
+import {MaterialModule} from './shared/modules/material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { JobListComponent } from './job/job-list/job-list.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import {StoreModule} from '@ngrx/store';
-import { ShellComponent } from './shell/shell.component';
-import {UserModule} from './user/user.module';
+import {SharedModule} from './shared/shared.module';
+import {UserModule} from './modules/user/user.module';
 import {
   SocialLoginModule,
   AuthServiceConfig,
   GoogleLoginProvider,
-  FacebookLoginProvider,
-  LinkedInLoginProvider
 } from 'angularx-social-login';
+import {HomeComponent} from './shared/pages/home/home.component';
+import {DashboardComponent} from './modules/dashboard/dashboard.component';
 
 registerLocaleData(localeZh, 'zh-Hans');
 
@@ -44,13 +38,7 @@ export function provideConfig() {
   entryComponents: [],
   declarations: [
     AppComponent,
-    WelcomeComponent,
-    PageNotFoundComponent,
-    HeaderComponent,
-    FooterComponent,
-    JobListComponent,
-    DashboardComponent,
-    ShellComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +46,7 @@ export function provideConfig() {
     CommonModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MaterialModule,
     SharedModule,
     UserModule,
     SocialLoginModule,

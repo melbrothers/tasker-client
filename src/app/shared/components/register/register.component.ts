@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
 import * as fromUser from 'app/modules/user/state/user.reducer';
 import * as userActions from 'app/modules/user/state/user.actions';
-import * as fromRoot from 'app/store/state/app.state';
+import * as fromRoot from 'app/store/states/app.state';
 import {takeWhile} from 'rxjs/operators';
 
 @Component({

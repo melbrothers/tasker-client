@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpHeaders, HttpParams} from '@angular/common/http';
 import {ApiService} from './api.service';
 import {shareReplay} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {IUser} from '../model/user';
 import * as googleAuthService from 'angularx-social-login';
 import {GoogleLoginProvider} from 'angularx-social-login';
+import {IUser} from 'app/store/model/user';
 
 @Injectable({
   providedIn: 'root'
