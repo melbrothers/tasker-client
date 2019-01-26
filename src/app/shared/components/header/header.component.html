@@ -19,17 +19,17 @@
           <ul id="responsive">
 
             <li><a href="#" class="current">Home</a>
-              <ul class="dropdown-nav">
+              <!-- <ul class="dropdown-nav">
                 <li><a href="index.html">Home 1</a></li>
                 <li><a href="index-2.html">Home 2</a></li>
                 <li><a href="index-3.html">Home 3</a></li>
-              </ul>
+              </ul> -->
             </li>
 
-            <li><a href="#">Find Work</a>
-              <ul class="dropdown-nav">
+            <li><a [routerLink]="['/tasks']">Browse Tasks</a>
+              <!-- <ul class="dropdown-nav">
                 <li routerLinkActive="active">
-                  <a [routerLink]="['/jobs']">Browse Jobs</a>
+                  <a [routerLink]="['/tasks']">Browse Tasks</a>
                 </li>
                 <li><a href="#">Browse Tasks</a>
                   <ul class="dropdown-nav">
@@ -43,11 +43,11 @@
                 <li><a href="single-job-page.html">Job Page</a></li>
                 <li><a href="single-task-page.html">Task Page</a></li>
                 <li><a href="single-company-profile.html">Company Profile</a></li>
-              </ul>
+              </ul> -->
             </li>
 
             <li><a href="#">For Employers</a>
-              <ul class="dropdown-nav">
+              <!-- <ul class="dropdown-nav">
                 <li><a href="#">Find a Freelancer</a>
                   <ul class="dropdown-nav">
                     <li><a href="freelancers-grid-layout-full-page.html">Full Page Grid</a></li>
@@ -59,10 +59,10 @@
                 <li><a href="single-freelancer-profile.html">Freelancer Profile</a></li>
                 <li><a href="dashboard-post-a-job.html">Post a Job</a></li>
                 <li><a href="dashboard-post-a-task.html">Post a Task</a></li>
-              </ul>
+              </ul> -->
             </li>
 
-            <li><a href="#">Dashboard</a>
+            <!-- <li><a href="#">Dashboard</a>
               <ul class="dropdown-nav">
                 <li routerLinkActive="active"><a [routerLink]="['/dashboard']">Dashboard</a></li>
                 <li><a href="dashboard-messages.html">Messages</a></li>
@@ -99,7 +99,7 @@
                 <li><a href="pages-404.html">404 Page</a></li>
                 <li><a href="pages-contact.html">Contact</a></li>
               </ul>
-            </li>
+            </li> -->
 
           </ul>
         </nav>
@@ -114,7 +114,7 @@
       <div class="right-side">
 
         <!--  User Notifications -->
-        <div class="header-widget hide-on-mobile">
+        <div class="header-widget hide-on-mobile" *ngIf="isAuthenticated$ | async">
 
           <!-- Notifications -->
           <div class="header-notifications">
@@ -250,10 +250,10 @@
         <!--  User Notifications / End -->
 
         <!-- User Menu -->
-        <div class="header-widget" >
+        <div class="header-widget">
 
           <!-- Messages -->
-          <div class="header-notifications user-menu" *ngIf="isLoggedIn$ | async">
+          <div class="header-notifications user-menu" *ngIf="isAuthenticated$ | async">
             <div class="header-notifications-trigger">
               <a href="#"><div class="user-avatar status-online"><img [src]="avatarUrl" [alt]="socialUser?.name"></div></a>
             </div>
@@ -291,7 +291,7 @@
           </div>
 
           <!-- login/register-->
-          <a class="popup-with-zoom-anim log-in-button" (click)="openDialog();" *ngIf="!isLoggedIn$ | async"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
+          <a class="popup-with-zoom-anim log-in-button" (click)="openDialog();" *ngIf="!(isAuthenticated$ | async)"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
 
         </div>
         <!-- User Menu / End -->

@@ -1,14 +1,11 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {RegisterComponent} from '../register/register.component';
+import {AuthComponent} from '../auth/auth.component';
 import {MatDialog} from '@angular/material';
 import {ActivatedRoute} from '@angular/router';
-import {IUser} from 'app/store/model/user';
-import {AuthService} from 'app/core/services/auth.service';
-import {select, Store} from '@ngrx/store';
-import * as fromUser from 'app/modules/user/state/user.reducer';
-import * as userActions from 'app/modules/user/state/user.actions';
+import {IUser} from 'app/store/models/user';
+import {Store} from '@ngrx/store';
+import * as fromRoot from 'app/app.reducer';
 
-import {takeWhile} from 'rxjs/operators';
 import {SocialUser} from 'angularx-social-login';
 import * as googleAuthService from 'angularx-social-login';
 import {Observable} from 'rxjs';
@@ -21,20 +18,19 @@ import {Observable} from 'rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   currentUser: IUser;
-  isLoggedIn$: Observable<boolean>;
+  isAuthenticated$: Observable<boolean>;
   private avatarUrl = '../assets/images/avatar.png';
   private socialUser: SocialUser;
   componentActive = true;
   constructor(private dialog: MatDialog,
               private activatedRouter: ActivatedRoute,
-              private authService: AuthService,
-              private store: Store<fromUser.UserState>,
+              private store: Store<fromRoot.State>,
               private googleAuth: googleAuthService.AuthService) { }
 
   ngOnInit() {
     const header = document.getElementById('header-container');
-    this.isLoggedIn$ = this.store.select(fromUser.getLoginStatus);
-    console.log(this.isLoggedIn$);
+    this.isAuthenticated$ = this.store.select(fromRoot.getIsAuthenticated);
+    console.log(this.isAuthenticated$);
     this.currentUser = JSON.parse(localStorage.getItem('current_user'));
     this.activatedRouter.url.subscribe(url => {
       console.log(url);
@@ -57,12 +53,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       } else {
         // normal login
         // this.isLoggedIn = this.authService.isLoggedIn;
-        this.store.pipe(select(fromUser.getLoginStatus), takeWhile(() => this.componentActive)).subscribe(
-          (isLoggedIn) => {
-            // this.isLoggedIn = isLoggedIn;
-          }
-        );
-        // console.log(this.isLoggedIn);
+        this.isAuthenticated$ = this.store.select(fromRoot.getIsAuthenticated);
       }
     });
 
@@ -73,7 +64,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(RegisterComponent, {
+    const dialogRef = this.dialog.open(AuthComponent, {
       width: '540px',
       height: '600px',
       panelClass: 'registerDialog'

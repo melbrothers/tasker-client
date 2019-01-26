@@ -5,18 +5,17 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from 'app/core/services/auth.service';
 import {Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
-import * as fromUser from 'app/modules/user/state/user.reducer';
-import * as userActions from 'app/modules/user/state/user.actions';
-import * as fromRoot from 'app/store/states/app.state';
-import {takeWhile} from 'rxjs/operators';
+import * as Auth from 'app/store/actions/auth.actions';
+import * as fromRoot from 'app/app.reducer';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-auth',
+  templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.scss']
 })
 
-export class RegisterComponent implements OnInit, OnDestroy {
+export class AuthComponent implements OnInit, OnDestroy {
   name: string;
   loginForm: FormGroup;
   registerForm: FormGroup;
@@ -31,9 +30,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
   };
   componentActive = true;
   inProcess = false;
-  isLoggedIn: boolean;
+  isAuthenticated$: Observable<boolean>;
 
-  constructor( public dialogRef: MatDialogRef<RegisterComponent>,
+  constructor( public dialogRef: MatDialogRef<AuthComponent>,
                private iconRegistry: MatIconRegistry,
                private sanitizer: DomSanitizer,
                private fb: FormBuilder,
@@ -78,9 +77,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     return this.errorMsgs;
   }
   ngOnInit(): void {
-    this.store.pipe(select(fromUser.getLoginStatus), takeWhile(() => this.componentActive)).subscribe(
-      isLoggedIn => this.isLoggedIn = isLoggedIn
-    );
+    this.isAuthenticated$ = this.store.select(fromRoot.getIsAuthenticated);
+
   }
 
   ngOnDestroy(): void {
@@ -115,13 +113,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
           localStorage.setItem('refresh_token', res.refresh_token);
           self.authService.currentUser = {
             id: res.access_token,
-            userName: this.registerForm.value.email,
-            isAdmin: false,
-            type: ''
+            email: this.registerForm.value.email,
+            avatar: ''
           };
           localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
           // self.authService.isLoggedIn = true;
-          this.store.dispatch(new userActions.SetLoginStatus(true));
+          this.store.dispatch(new Auth.SetAuthenticated());
           self.dialogRef.close();
           if (self.authService.redirectUrl) {
             this.router.navigateByUrl(this.authService.redirectUrl);
@@ -155,13 +152,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
         localStorage.setItem('refresh_token', res.refresh_token);
         self.authService.currentUser = {
           id: res.access_token,
-          userName: this.loginForm.value.email,
-          isAdmin: false,
-          type: ''
+          email: this.loginForm.value.email,
+          avatar: '',
         };
         localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
-        // self.authService.isLoggedIn = true;
-        this.store.dispatch(new userActions.SetLoginStatus(true));
+        this.store.dispatch(new Auth.SetAuthenticated());
         self.dialogRef.close();
         if (self.authService.redirectUrl) {
           this.router.navigateByUrl(this.authService.redirectUrl);

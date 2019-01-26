@@ -1,0 +1,12 @@
+version: '3.6'
+services:
+    app:
+      build: ./docker
+      container_name: tasker-client
+      command: "npm start"
+      ports:
+        - "4200:4200"
+        - "49153:49153"
+      # Maps the current directory to the Dockerfile's content
+      volumes:
+        - "./:/usr/src/app/"

@@ -11,7 +11,7 @@ export enum AuthActionTypes {
 
 /**
  * Every action is comprised of at least a type and an optional
- * payload. Expressing actions as classes enables powerful 
+ * payload. Expressing actions as classes enables powerful
  * type checking in reducer functions.
  */
 export class SetAuthenticated implements Action {
