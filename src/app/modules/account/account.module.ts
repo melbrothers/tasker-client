@@ -5,13 +5,15 @@ import { DashboardComponent } from 'app/modules/account/dashboard/dashboard.comp
 import { AccountRoutingModule } from 'app/modules/account/account-routing.module';
 import { AccountComponent } from './account.component';
 import { SideNavComponent } from 'app/modules/account/side-nav/side-nav.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     MyTasksComponent,
     DashboardComponent,
     AccountComponent,
-    SideNavComponent
+    SideNavComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
