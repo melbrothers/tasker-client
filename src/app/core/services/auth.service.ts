@@ -5,7 +5,7 @@ import {shareReplay} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import * as googleAuthService from 'angularx-social-login';
 import {GoogleLoginProvider} from 'angularx-social-login';
-import {IUser} from 'app/store/model/user';
+import {IUser} from 'app/store/models/user';
 
 @Injectable({
   providedIn: 'root'

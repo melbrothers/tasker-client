@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from './shared/pages/home/home.component';
 import {Error404Component} from './shared/pages/error-404/error-404.component';
-import {DashboardComponent} from './modules/dashboard/dashboard.component';
 import { TaskModule } from 'app/modules/tasks/task.module';
+import { DashboardComponent } from 'app/modules/account/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
