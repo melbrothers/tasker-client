@@ -20,9 +20,7 @@ export class TokenInterceptorService implements HttpInterceptor {
         self.token = accessToken;
       }
       request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${self.token}`
-        }
+        withCredentials: true
       });
       return next.handle(request);
     } else {

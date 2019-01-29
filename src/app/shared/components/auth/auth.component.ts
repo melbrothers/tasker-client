@@ -107,17 +107,14 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.registerForm.value.name = this.registerForm.value.email;
         this.inProcess = true;
         this.authService.register(this.registerForm.value).subscribe((res: any) => {
-          console.log(res);
           this.inProcess = false;
-          localStorage.setItem('access_token', res.access_token);
-          localStorage.setItem('refresh_token', res.refresh_token);
           self.authService.currentUser = {
             id: res.access_token,
             email: this.registerForm.value.email,
             avatar: ''
           };
+          // TODO: remove localStorage total in some stage, instead using ngrx
           localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
-          // self.authService.isLoggedIn = true;
           this.store.dispatch(new Auth.SetAuthenticated());
           self.dialogRef.close();
           if (self.authService.redirectUrl) {
@@ -136,7 +133,6 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.isPassMatch = false;
         this.inProcess = false;
         this.errorMsgs.cPasswordErrorMsg = 'Passwords do not match!';
-        // return;
       }
     }
   }
@@ -148,13 +144,12 @@ export class AuthComponent implements OnInit, OnDestroy {
       this.loginForm.value.email = this.loginForm.value.email.toLowerCase();
       this.inProcess = true;
       this.authService.login(this.loginForm.value).subscribe((res: any) => {
-        localStorage.setItem('access_token', res.access_token);
-        localStorage.setItem('refresh_token', res.refresh_token);
         self.authService.currentUser = {
           id: res.access_token,
           email: this.loginForm.value.email,
           avatar: '',
         };
+        // TODO: remove localStorage total in some stage, instead using ngrx
         localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
         this.store.dispatch(new Auth.SetAuthenticated());
         self.dialogRef.close();
