@@ -114,8 +114,8 @@ export class AuthComponent implements OnInit, OnDestroy {
             avatar: ''
           };
           // TODO: remove localStorage total in some stage, instead using ngrx
-          localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
-          this.store.dispatch(new Auth.SetAuthenticated());
+          // localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
+          this.store.dispatch(new Auth.SetAuthenticated({user: self.authService.currentUser}));
           self.dialogRef.close();
           if (self.authService.redirectUrl) {
             this.router.navigateByUrl(this.authService.redirectUrl);
@@ -150,8 +150,8 @@ export class AuthComponent implements OnInit, OnDestroy {
           avatar: '',
         };
         // TODO: remove localStorage total in some stage, instead using ngrx
-        localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
-        this.store.dispatch(new Auth.SetAuthenticated());
+        // localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
+        this.store.dispatch(new Auth.SetAuthenticated({user: self.authService.currentUser}));
         self.dialogRef.close();
         if (self.authService.redirectUrl) {
           this.router.navigateByUrl(this.authService.redirectUrl);

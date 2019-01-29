@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import {IUser} from '../models/user';
 
 /**
  * For each action type in an action group, make a simple
@@ -16,6 +17,7 @@ export enum AuthActionTypes {
  */
 export class SetAuthenticated implements Action {
     readonly type = AuthActionTypes.SET_AUTHENTICATED;
+    constructor (public payload: {user: IUser}) {}
 }
 
 export class SetUnauthenticated implements Action {
