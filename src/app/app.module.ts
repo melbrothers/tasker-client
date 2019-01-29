@@ -17,7 +17,8 @@ import {
   GoogleLoginProvider,
 } from 'angularx-social-login';
 import { AccountModule } from 'app/modules/account/account.module';
-import {reducers, metaReducers} from './app.reducer';
+import {reducers, metaReducers} from './store/reducers/app.reducer';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
 registerLocaleData(localeZh, 'zh-Hans');
 
@@ -49,7 +50,8 @@ export function provideConfig() {
     AccountModule,
     SocialLoginModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    StoreModule.forRoot(reducers, {metaReducers})
+    StoreModule.forRoot(reducers, {metaReducers}),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'zh-Hans'},
