@@ -6,7 +6,7 @@ import {AuthService} from 'app/core/services/auth.service';
 import {Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
 import * as Auth from 'app/store/actions/auth.actions';
-import * as fromRoot from 'app/app.reducer';
+import * as fromRoot from 'app/store/reducers/app.reducer';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -120,7 +120,7 @@ export class AuthComponent implements OnInit, OnDestroy {
           if (self.authService.redirectUrl) {
             this.router.navigateByUrl(this.authService.redirectUrl);
           } else {
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/account/dashboard']);
           }
         }, error => {
           self.inProcess = false;
@@ -156,7 +156,7 @@ export class AuthComponent implements OnInit, OnDestroy {
         if (self.authService.redirectUrl) {
           this.router.navigateByUrl(this.authService.redirectUrl);
         } else {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/account/dashboard']);
         }
       }, error => {
         console.log(error);

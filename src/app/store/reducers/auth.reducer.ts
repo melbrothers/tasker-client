@@ -6,10 +6,14 @@ import {AuthActions, AuthActionTypes} from '../actions/auth.actions';
 
 export interface AuthState {
     isAuthenticated?: boolean;
-    user: IUser;
+    user?: IUser;
 }
 
-export function authReducer(state: AuthState, action: AuthActions ): AuthState {
+const initialState: AuthState = {
+    isAuthenticated: false,
+};
+
+export function authReducer(state = initialState, action: Auth.AuthActions ): AuthState {
     switch (action.type) {
         case AuthActionTypes.SET_AUTHENTICATED: {
             return {

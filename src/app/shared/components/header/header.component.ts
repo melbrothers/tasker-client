@@ -4,7 +4,7 @@ import {MatDialog} from '@angular/material';
 import {ActivatedRoute} from '@angular/router';
 import {IUser} from 'app/store/models/user';
 import {Store} from '@ngrx/store';
-import * as fromRoot from 'app/app.reducer';
+import * as fromRoot from 'app/store/reducers/app.reducer';
 
 import {SocialUser} from 'angularx-social-login';
 import * as googleAuthService from 'angularx-social-login';
