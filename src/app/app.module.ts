@@ -11,14 +11,13 @@ import {MaterialModule} from './shared/modules/material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {StoreModule} from '@ngrx/store';
 import {SharedModule} from './shared/shared.module';
-import {UserModule} from './modules/user/user.module';
 import {
   SocialLoginModule,
   AuthServiceConfig,
   GoogleLoginProvider,
 } from 'angularx-social-login';
-import {HomeComponent} from './shared/pages/home/home.component';
-import {DashboardComponent} from './modules/dashboard/dashboard.component';
+import { AccountModule } from 'app/modules/account/account.module';
+import {reducers} from './app.reducer';
 
 registerLocaleData(localeZh, 'zh-Hans');
 
@@ -38,7 +37,6 @@ export function provideConfig() {
   entryComponents: [],
   declarations: [
     AppComponent,
-    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -48,10 +46,10 @@ export function provideConfig() {
     BrowserAnimationsModule,
     MaterialModule,
     SharedModule,
-    UserModule,
+    AccountModule,
     SocialLoginModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    StoreModule.forRoot({})
+    StoreModule.forRoot(reducers)
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'zh-Hans'},

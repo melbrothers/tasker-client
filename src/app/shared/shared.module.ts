@@ -7,7 +7,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {HomeComponent} from './pages/home/home.component';
 import {Error404Component} from './pages/error-404/error-404.component';
 import { RouterModule } from '@angular/router';
-import { RegisterComponent } from './components/register/register.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 @NgModule({
     imports: [
@@ -21,16 +21,16 @@ import { RegisterComponent } from './components/register/register.component';
       Error404Component,
       HeaderComponent,
       FooterComponent,
-      RegisterComponent,
+      AuthComponent,
     ],
     exports: [
       CommonModule,
       MaterialModule,
       HeaderComponent,
       FooterComponent,
-      RegisterComponent
+      AuthComponent
     ],
-    entryComponents: [RegisterComponent],
+    entryComponents: [AuthComponent],
   })
 export class SharedModule {
 }

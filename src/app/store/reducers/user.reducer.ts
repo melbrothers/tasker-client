@@ -1,14 +1,12 @@
-import { User } from '../user';
-
-/* NgRx */
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { UserActions, UserActionTypes } from './user.actions';
+import { UserActions, UserActionTypes } from '../actions/user.actions';
+import { IUser } from 'app/store/models/user';
 
 
 // State for this feature (User)
 export interface UserState {
   isLoggedIn: boolean;
-  currentUser: User;
+  currentUser: IUser;
 }
 
 const initialState: UserState = {

@@ -2,17 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from './shared/pages/home/home.component';
 import {Error404Component} from './shared/pages/error-404/error-404.component';
-import {DashboardComponent} from './modules/dashboard/dashboard.component';
 import { TaskModule } from 'app/modules/tasks/task.module';
+import { AccountModule } from 'app/modules/account/account.module';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    children: [
-      {path: 'dashboard', component: DashboardComponent},
-      { path: '', redirectTo: '/', pathMatch: 'full' },
-    ]
+    pathMatch: 'full'
   },
   { path: '**', component: Error404Component }
 ];
@@ -20,6 +17,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     TaskModule,
+    AccountModule,
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]

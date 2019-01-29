@@ -1,4 +1,3 @@
-/* NgRx */
 import { Action } from '@ngrx/store';
 
 export enum UserActionTypes {
