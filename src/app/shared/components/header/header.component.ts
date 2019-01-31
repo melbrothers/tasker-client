@@ -19,8 +19,8 @@ import {Observable} from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
   currentUser: IUser;
   isAuthenticated$: Observable<boolean>;
-  private avatarUrl = '../assets/images/avatar.png';
-  private socialUser: SocialUser;
+  avatarUrl = '../assets/images/avatar.png';
+  socialUser: SocialUser;
   componentActive = true;
   constructor(private dialog: MatDialog,
               private activatedRouter: ActivatedRoute,
@@ -30,7 +30,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const header = document.getElementById('header-container');
     this.isAuthenticated$ = this.store.select(fromRoot.getIsAuthenticated);
-    console.log(this.isAuthenticated$);
     this.currentUser = JSON.parse(localStorage.getItem('current_user'));
     this.activatedRouter.url.subscribe(url => {
       console.log(url);
@@ -41,6 +40,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         }
       }
     });
+    // TODO: need to refactor, get user info from authState
     this.googleAuth.authState.subscribe((user) => {
       // google login
       if (user) {
@@ -49,11 +49,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if (user.photoUrl) {
           this.avatarUrl = user.photoUrl;
         }
-        // this.store.dispatch(new userActions.SetLoginStatus(this.isLoggedIn$));
-      } else {
-        // normal login
-        // this.isLoggedIn = this.authService.isLoggedIn;
-        this.isAuthenticated$ = this.store.select(fromRoot.getIsAuthenticated);
       }
     });
 

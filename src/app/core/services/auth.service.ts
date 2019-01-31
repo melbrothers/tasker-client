@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import * as googleAuthService from 'angularx-social-login';
 import {GoogleLoginProvider} from 'angularx-social-login';
 import {IUser} from 'app/store/models/user';
+import {SocialUser} from 'angularx-social-login';
 
 @Injectable({
   providedIn: 'root'
@@ -33,13 +34,12 @@ export class AuthService {
     return  this.api.post(endpointTag, body, headers).pipe(shareReplay(1));
   }
 
-  signInWithGoogle(): void {
-    this.googleAuth.signIn(GoogleLoginProvider.PROVIDER_ID);
+  signInWithGoogle(): Promise<SocialUser> {
+   return this.googleAuth.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
 
   logout(): void {
-    localStorage.clear();
     this.googleAuth.signOut();
   }
 }
