@@ -9,6 +9,7 @@ import * as fromRoot from 'app/store/reducers/app.reducer';
 import {SocialUser} from 'angularx-social-login';
 import * as googleAuthService from 'angularx-social-login';
 import {Observable} from 'rxjs';
+import {AuthService} from '../../../core/services/auth.service';
 
 /* NgRx */
 @Component({
@@ -25,6 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private dialog: MatDialog,
               private activatedRouter: ActivatedRoute,
               private store: Store<fromRoot.State>,
+              private authService: AuthService,
               private googleAuth: googleAuthService.AuthService) { }
 
   ngOnInit() {
@@ -53,7 +55,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
 
   }
-
+  logout(): void {
+    this.authService.logout();
+  }
   ngOnDestroy(): void {
     this.componentActive = false;
   }

@@ -171,21 +171,7 @@ export class AuthComponent implements OnInit, OnDestroy {
       });
     }
   }
-  logout(): void  {
-    this.isAuthenticated$.subscribe(isAuth => {
-      if (isAuth) {
-        // check if google login
-        this.googleAuth.authState.subscribe((user: SocialUser) => {
-          // google login
-          if (user) {
-           this.googleAuth.signOut();
-          }
-        });
-      } else {
-        this.store.dispatch(new Auth.SetUnauthenticated());
-      }
-    });
-  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
