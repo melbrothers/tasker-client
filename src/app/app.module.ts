@@ -19,6 +19,7 @@ import {
 import { AccountModule } from 'app/modules/account/account.module';
 import {reducers, metaReducers} from './store/reducers/app.reducer';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {CookieService} from 'ngx-cookie-service';
 
 registerLocaleData(localeZh, 'zh-Hans');
 
@@ -54,6 +55,7 @@ export function provideConfig() {
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [
+    CookieService,
     {provide: LOCALE_ID, useValue: 'zh-Hans'},
     {provide: AuthServiceConfig, useFactory: provideConfig}
   ],
