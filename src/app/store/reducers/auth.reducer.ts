@@ -19,7 +19,6 @@ export function authReducer(state = initialState, action: Auth.AuthActions ): Au
             return {
                 ...state,
                 isAuthenticated: true,
-                user: action.payload.user
             };
         }
         case Auth.AuthActionTypes.SET_UNAUTHENTICATED: {
