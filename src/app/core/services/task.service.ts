@@ -13,4 +13,9 @@ export class TaskService {
     const requestUrl = `${environment.apiUrl}/v1/tasks`;
     return this.http.get<ITask>(requestUrl);
   }
+  // TODO: refactor needed to type the return Observable, need to create a Task model
+  getTask(slug) {
+    const requestUrl = `${environment.apiUrl}/v1/tasks/${slug}`;
+    return this.http.get(requestUrl);
+  }
 }
