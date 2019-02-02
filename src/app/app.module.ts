@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import localeZh from '@angular/common/locales/zh-Hans';
 import {CommonModule, registerLocaleData} from '@angular/common';
 import {MaterialModule} from './shared/modules/material.module';
@@ -18,6 +18,7 @@ import {
 } from 'angularx-social-login';
 import { AccountModule } from 'app/modules/account/account.module';
 import {reducers} from './app.reducer';
+import { TokenInterceptorService } from 'app/core/interceptors/token-interceptor.service';
 
 registerLocaleData(localeZh, 'zh-Hans');
 
@@ -53,7 +54,8 @@ export function provideConfig() {
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'zh-Hans'},
-    {provide: AuthServiceConfig, useFactory: provideConfig}
+    {provide: AuthServiceConfig, useFactory: provideConfig},
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
 })

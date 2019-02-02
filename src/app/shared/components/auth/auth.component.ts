@@ -4,7 +4,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from 'app/core/services/auth.service';
 import {Router} from '@angular/router';
-import {select, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import * as Auth from 'app/store/actions/auth.actions';
 import * as fromRoot from 'app/app.reducer';
 import { Observable } from 'rxjs';
@@ -14,7 +14,6 @@ import { Observable } from 'rxjs';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-
 export class AuthComponent implements OnInit, OnDestroy {
   name: string;
   loginForm: FormGroup;
@@ -114,13 +113,12 @@ export class AuthComponent implements OnInit, OnDestroy {
             avatar: ''
           };
           // TODO: remove localStorage total in some stage, instead using ngrx
-          localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
           this.store.dispatch(new Auth.SetAuthenticated());
           self.dialogRef.close();
           if (self.authService.redirectUrl) {
             this.router.navigateByUrl(this.authService.redirectUrl);
           } else {
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/accout/dashboard']);
           }
         }, error => {
           self.inProcess = false;
@@ -144,19 +142,19 @@ export class AuthComponent implements OnInit, OnDestroy {
       this.loginForm.value.email = this.loginForm.value.email.toLowerCase();
       this.inProcess = true;
       this.authService.login(this.loginForm.value).subscribe((res: any) => {
+        console.log(res);
         self.authService.currentUser = {
           id: res.access_token,
           email: this.loginForm.value.email,
           avatar: '',
         };
         // TODO: remove localStorage total in some stage, instead using ngrx
-        localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
         this.store.dispatch(new Auth.SetAuthenticated());
         self.dialogRef.close();
         if (self.authService.redirectUrl) {
           this.router.navigateByUrl(this.authService.redirectUrl);
         } else {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/account/dashboard']);
         }
       }, error => {
         console.log(error);

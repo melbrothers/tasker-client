@@ -8,23 +8,28 @@ import {switchMap} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TokenInterceptorService implements HttpInterceptor {
-  token = '';
 
   constructor() { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const self = this;
-    const accessToken = localStorage.getItem('access_token');
-    if (accessToken && !(request.url.includes('register')) && !(request.url.includes('login'))) {
-      if (accessToken) {
-        self.token = accessToken;
-      }
-      request = request.clone({
-        withCredentials: true
-      });
-      return next.handle(request);
-    } else {
-      return next.handle(request);
-    }
+    // const self = this;
+    // const accessToken = localStorage.getItem('access_token');
+    // if (accessToken && !(request.url.includes('register')) && !(request.url.includes('login'))) {
+    //   if (accessToken) {
+    //     self.token = accessToken;
+    //   }
+    //   request = request.clone({
+    //     withCredentials: true
+    //   });
+    //   return next.handle(request);
+    // } else {
+    //   return next.handle(request);
+    // }
+
+    request = request.clone({
+      withCredentials: true
+    });
+    console.log(request);
+    return next.handle(request);
   }
 }

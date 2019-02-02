@@ -17,7 +17,7 @@ import { ProfileComponent } from './profile/profile.component';
   ],
   imports: [
     CommonModule,
-    AccountRoutingModule
+    AccountRoutingModule,
   ],
   exports: [
     DashboardComponent
