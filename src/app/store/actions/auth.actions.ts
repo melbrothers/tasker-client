@@ -19,7 +19,7 @@ export enum AuthActionTypes {
  */
 export class SetAuthenticated implements Action {
     readonly type = AuthActionTypes.SET_AUTHENTICATED;
-    constructor () {}
+    constructor (public payload: {user: IUser}) {}
 }
 
 export class SetGoogleUser implements Action {
