@@ -114,9 +114,10 @@
 ------------------------------------- */
 
 .full-page-map-container {
-  flex: auto;
+  //flex: auto;
   position: relative;
   background-color: #e5e3df;
+  flex: 0 0 45vw;
   #map {
     position: relative;
     z-index: 30;

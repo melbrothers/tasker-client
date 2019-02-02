@@ -33,7 +33,6 @@ export function provideConfig() {
   return config;
 }
 
-
 @NgModule({
   entryComponents: [],
   declarations: [
