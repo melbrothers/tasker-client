@@ -27,7 +27,7 @@ export const getCurrentUser = createSelector(
   (state: UserState) => state.currentUser
 );
 
-export function reducer(state = initialState, action: UserActions): UserState {
+export function userReducer(state = initialState, action: UserActions): UserState {
   switch (action.type) {
     case UserActionTypes.SetLoginStatus:
       return {

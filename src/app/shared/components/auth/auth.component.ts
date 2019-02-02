@@ -6,7 +6,7 @@ import {AuthService} from 'app/core/services/auth.service';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import * as Auth from 'app/store/actions/auth.actions';
-import * as fromRoot from 'app/app.reducer';
+import * as fromRoot from 'app/store/reducers/app.reducer';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -48,15 +48,15 @@ export class AuthComponent implements OnInit, OnDestroy {
   createRegForm(): void {
     const controlsConfig = {
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      password_confirmation: ['', [Validators.required, Validators.minLength(8)]]
+      // password: ['', [Validators.required, Validators.minLength(8)]],
+      // password_confirmation: ['', [Validators.required, Validators.minLength(8)]]
     };
     this.registerForm = this.fb.group(controlsConfig);
   }
   createLoginForm(): void {
     const controlsConfig = {
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required]]
     };
     this.loginForm = this.fb.group(controlsConfig);
   }
@@ -67,12 +67,12 @@ export class AuthComponent implements OnInit, OnDestroy {
     if (!this.registerForm.controls.email.valid) {
       this.errorMsgs.emailErrorMsg = 'Please supply a valid email address';
     }
-    if (!this.registerForm.controls.password.valid) {
-      this.errorMsgs.passwordErrorMsg = 'Please supply a legal password';
-    }
-    if (!this.registerForm.controls.password_confirmation.valid) {
-      this.errorMsgs.cPasswordErrorMsg = 'Please supply a legal password';
-    }
+    // if (!this.registerForm.controls.password.valid) {
+    //   this.errorMsgs.passwordErrorMsg = 'Please supply a legal password';
+    // }
+    // if (!this.registerForm.controls.password_confirmation.valid) {
+    //   this.errorMsgs.cPasswordErrorMsg = 'Please supply a legal password';
+    // }
     return this.errorMsgs;
   }
   ngOnInit(): void {
@@ -113,12 +113,13 @@ export class AuthComponent implements OnInit, OnDestroy {
             avatar: ''
           };
           // TODO: remove localStorage total in some stage, instead using ngrx
+          // localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
           this.store.dispatch(new Auth.SetAuthenticated());
           self.dialogRef.close();
           if (self.authService.redirectUrl) {
             this.router.navigateByUrl(this.authService.redirectUrl);
           } else {
-            this.router.navigate(['/accout/dashboard']);
+            this.router.navigate(['/account/dashboard']);
           }
         }, error => {
           self.inProcess = false;
@@ -149,6 +150,7 @@ export class AuthComponent implements OnInit, OnDestroy {
           avatar: '',
         };
         // TODO: remove localStorage total in some stage, instead using ngrx
+        // localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
         this.store.dispatch(new Auth.SetAuthenticated());
         self.dialogRef.close();
         if (self.authService.redirectUrl) {
