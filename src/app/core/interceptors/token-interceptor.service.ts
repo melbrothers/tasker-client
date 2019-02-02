@@ -15,9 +15,9 @@ export class TokenInterceptorService implements HttpInterceptor {
 
     request = request.clone({
       withCredentials: true,
-      setHeaders: {
-        'Content-type': 'application/x-www-form-urlencoded'
-      },
+      // setHeaders: {
+      //   'Content-type': 'application/x-www-form-urlencoded'
+      // },
     });
     return next.handle(request);
   }
