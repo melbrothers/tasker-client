@@ -32,7 +32,8 @@ export function userReducer(state = initialState, action: UserActions): UserStat
     case UserActionTypes.SetLoginStatus:
       return {
         ...state,
-        isLoggedIn: action.payload
+        isLoggedIn: action.payload.isLoggedIn,
+        currentUser: action.payload.user
       };
 
     default:

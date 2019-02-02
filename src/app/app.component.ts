@@ -12,9 +12,10 @@ import * as Auth from 'app/store/actions/auth.actions';
 export class AppComponent implements OnInit {
   title = 'tasker-client';
   name: string;
-  constructor(private _cookieService:CookieService, private store:Store<fromRoot.State>) { 
+  constructor(private _cookieService: CookieService, private store: Store<fromRoot.State>) {
     if (this._cookieService.check('token')) {
-      this.store.dispatch(new Auth.SetAuthenticated());
+      // TODO: add user to the store from api
+      // this.store.dispatch(new Auth.SetAuthenticated());
     }
   }
 

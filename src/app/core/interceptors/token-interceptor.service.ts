@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {fromPromise} from 'rxjs/internal-compatibility';
-import {switchMap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +13,6 @@ export class TokenInterceptorService implements HttpInterceptor {
 
     request = request.clone({
       withCredentials: true,
-      // setHeaders: {
-      //   'Content-type': 'application/x-www-form-urlencoded'
-      // },
     });
     return next.handle(request);
   }

@@ -15,7 +15,6 @@ import {Store} from '@ngrx/store';
   providedIn: 'root'
 })
 export class AuthService {
-  currentUser: IUser;
   redirectUrl: string;
   constructor(
     private api: ApiService,
