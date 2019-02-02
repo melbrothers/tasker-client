@@ -4,7 +4,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from 'app/core/services/auth.service';
 import {Router} from '@angular/router';
-import {select, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import * as Auth from 'app/store/actions/auth.actions';
 import * as fromRoot from 'app/store/reducers/app.reducer';
 import * as fromAuth from 'app/store/reducers/auth.reducer';
@@ -18,7 +18,6 @@ import {SocialUser} from 'angularx-social-login';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-
 export class AuthComponent implements OnInit, OnDestroy {
   name: string;
   loginForm: FormGroup;
@@ -55,15 +54,15 @@ export class AuthComponent implements OnInit, OnDestroy {
   createRegForm(): void {
     const controlsConfig = {
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      password_confirmation: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required]],
+      password_confirmation: ['', [Validators.required]]
     };
     this.registerForm = this.fb.group(controlsConfig);
   }
   createLoginForm(): void {
     const controlsConfig = {
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required]]
     };
     this.loginForm = this.fb.group(controlsConfig);
   }
@@ -74,12 +73,12 @@ export class AuthComponent implements OnInit, OnDestroy {
     if (!this.registerForm.controls.email.valid) {
       this.errorMsgs.emailErrorMsg = 'Please supply a valid email address';
     }
-    if (!this.registerForm.controls.password.valid) {
-      this.errorMsgs.passwordErrorMsg = 'Please supply a legal password';
-    }
-    if (!this.registerForm.controls.password_confirmation.valid) {
-      this.errorMsgs.cPasswordErrorMsg = 'Please supply a legal password';
-    }
+    // if (!this.registerForm.controls.password.valid) {
+    //   this.errorMsgs.passwordErrorMsg = 'Please supply a legal password';
+    // }
+    // if (!this.registerForm.controls.password_confirmation.valid) {
+    //   this.errorMsgs.cPasswordErrorMsg = 'Please supply a legal password';
+    // }
     return this.errorMsgs;
   }
   ngOnInit(): void {
@@ -123,7 +122,9 @@ export class AuthComponent implements OnInit, OnDestroy {
             email: this.registerForm.value.email,
             avatar: ''
           };
-          this.store.dispatch(new Auth.SetAuthenticated({user: self.authService.currentUser}));
+          // TODO: remove localStorage total in some stage, instead using ngrx
+          // localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
+          this.store.dispatch(new Auth.SetAuthenticated());
           self.dialogRef.close();
           if (self.authService.redirectUrl) {
             this.router.navigateByUrl(this.authService.redirectUrl);
@@ -152,12 +153,15 @@ export class AuthComponent implements OnInit, OnDestroy {
       this.loginForm.value.email = this.loginForm.value.email.toLowerCase();
       this.inProcess = true;
       this.authService.login(this.loginForm.value).subscribe((res: any) => {
+        console.log(res);
         self.authService.currentUser = {
           id: res.access_token,
           email: this.loginForm.value.email,
           avatar: '',
         };
-        this.store.dispatch(new Auth.SetAuthenticated({user: self.authService.currentUser}));
+        // TODO: remove localStorage total in some stage, instead using ngrx
+        // localStorage.setItem('current_user', JSON.stringify(self.authService.currentUser));
+        this.store.dispatch(new Auth.SetAuthenticated());
         self.dialogRef.close();
         if (self.authService.redirectUrl) {
           this.router.navigateByUrl(this.authService.redirectUrl);
