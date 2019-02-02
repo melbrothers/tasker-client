@@ -57,6 +57,7 @@ export function provideConfig() {
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [
+    CookieService,
     {provide: LOCALE_ID, useValue: 'zh-Hans'},
     {provide: AuthServiceConfig, useFactory: provideConfig},
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},

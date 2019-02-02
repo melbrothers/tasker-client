@@ -7,7 +7,11 @@ import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import * as Auth from 'app/store/actions/auth.actions';
 import * as fromRoot from 'app/store/reducers/app.reducer';
+import * as fromAuth from 'app/store/reducers/auth.reducer';
 import { Observable } from 'rxjs';
+import * as googleAuthService from 'angularx-social-login';
+import {SocialUser} from 'angularx-social-login';
+
 
 @Component({
   selector: 'app-auth',
@@ -30,6 +34,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   componentActive = true;
   inProcess = false;
   isAuthenticated$: Observable<boolean>;
+  googleUser$: Observable<SocialUser>;
 
   constructor( public dialogRef: MatDialogRef<AuthComponent>,
                private iconRegistry: MatIconRegistry,
@@ -38,7 +43,8 @@ export class AuthComponent implements OnInit, OnDestroy {
                private router: Router,
                private store: Store<fromRoot.State>,
                private authService: AuthService,
-               @Inject(MAT_DIALOG_DATA) public data: any,
+               private googleAuth: googleAuthService.AuthService,
+  @Inject(MAT_DIALOG_DATA) public data: any,
                ) {
     iconRegistry.addSvgIcon('facebook-icon', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/fb.svg'));
     iconRegistry.addSvgIcon('google-icon', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/google.svg'));
@@ -48,8 +54,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   createRegForm(): void {
     const controlsConfig = {
       email: ['', [Validators.required, Validators.email]],
-      // password: ['', [Validators.required, Validators.minLength(8)]],
-      // password_confirmation: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required]],
+      password_confirmation: ['', [Validators.required]]
     };
     this.registerForm = this.fb.group(controlsConfig);
   }
@@ -94,7 +100,11 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   googleSignIn(): void {
-    this.authService.signInWithGoogle();
+    this.authService.signInWithGoogle().then(user => {
+      if (user) {
+        this.store.dispatch(new Auth.SetGoogleUser({user: user}));
+      }
+    });
   }
 
   signup(): void {

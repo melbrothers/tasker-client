@@ -26,9 +26,7 @@ export class ApiService {
   }
 
   post(endpoint: string, body: any, reqOpts?: any) {
-    return this.httpClient.post(this.url + '/' + endpoint, body, {
-      withCredentials: true
-    });
+    return this.httpClient.post(this.url + '/' + endpoint, body, reqOpts);
   }
   put(endpoint: string, body: any, reqOpts?: any) {
     return this.httpClient.put(this.url + '/' + endpoint, body, reqOpts);

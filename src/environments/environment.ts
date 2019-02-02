@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  // apiUrl: 'http://taskerapi.herokuapp.com',
-  apiUrl: 'http://localhost:8000',
+  apiUrl: 'http://taskerapi.herokuapp.com',
   googleClientId: '611463719645-cvunnfjflkvike7abo38vogvjb0uapbp.apps.googleusercontent.com'
 };
 

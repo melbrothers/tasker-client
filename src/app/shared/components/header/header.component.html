@@ -114,7 +114,7 @@
       <div class="right-side">
 
         <!--  User Notifications -->
-        <div class="header-widget hide-on-mobile" *ngIf="isAuthenticated$ | async">
+        <div class="header-widget hide-on-mobile" *ngIf="(isAuthenticated$ | async)">
 
           <!-- Notifications -->
           <div class="header-notifications">
@@ -253,9 +253,9 @@
         <div class="header-widget">
 
           <!-- Messages -->
-          <div class="header-notifications user-menu" *ngIf="isAuthenticated$ | async">
+          <div class="header-notifications user-menu" *ngIf="(isAuthenticated$ | async)">
             <div class="header-notifications-trigger">
-              <a href="#"><div class="user-avatar status-online"><img [src]="avatarUrl" [alt]="socialUser?.name"></div></a>
+              <a><div class="user-avatar status-online"><img [src]="avatarUrl" [alt]="socialUser?.name"></div></a>
             </div>
 
             <!-- Dropdown -->
@@ -292,7 +292,7 @@
 
           <!-- login/register-->
           <a class="popup-with-zoom-anim log-in-button" (click)="openDialog();" *ngIf="!(isAuthenticated$ | async)"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
-
+          <a class="popup-with-zoom-anim log-in-button" (click)="logout();"  *ngIf="(isAuthenticated$ | async)">Logout</a>
         </div>
         <!-- User Menu / End -->
 
