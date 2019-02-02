@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../../../core/services/task.service';
+import { ActivatedRoute } from '@angular/router';
+import { Task } from 'app/store/models/task.model';
 
 @Component({
   selector: 'app-task-list',
@@ -7,11 +9,11 @@ import {TaskService} from '../../../core/services/task.service';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit {
-  selectedTask: any;
-  tasks: Array<object>;
-  constructor(private taskService: TaskService) { }
+  selectedTask: Task;
+  tasks: Task[];
+  constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute) { }
 
-  viewTask(task): void {
+  viewTask(task: Task): void {
     // get task details
     // TODO: need a task model to type the returned data
     this.taskService.getTask(task.slug).subscribe((t: any) => {
@@ -20,11 +22,10 @@ export class TaskListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.taskService.listTasks().subscribe(tasks => {
-      console.log(tasks);
-      this.tasks = tasks.data;
-      if (tasks.data && tasks.data.length > 0) {
-        this.selectedTask = tasks.data[0];
+    this.activatedRoute.data.subscribe(data => {
+      this.tasks = data['tasks'].data;
+      if (this.tasks.length > 0) {
+        this.selectedTask = this.tasks[0];
       }
     });
   }

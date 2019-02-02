@@ -34,7 +34,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.isAuthenticated$ = this.store.select(fromRoot.getIsAuthenticated);
     this.currentUser = JSON.parse(localStorage.getItem('current_user'));
     this.activatedRouter.url.subscribe(url => {
-      console.log(url);
       if (url.length) {
         const pathName = url[0].path;
         if (pathName == null) {
