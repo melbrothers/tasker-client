@@ -60,7 +60,6 @@ export function provideConfig() {
     {provide: LOCALE_ID, useValue: 'zh-Hans'},
     {provide: AuthServiceConfig, useFactory: provideConfig},
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
-    CookieService
   ],
   bootstrap: [AppComponent]
 })
