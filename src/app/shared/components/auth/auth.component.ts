@@ -6,11 +6,14 @@ import {AuthService} from 'app/core/services/auth.service';
 import {Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
 import * as Auth from 'app/store/actions/auth.actions';
+import * as User from 'app/store/actions/user.actions';
 import * as fromRoot from 'app/store/reducers/app.reducer';
 import * as fromAuth from 'app/store/reducers/auth.reducer';
+import * as fromUser from 'app/store/reducers/user.reducer';
 import { Observable } from 'rxjs';
 import * as googleAuthService from 'angularx-social-login';
 import {SocialUser} from 'angularx-social-login';
+import {IUser} from '../../../store/models/user';
 
 
 @Component({
@@ -116,14 +119,10 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.registerForm.value.email = this.registerForm.value.email.toLowerCase();
         this.registerForm.value.name = this.registerForm.value.email;
         this.inProcess = true;
-        this.authService.register(this.registerForm.value).subscribe((res: any) => {
+        this.authService.register(this.registerForm.value).subscribe((loggedUser: IUser) => {
           this.inProcess = false;
-          self.authService.currentUser = {
-            id: res.access_token,
-            email: this.registerForm.value.email,
-            avatar: ''
-          };
-          this.store.dispatch(new Auth.SetAuthenticated({user: self.authService.currentUser}));
+          this.store.dispatch(new Auth.SetAuthenticated({user: loggedUser}));
+          this.store.dispatch(new User.SetLoginStatus({isLoggedIn: true, user: loggedUser}));
           self.dialogRef.close();
           if (self.authService.redirectUrl) {
             this.router.navigateByUrl(this.authService.redirectUrl);
@@ -151,13 +150,9 @@ export class AuthComponent implements OnInit, OnDestroy {
     if (this.loginForm.valid) {
       this.loginForm.value.email = this.loginForm.value.email.toLowerCase();
       this.inProcess = true;
-      this.authService.login(this.loginForm.value).subscribe((res: any) => {
-        self.authService.currentUser = {
-          id: res.access_token,
-          email: this.loginForm.value.email,
-          avatar: '',
-        };
-        this.store.dispatch(new Auth.SetAuthenticated({user: self.authService.currentUser}));
+      this.authService.login(this.loginForm.value).subscribe((loggedUser: IUser) => {
+        this.store.dispatch(new Auth.SetAuthenticated({user: loggedUser}));
+        this.store.dispatch(new User.SetLoginStatus({isLoggedIn: true, user: loggedUser}));
         self.dialogRef.close();
         if (self.authService.redirectUrl) {
           this.router.navigateByUrl(this.authService.redirectUrl);
