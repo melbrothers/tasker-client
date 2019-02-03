@@ -56,15 +56,15 @@ export class AuthComponent implements OnInit, OnDestroy {
   createRegForm(): void {
     const controlsConfig = {
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      password_confirmation: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required]],
+      password_confirmation: ['', [Validators.required]]
     };
     this.registerForm = this.fb.group(controlsConfig);
   }
   createLoginForm(): void {
     const controlsConfig = {
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required]]
     };
     this.loginForm = this.fb.group(controlsConfig);
   }
@@ -103,6 +103,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   googleSignIn(): void {
     this.authService.signInWithGoogle().then(user => {
+      console.log(user);
       if (user) {
         this.store.dispatch(new Auth.SetGoogleUser({user: user}));
       }
