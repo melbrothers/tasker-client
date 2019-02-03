@@ -45,6 +45,7 @@ export class AuthService {
           // google login
           if (user) {
             this.googleAuth.signOut();
+            this.store.dispatch(new Auth.SetUnauthenticated());
           }
         });
       } else {
