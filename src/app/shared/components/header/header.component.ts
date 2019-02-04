@@ -52,7 +52,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
         }
       }
     });
-
+    this.activatedRouter.data.subscribe(data => {
+      if (Object.keys(data).length > 0 ) {
+        console.log(data);
+        this.currentUser = data['account'].data;
+        console.log(this.currentUser);
+      }
+    });
   }
   logout(): void {
     this.authService.logout();

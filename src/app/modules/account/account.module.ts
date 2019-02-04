@@ -6,6 +6,7 @@ import { AccountRoutingModule } from 'app/modules/account/account-routing.module
 import { AccountComponent } from './account.component';
 import { SideNavComponent } from 'app/modules/account/side-nav/side-nav.component';
 import { ProfileComponent } from './profile/profile.component';
+import {UserService} from '../../core/services/user.service';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,9 @@ import { ProfileComponent } from './profile/profile.component';
   ],
   exports: [
     DashboardComponent
+  ],
+  providers: [
+    UserService
   ]
 })
 export class AccountModule { }
