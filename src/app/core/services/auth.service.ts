@@ -26,6 +26,7 @@ export class AuthService {
     const body = new HttpParams({fromObject: signinForm });
     return  this.api.post(endpointTag, body).pipe(shareReplay(1));
   }
+
   login(loginForm): Observable<any> {
     const endpointTag = 'login';
     const body = new HttpParams({fromObject: loginForm });
@@ -35,7 +36,6 @@ export class AuthService {
   signInWithGoogle(): Promise<SocialUser> {
    return this.googleAuth.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
-
 
   logout(): void  {
     this.store.select(fromAuth.getIsAuthenticated).subscribe(isAuth => {

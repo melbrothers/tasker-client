@@ -8,8 +8,6 @@ import {select, Store} from '@ngrx/store';
 import * as Auth from 'app/store/actions/auth.actions';
 import * as User from 'app/store/actions/user.actions';
 import * as fromRoot from 'app/store/reducers/app.reducer';
-import * as fromAuth from 'app/store/reducers/auth.reducer';
-import * as fromUser from 'app/store/reducers/user.reducer';
 import { Observable } from 'rxjs';
 import * as googleAuthService from 'angularx-social-login';
 import {SocialUser} from 'angularx-social-login';
@@ -58,15 +56,15 @@ export class AuthComponent implements OnInit, OnDestroy {
   createRegForm(): void {
     const controlsConfig = {
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      password_confirmation: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required]],
+      password_confirmation: ['', [Validators.required]]
     };
     this.registerForm = this.fb.group(controlsConfig);
   }
   createLoginForm(): void {
     const controlsConfig = {
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required]]
     };
     this.loginForm = this.fb.group(controlsConfig);
   }
@@ -77,12 +75,12 @@ export class AuthComponent implements OnInit, OnDestroy {
     if (!this.registerForm.controls.email.valid) {
       this.errorMsgs.emailErrorMsg = 'Please supply a valid email address';
     }
-    if (!this.registerForm.controls.password.valid) {
-      this.errorMsgs.passwordErrorMsg = 'Please supply a legal password';
-    }
-    if (!this.registerForm.controls.password_confirmation.valid) {
-      this.errorMsgs.cPasswordErrorMsg = 'Please supply a legal password';
-    }
+    // if (!this.registerForm.controls.password.valid) {
+    //   this.errorMsgs.passwordErrorMsg = 'Please supply a legal password';
+    // }
+    // if (!this.registerForm.controls.password_confirmation.valid) {
+    //   this.errorMsgs.cPasswordErrorMsg = 'Please supply a legal password';
+    // }
     return this.errorMsgs;
   }
   ngOnInit(): void {
@@ -105,6 +103,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   googleSignIn(): void {
     this.authService.signInWithGoogle().then(user => {
+      console.log(user);
       if (user) {
         this.store.dispatch(new Auth.SetGoogleUser({user: user}));
       }

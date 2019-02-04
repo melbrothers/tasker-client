@@ -34,7 +34,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.isAuthenticated$ = this.store.select(fromRoot.getIsAuthenticated);
     this.currentUser = JSON.parse(localStorage.getItem('current_user'));
     this.activatedRouter.url.subscribe(url => {
-      console.log(url);
       if (url.length) {
         const pathName = url[0].path;
         if (pathName == null) {
@@ -53,7 +52,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
         }
       }
     });
-
+    this.activatedRouter.data.subscribe(data => {
+      if (Object.keys(data).length > 0 ) {
+        console.log(data);
+        this.currentUser = data['account'].data;
+        console.log(this.currentUser);
+      }
+    });
   }
   logout(): void {
     this.authService.logout();

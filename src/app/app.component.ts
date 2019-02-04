@@ -1,4 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import * as fromRoot from 'app/store/reducers/app.reducer';
+import { Store } from '@ngrx/store';
+import * as Auth from 'app/store/actions/auth.actions';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +12,12 @@ import {Component, OnInit} from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'tasker-client';
   name: string;
-  constructor() { }
+  constructor(private _cookieService: CookieService, private store: Store<fromRoot.State>) {
+    if (this._cookieService.check('token')) {
+      // TODO: add user to the store from api
+      // this.store.dispatch(new Auth.SetAuthenticated());
+    }
+  }
 
   ngOnInit(): void {
     window.addEventListener('scroll', this.stickyHeader);

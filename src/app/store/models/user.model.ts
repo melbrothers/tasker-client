@@ -1,4 +1,6 @@
-export interface IUser {
+import {IUser} from './user';
+
+export class User implements IUser {
   id: string;
   name: string;
   email: string;
