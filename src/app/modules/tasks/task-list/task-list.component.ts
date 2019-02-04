@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../../../core/services/task.service';
 import { ActivatedRoute } from '@angular/router';
 import { Task } from 'app/store/models/task.model';
+import {ITask} from '../../../store/models/task';
 
 @Component({
   selector: 'app-task-list',

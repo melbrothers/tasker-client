@@ -1,5 +1,7 @@
+import {Task} from './task.model';
+
 export interface ITask {
-  data: Array<object>;
+  data: Task[];
   links: object;
   meta: object;
 }
