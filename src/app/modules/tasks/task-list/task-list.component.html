@@ -128,7 +128,8 @@
       <div class="sidebar-search-button-container">
         <button class="button ripple-effect">Search</button>
       </div>
-      <!-- Search Button / End-->
+
+
 
     </div>
   </div>
@@ -156,6 +157,17 @@
           </select>
         </div>
       </div>
+
+      <!-- Enable Filters Button -->
+      <div class="filter-button-container">
+        <button class="enable-filters-button">
+          <i class="enable-filters-button-icon"></i>
+          <span class="show-text">Show Filters</span>
+          <span class="hide-text">Hide Filters</span>
+        </button>
+        <div class="filter-button-tooltip">Click to expand sidebar with filters!</div>
+      </div>
+      <!-- Search Button / End-->
 
       <div class="listings-container compact-list-layout margin-top-35 margin-bottom-25">
 
@@ -203,15 +215,7 @@
   <!-- Full Page Map -->
   <div class="full-page-map-container">
 
-    <!-- Enable Filters Button -->
-    <div class="filter-button-container">
-      <button class="enable-filters-button">
-        <i class="enable-filters-button-icon"></i>
-        <span class="show-text">Show Filters</span>
-        <span class="hide-text">Hide Filters</span>
-      </button>
-      <div class="filter-button-tooltip">Click to expand sidebar with filters!</div>
-    </div>
+
 
     <app-task *ngIf="selectedTask" [task]="selectedTask"></app-task>
 
