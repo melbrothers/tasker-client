@@ -5,11 +5,13 @@ import { TaskRoutingModule } from 'app/modules/tasks/task-routing.module';
 import {TaskComponent} from './task/task.component';
 import { TaskService } from 'app/core/services/task.service';
 import { TaskDataResolver } from 'app/modules/tasks/tasks-resolver.service';
+import {TaskMapComponent} from './task-map/task-map.component';
 
 @NgModule({
   declarations: [
     TaskListComponent,
-    TaskComponent
+    TaskComponent,
+    TaskMapComponent
   ],
   imports: [
     CommonModule,

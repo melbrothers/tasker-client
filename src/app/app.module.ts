@@ -48,7 +48,6 @@ export function provideConfig() {
     CommonModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule,
     SharedModule,
     AccountModule,
     SocialLoginModule,

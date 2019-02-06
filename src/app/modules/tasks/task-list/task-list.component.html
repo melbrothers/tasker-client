@@ -128,13 +128,9 @@
       <div class="sidebar-search-button-container">
         <button class="button ripple-effect">Search</button>
       </div>
-
-
-
     </div>
   </div>
   <!-- Full Page Sidebar / End -->
-
 
   <!-- Full Page Content -->
   <div class="full-page-content-container" data-simplebar>
@@ -203,26 +199,16 @@
           </div>
         </a>
       </div>
-
-    
-
-
     </div>
   </div>
   <!-- Full Page Content / End -->
 
-
   <!-- Full Page Map -->
   <div class="full-page-map-container">
-
-
-
+    <app-task-map *ngIf="!selectedTask"></app-task-map>
     <app-task *ngIf="selectedTask" [task]="selectedTask"></app-task>
-
     <!-- Map -->
     <!--<div id="map" data-map-zoom="12" data-map-scroll="true"></div>-->
-
   </div>
   <!-- Full Page Map / End -->
-
 </div>
