@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import * as fromRoot from 'app/store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
 import * as Auth from 'app/store/actions/auth.actions';
+import { UserService } from './core/services/user.service';
+import { User } from './store/models/user.model';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +13,13 @@ import * as Auth from 'app/store/actions/auth.actions';
 export class AppComponent implements OnInit {
   title = 'tasker-client';
   name: string;
-  constructor(private _cookieService: CookieService, private store: Store<fromRoot.State>) {
-    if (this._cookieService.check('token')) {
-      // TODO: add user to the store from api
-      // this.store.dispatch(new Auth.SetAuthenticated());
-    }
+  constructor(private _userService: UserService, private store: Store<fromRoot.State>) {
+    this._userService.getCurrentUser().subscribe( (user: User) => {
+      console.log(user);
+      this.store.dispatch(new Auth.SetAuthenticated({user}));
+    }, () => {
+      this.store.dispatch(new Auth.SetUnauthenticated());
+    });
   }
 
   ngOnInit(): void {

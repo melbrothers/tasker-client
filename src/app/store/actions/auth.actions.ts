@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
-import {IUser} from '../models/user';
 import {SocialUser} from 'angularx-social-login';
+import { User } from '../models/user.model';
 
 /**
  * For each action type in an action group, make a simple
@@ -19,7 +19,7 @@ export enum AuthActionTypes {
  */
 export class SetAuthenticated implements Action {
     readonly type = AuthActionTypes.SET_AUTHENTICATED;
-    constructor (public payload: {user: IUser}) {}
+    constructor (public payload: {user: User}) {}
 }
 
 export class SetGoogleUser implements Action {
