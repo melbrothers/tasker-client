@@ -1,10 +1,25 @@
 <div class="task-detail-container">
   <div class="task-header">
-    <div class="details-panel">
-      <div class="top-actions">
-        <button mat-raised-button color="primary">Open</button>
-        <button mat-raised-button >Assigned</button>
-        <button mat-raised-button >Completed</button>
+    <div class="row">
+      <div class="col-8">
+        <div class="details-panel">
+          <div class="top-actions">
+            <button mat-raised-button color="primary" class="round-btn">Open</button>
+            <button mat-raised-button class="round-btn">Assigned</button>
+            <button mat-raised-button class="round-btn">Completed</button>
+          </div>
+          <button mat-raised-button>
+            Follow
+            <mat-icon>favorite</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="col-4 side-option">
+        <div class="budget-box">
+          <h3>Task budget</h3>
+          <div class="budget-number">$400</div>
+          <button mat-raised-button class="offer-btn">Make an offer</button>
+        </div>
       </div>
     </div>
   </div>
