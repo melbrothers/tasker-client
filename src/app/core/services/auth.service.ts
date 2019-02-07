@@ -33,7 +33,7 @@ export class AuthService {
     return  this.api.post(endpointTag, body).pipe(shareReplay(1));
   }
 
-  signInWithGoogle() {
+  signInWithGoogle(): Promise<any> {
    return this.googleAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then((user: SocialUser) => {
       return this.api.post('/social/google/login', {token: user.authToken}).pipe(shareReplay(1));
    });
