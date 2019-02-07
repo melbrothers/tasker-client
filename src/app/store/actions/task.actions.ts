@@ -7,6 +7,7 @@ import { Task } from 'app/store/models/task.model';
  */
 export enum TaskActionTypes {
     FETCH_TASKS = '[Task] FETCH_TASKS',
+    SELECT_TASK = '[Task] SELECT_TASK',
 }
 
 /**
@@ -19,6 +20,11 @@ export class FetchTasks implements Action {
     constructor (public payload: {tasks: Task[]}) {}
 }
 
+export class SelectTask implements Action {
+    readonly type = TaskActionTypes.SELECT_TASK;
+    constructor (public payload: {task: Task}) {}
+}
+
 // export class SetUnauthenticated implements Action {
 //     readonly type = AuthActionTypes.SET_UNAUTHENTICATED;
 // }
@@ -27,4 +33,4 @@ export class FetchTasks implements Action {
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
  */
-export type TaskActions = FetchTasks;
+export type TaskActions = FetchTasks | SelectTask;
