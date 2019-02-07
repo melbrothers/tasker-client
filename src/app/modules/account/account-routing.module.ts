@@ -5,6 +5,7 @@ import { DashboardComponent } from 'app/modules/account/dashboard/dashboard.comp
 import { AccountComponent } from 'app/modules/account/account.component';
 import { ProfileComponent } from 'app/modules/account/profile/profile.component';
 import {AccountDataResolver} from './account-resolver.service';
+import { AuthGuard } from 'app/core/services/auth.guard';
 
 const routes: Routes = [
     {
@@ -22,7 +23,8 @@ const routes: Routes = [
                 path: 'profile',
                 component: ProfileComponent
             }
-        ]
+        ],
+        canActivate: [AuthGuard]
     }
 ];
 

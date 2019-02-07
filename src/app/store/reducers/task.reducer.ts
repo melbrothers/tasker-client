@@ -15,7 +15,7 @@ const initialState: TaskState = {
 
 export function taskReducer(state = initialState, action: TaskActions ): TaskState {
     switch (action.type) {
-        case TaskActionTypes.FETCH_TASKS:
+        case TaskActionTypes.LOAD_TASKS:
             const tasks = [...state.tasks, ...action.payload.tasks];
             return {...state, tasks: tasks};
         case TaskActionTypes.SELECT_TASK:
