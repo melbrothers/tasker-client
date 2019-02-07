@@ -4,7 +4,33 @@
 .task-detail-container {
   margin-top: 10px;
 }
+.task-posted-details {
+  .task-subheader {
+    padding: 10px 16px 0px;
+    height: auto;
+    text-transform: uppercase;
+    color: #666;
+  }
 
+  .task-post-list {
+    .task-post-item {
+      height: auto;
+      h4, p {
+        color: #666;
+      }
+      p {
+        font-size: 12px;
+        margin-top: -5px;
+      }
+      .task-post-icon {
+        font-size: 36px;
+        width: 36px;
+        height: 36px;
+        color: #666;
+      }
+    }
+  }
+}
 .details-panel {
   display: flex;
   align-items: center;
@@ -50,6 +76,9 @@
   .task-options {
     border: 1px solid #2a41e8;
     padding: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
     .task-options-select {
       font-size: 1rem;
     }
@@ -104,22 +133,24 @@
 .task-offers,
 .task-questions,
 .task-attachment {
-  padding: 20px 20px 0 40px;
+  padding: 5px 20px 0 40px;
   margin: 0;
-  .offer {
-    margin: 10px 10px 10px 0;
-    border: 0;
-    box-shadow: none;
-    background: #f5f9fb;
-  }
-  .offer-time {
-    font-size: 11px;
-    color: #545A77;
-  }
+
   .section-title {
     text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
+    color: #666;
+  }
+
+  .task-detail-description {
+    font-size: 14px;
+    line-height: 140%;
+    margin-bottom: 8px;
   }
 }
+
+
 
 //.task-offers {
 //  padding: 0 20px 0 40px;
@@ -128,14 +159,77 @@
 //  }
 //}
 
+.task-offers {
+  .offer {
+    margin: 10px 10px 10px 0;
+    border: 0;
+    box-shadow: none;
+    background: #f5f9fb;
+    .offer-time {
+      font-size: 11px;
+      color: #545A77;
+    }
+    .task-offer-name {
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 0;
+    }
+
+    .rate-number, pre, .offer-description {
+      font-size: 14px;
+      color: #333;
+    }
+    .offer-description {
+      line-height: 140%;
+      color: #333;
+    }
+  }
+}
 
 .task-questions {
   .notice {
     margin: 0;
+    font-size: 14px;
+    color: #666;
   }
   .task-question {
     width: 100%;
     margin-right: 10px;
+    .footer {
+      position: absolute;
+      left: 1px;
+      right: 1px;
+      bottom: 7px;
+      border-radius: 3px;
+      padding: 0 8px;
+      height: 35px;
+      max-height: 35px;
+      .attach_file {
+        margin: 0;
+        bottom: 5px;
+        .mat-icon {
+          font-size: 16px;
+          width: 16px;
+          height: 16px;
+          color: #2a41e8;
+        }
+      }
+      .right {
+        float: right;
+        .input-count {
+          color: #bbc2dc;
+          font-size: 13px;
+          display: inline-block;
+
+        }
+        .question-send-btn {
+          color: rgb(187, 194, 220);
+        }
+      }
+
+    }
+
     ::ng-deep {
       .mat-form-field-label {
         padding: 0 5px;
@@ -147,6 +241,7 @@
     .task-question-input {
 
     }
+
   }
 }
 .user-avatar {

@@ -15,6 +15,7 @@ export class TaskComponent implements OnInit {
   currentCompletedRate: number;
   rateCount: number;
   taskQuestionsCount: number;
+  inputCountForQuestion = 1500;
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
   iconRegistry.addSvgIcon(
   'fb-logo',
