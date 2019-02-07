@@ -5,11 +5,11 @@ import {shareReplay} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import * as googleAuthService from 'angularx-social-login';
 import {GoogleLoginProvider} from 'angularx-social-login';
-import {IUser} from 'app/store/models/user';
 import {SocialUser} from 'angularx-social-login';
 import * as Auth from '../../store/actions/auth.actions';
 import * as fromAuth from '../../store/reducers/auth.reducer';
 import {Store} from '@ngrx/store';
+import { User } from 'app/store/models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +33,10 @@ export class AuthService {
     return  this.api.post(endpointTag, body).pipe(shareReplay(1));
   }
 
-  signInWithGoogle(): Promise<SocialUser> {
-   return this.googleAuth.signIn(GoogleLoginProvider.PROVIDER_ID);
+  signInWithGoogle() {
+   return this.googleAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then((user: SocialUser) => {
+      return this.api.post('/social/google/login', {token: user.authToken}).pipe(shareReplay(1));
+   });
   }
 
   logout(): void  {
