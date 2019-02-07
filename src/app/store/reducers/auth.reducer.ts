@@ -1,12 +1,9 @@
-import {Action, ActionReducer, ActionReducerMap} from '@ngrx/store';
-
-import * as Auth from '../actions/auth.actions';
 import {AuthActions, AuthActionTypes} from '../actions/auth.actions';
 import { User } from 'app/store/models/user.model';
 
 export interface AuthState {
-    isAuthenticated?: boolean;
-    user?: User;
+    isAuthenticated: boolean;
+    user: User;
 }
 
 const initialState: AuthState = {
@@ -14,7 +11,7 @@ const initialState: AuthState = {
   user: null,
 };
 
-export function authReducer(state = initialState, action: Auth.AuthActions ): AuthState {
+export function authReducer(state = initialState, action: AuthActions ): AuthState {
     switch (action.type) {
         case AuthActionTypes.SET_AUTHENTICATED: {
             return {
@@ -22,7 +19,7 @@ export function authReducer(state = initialState, action: Auth.AuthActions ): Au
                 user: action.payload.user
             };
         }
-        case Auth.AuthActionTypes.SET_UNAUTHENTICATED: {
+        case AuthActionTypes.SET_UNAUTHENTICATED: {
             return {
                 isAuthenticated: false,
                 user: null
