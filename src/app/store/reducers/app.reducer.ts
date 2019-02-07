@@ -5,12 +5,10 @@ import {environment} from 'environments/environment';
 
 export interface State {
     auth: fromAuth.AuthState;
-    user: fromUser.UserState;
 }
 
 export const reducers: ActionReducerMap<State> = {
     auth: fromAuth.authReducer,
-    user: fromUser.userReducer
 };
 
 export const getAuthState = createFeatureSelector<fromAuth.AuthState>('auth');
