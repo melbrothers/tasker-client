@@ -65,7 +65,7 @@
     .budget-number {
       font-size: 40px;
       font-weight: bold;
-      color: #585858;
+      color: #666;
       width: 100%;
       border-bottom: 1px dotted #2a41e8;
       padding: 20px 0;
@@ -105,11 +105,17 @@
       align-items: center;
       justify-content: space-around;
       .share-link {
+        &:hover {
+          cursor: pointer;
+        }
         .mat-icon {
           font-size: 15px;
           width: 15px;
           height: 15px;
           margin: 0 5px;
+          &:hover {
+            color: #37b3e8;
+          }
         }
       }
     }
