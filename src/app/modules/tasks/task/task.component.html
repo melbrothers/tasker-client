@@ -17,24 +17,24 @@
             </button>
           </div>
           <div class="task-posted-details">
-            <mat-list>
-              <h3 mat-subheader>POSTED BY</h3>
-              <mat-list-item>
-                <mat-icon mat-list-icon>face</mat-icon>
+            <mat-list class="task-post-list">
+              <h3 mat-subheader class="task-subheader">POSTED BY</h3>
+              <mat-list-item class="task-post-item">
+                <mat-icon mat-list-icon class="task-post-icon">face</mat-icon>
                 <h4 mat-line>Ryan Smith</h4>
                 <p mat-line> 2 hours ago</p>
               </mat-list-item>
               <mat-divider></mat-divider>
-              <h3 mat-subheader>LOCATION</h3>
-              <mat-list-item>
-                <mat-icon mat-list-icon>place</mat-icon>
+              <h3 mat-subheader class="task-subheader">LOCATION</h3>
+              <mat-list-item class="task-post-item">
+                <mat-icon mat-list-icon class="task-post-icon">place</mat-icon>
                 <h4 mat-line>Bundoora VIC, Australia</h4>
                 <p mat-line> View Map </p>
               </mat-list-item>
               <mat-divider></mat-divider>
-              <h3 mat-subheader>DUE DATE</h3>
-              <mat-list-item>
-                <mat-icon mat-list-icon>date_range</mat-icon>
+              <h3 mat-subheader class="task-subheader">DUE DATE</h3>
+              <mat-list-item class="task-post-item">
+                <mat-icon mat-list-icon class="task-post-icon">date_range</mat-icon>
                 <h4 mat-line>Sunday, 10th Feb 2019</h4>
                 <p mat-line> Afternoon (2pm - 6pm)</p>
               </mat-list-item>
@@ -119,14 +119,14 @@
               <hr>
               <pre>Completed rate: <b>{{currentCompletedRate}}%</b></pre>
 
-              <mat-card-title>
+              <mat-card-title class="task-offer-name">
                 Ann Stephanie
               </mat-card-title>
-              <mat-card-subtitle>1 hours ago</mat-card-subtitle>
+              <mat-card-subtitle class="offer-time">1 hours ago</mat-card-subtitle>
             </mat-card-header>
             <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
             <mat-card-content>
-              <p>
+              <p class="offer-description">
                 The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
                 A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
                 bred for hunting.
@@ -145,12 +145,12 @@
               <ngb-rating [(rate)]="currentRate"></ngb-rating> &#40;<span class="rate-number">{{rateCount}}</span>&#41;
               <hr>
               <pre>Completed rate: <b>{{currentCompletedRate}}%</b></pre>
-              <mat-card-title>Ryan Smith</mat-card-title>
-              <mat-card-subtitle>3 hours ago</mat-card-subtitle>
+              <mat-card-title class="task-offer-name">Ryan Smith</mat-card-title>
+              <mat-card-subtitle class="offer-time">3 hours ago</mat-card-subtitle>
             </mat-card-header>
             <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
             <mat-card-content>
-              <p>
+              <p class="offer-description">
                 The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
                 A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
                 bred for hunting.
@@ -174,6 +174,16 @@
           <p class="notice">Please don't share personal info – insurance won't apply to tasks not done through Tasker!</p>
           <mat-form-field class="task-question">
             <textarea matInput placeholder="Ask Ryan a question" class="task-question-input"></textarea>
+            <div class="footer">
+              <button mat-icon-button class="attach_file">
+                <mat-icon >attach_file</mat-icon>
+              </button>
+              <span class="right">
+                 <span class="input-count">{{inputCountForQuestion}}</span>
+                <button mat-button class="question-send-btn">Send</button>
+              </span>
+            </div>
+
           </mat-form-field>
         </div>
       </div>
