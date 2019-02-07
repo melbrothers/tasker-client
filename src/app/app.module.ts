@@ -7,7 +7,6 @@ import { environment } from '../environments/environment';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import localeZh from '@angular/common/locales/zh-Hans';
 import {CommonModule, registerLocaleData} from '@angular/common';
-import {MaterialModule} from './shared/modules/material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {StoreModule} from '@ngrx/store';
 import {SharedModule} from './shared/shared.module';

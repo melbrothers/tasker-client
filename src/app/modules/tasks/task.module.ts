@@ -7,18 +7,17 @@ import { TaskService } from 'app/core/services/task.service';
 import { TaskDataResolver } from 'app/modules/tasks/tasks-resolver.service';
 import {TaskMapComponent} from './task-map/task-map.component';
 import {SharedModule} from '../../shared/shared.module';
-import {MaterialModule} from '../../shared/modules/material.module';
 
 @NgModule({
   declarations: [
     TaskListComponent,
     TaskComponent,
-    TaskMapComponent
+    TaskMapComponent,
   ],
   imports: [
     CommonModule,
     TaskRoutingModule,
-    MaterialModule
+    SharedModule
   ],
   providers: [
     TaskService,

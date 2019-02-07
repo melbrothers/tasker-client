@@ -28,7 +28,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatOptionModule,
     MatTabsModule,
     MatIconModule,
-    MatProgressSpinnerModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     ReactiveFormsModule,
