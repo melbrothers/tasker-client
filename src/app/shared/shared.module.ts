@@ -34,7 +34,7 @@ import {LoadingComponent} from './components/loading/loading.component';
       HeaderComponent,
       FooterComponent,
       AuthComponent,
-      LoadingComponent,
+      LoadingComponent
     ],
     entryComponents: [AuthComponent],
   })
