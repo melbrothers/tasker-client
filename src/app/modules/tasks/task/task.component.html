@@ -1,26 +1,182 @@
-<div class="task-detail-container">
-  <div class="task-header">
-    <div class="row">
-      <div class="col-xl-8 col-sm-12">
-        <div class="details-panel">
-          <div class="top-actions">
-            <button mat-raised-button color="primary" class="round-btn">Open</button>
-            <button mat-raised-button class="round-btn">Assigned</button>
-            <button mat-raised-button class="round-btn">Completed</button>
+  <div class="task-detail-container" >
+    <div class="task-content">
+      <div class="row justify-content-between">
+        <div class="col col-xl-8 col-sm-12">
+          <div class="details-panel">
+
+            <mat-chip-list class="top-actions">
+              <mat-chip color="primary" selected>Open</mat-chip>
+              <mat-chip>Assigned</mat-chip>
+              <mat-chip>Completed</mat-chip>
+            </mat-chip-list>
+
+            <button mat-button class="follow-btn">
+              Follow
+              <mat-icon *ngIf="isFollowed">favorite</mat-icon>
+              <mat-icon *ngIf="!isFollowed">favorite_border</mat-icon>
+            </button>
           </div>
-          <button mat-raised-button>
-            Follow
-            <mat-icon>favorite</mat-icon>
-          </button>
+          <div class="task-posted-details">
+            <mat-list>
+              <h3 mat-subheader>POSTED BY</h3>
+              <mat-list-item>
+                <mat-icon mat-list-icon>face</mat-icon>
+                <h4 mat-line>Ryan Smith</h4>
+                <p mat-line> 2 hours ago</p>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+              <h3 mat-subheader>LOCATION</h3>
+              <mat-list-item>
+                <mat-icon mat-list-icon>place</mat-icon>
+                <h4 mat-line>Bundoora VIC, Australia</h4>
+                <p mat-line> View Map </p>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+              <h3 mat-subheader>DUE DATE</h3>
+              <mat-list-item>
+                <mat-icon mat-list-icon>date_range</mat-icon>
+                <h4 mat-line>Sunday, 10th Feb 2019</h4>
+                <p mat-line> Afternoon (2pm - 6pm)</p>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            </mat-list>
+          </div>
+        </div>
+        <div class="col-xl-auto col-sm-12 side-option">
+          <div class="budget-box">
+            <h3>Task budget</h3>
+            <span class="budget-number">$400</span>
+            <button mat-raised-button class="offer-btn" color="primary">Make an offer</button>
+          </div>
+          <div class="task-options">
+            <mat-select placeholder="More options" class="task-options-select">
+              <mat-option value="1">Post a similar task</mat-option>
+              <mat-option value="2">Set up alerts</mat-option>
+            </mat-select>
+          </div>
+          <div class="task-share">
+            <p class="share-text">SHARE</p>
+            <div class="share-buttons">
+              <a class="share-link">
+                <mat-icon svgIcon="fb-logo"></mat-icon>
+              </a>
+              <a class="share-link">
+                <mat-icon svgIcon="twitter-logo"></mat-icon>
+              </a>
+              <a class="share-link">
+                <mat-icon svgIcon="google-plus"></mat-icon>
+              </a>
+              <a class="share-link">
+                <mat-icon svgIcon="linkedin"></mat-icon>
+              </a>
+              <a class="share-link">
+                <mat-icon svgIcon="wechat"></mat-icon>
+              </a>
+            </div>
+          </div>
+          <p class="report-task">
+            <mat-icon class="material-icons">
+              outlined_flag
+            </mat-icon>
+            Report this task
+          </p>
         </div>
       </div>
-      <div class="col-xl-4 col-sm-12 side-option">
-        <div class="budget-box">
-          <h3>Task budget</h3>
-          <span class="budget-number">$400</span>
-          <button mat-raised-button class="offer-btn" color="primary">Make an offer</button>
+
+      <!-- Task details -->
+      <div class="row justify-content-around">
+        <div class="col task-detail">
+          <h3 class="section-title">DETAILS</h3>
+          <p class="task-detail-description">
+            The budget on this task is based on Airtasker's cleaning price calculator. You can still ask questions and make offers as you would on standard tasks.
+          </p>
+          <p class="task-detail-description">
+            The budget on this task is based on Airtasker's cleaning price calculator. You can still ask questions and make offers as you would on standard tasks.
+          </p>
+        </div>
+
+      </div>
+      <!-- End of Task details -->
+      <!-- Task attachment -->
+      <div class="row justify-content-around">
+        <div class="col task-attachment">
+          <h3 class="section-title">Attachments</h3>
+          <div class="attachments-container">
+            <a href="#" class="attachment-box ripple-effect"><span>Project Brief</span><i>PDF</i></a>
+          </div>
         </div>
       </div>
+      <!-- End of task attachment -->
+
+      <!-- Task offers -->
+      <div class="row justify-content-around">
+        <div class="col task-offers">
+          <h3 class="section-title">OFFERS</h3>
+          <mat-card class="offer">
+            <mat-card-header>
+              <div mat-card-avatar class="user-avatar"></div>
+              <ngb-rating [(rate)]="currentRate"></ngb-rating> &#40;<span class="rate-number">{{rateCount}}</span>&#41;
+              <hr>
+              <pre>Completed rate: <b>{{currentCompletedRate}}%</b></pre>
+
+              <mat-card-title>
+                Ann Stephanie
+              </mat-card-title>
+              <mat-card-subtitle>1 hours ago</mat-card-subtitle>
+            </mat-card-header>
+            <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
+            <mat-card-content>
+              <p>
+                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+                bred for hunting.
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button class="reply-btn">
+                <mat-icon>reply</mat-icon>
+                Reply
+              </button>
+            </mat-card-actions>
+          </mat-card>
+          <mat-card class="offer">
+            <mat-card-header>
+              <div mat-card-avatar class="user-avatar"></div>
+              <ngb-rating [(rate)]="currentRate"></ngb-rating> &#40;<span class="rate-number">{{rateCount}}</span>&#41;
+              <hr>
+              <pre>Completed rate: <b>{{currentCompletedRate}}%</b></pre>
+              <mat-card-title>Ryan Smith</mat-card-title>
+              <mat-card-subtitle>3 hours ago</mat-card-subtitle>
+            </mat-card-header>
+            <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
+            <mat-card-content>
+              <p>
+                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+                bred for hunting.
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button class="reply-btn">
+                <mat-icon>reply</mat-icon>
+                Reply
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+      <!-- End of Task Offers -->
+
+      <!-- Task question -->
+      <div class="row justify-content-around">
+        <div class="col task-questions">
+          <h3 class="section-title">Questions &#40;<span>{{taskQuestionsCount}}</span>&#41;</h3>
+          <p class="notice">Please don't share personal info – insurance won't apply to tasks not done through Tasker!</p>
+          <mat-form-field class="task-question">
+            <textarea matInput placeholder="Ask Ryan a question" class="task-question-input"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- End of Task question -->
     </div>
   </div>
-</div>
