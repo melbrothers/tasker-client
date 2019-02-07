@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {
-  MatButtonModule,
+  MatButtonModule, MatCardModule, MatChipsModule,
   MatDialogModule, MatDividerModule,
   MatFormFieldModule, MatIconModule,
-  MatInputModule,
+  MatInputModule, MatListModule,
   MatOptionModule, MatProgressSpinnerModule,
   MatSelectModule, MatTabsModule
 } from '@angular/material';
@@ -18,10 +17,13 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     FormsModule,
     MatButtonModule,
+    MatCardModule,
+    MatChipsModule,
     MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
+    MatListModule,
     MatSelectModule,
     MatOptionModule,
     MatTabsModule,
@@ -33,10 +35,13 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     NgbModule,
     MatButtonModule,
+    MatCardModule,
+    MatChipsModule,
     MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
+    MatListModule,
     MatSelectModule,
     MatOptionModule,
     MatTabsModule,

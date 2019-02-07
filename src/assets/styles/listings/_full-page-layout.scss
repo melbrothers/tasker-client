@@ -36,8 +36,7 @@
 }
 
 .full-page-content-inner {
-  padding: 40px;
-  padding-bottom: 0;
+  padding: 40px 20px 0;
   .grid-layout {
     width: calc(100% + 30px);
     .job-listing {
@@ -183,8 +182,8 @@
 
 .filter-button-container {
   position: absolute;
-  right: 40px;
-  top: 0px;
+  right: 20px;
+  top: 0;
   width: 175px;
   overflow-x: hidden;
   padding: 20px 0;
