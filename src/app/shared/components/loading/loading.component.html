@@ -1,15 +1,3 @@
-<!--<div class="loading" *ngIf="isLoading$ | async; else spinner">-->
-  <!--&lt;!&ndash;<mat-progress-spinner&ndash;&gt;-->
-    <!--&lt;!&ndash;class="spinner"&ndash;&gt;-->
-    <!--&lt;!&ndash;[color]='color'&ndash;&gt;-->
-    <!--&lt;!&ndash;[mode]='mode'&ndash;&gt;-->
-    <!--&lt;!&ndash;[value]='value'&ndash;&gt;-->
-    <!--&lt;!&ndash;[strokeWidth]='strokeWidth'&ndash;&gt;-->
-    <!--&lt;!&ndash;[diameter]='diameter'&ndash;&gt;-->
-  <!--&lt;!&ndash;&gt;</mat-progress-spinner>&ndash;&gt;-->
- <!---->
-<!--</div>-->
-
 <ng-content *ngIf="!(isLoading$ | async); else spinner"></ng-content>
 <ng-template #spinner>
   <div class="loading">
