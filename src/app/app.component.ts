@@ -1,12 +1,9 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as Auth from 'app/store/actions/auth.actions';
 import * as fromRoot from 'app/store/reducers/app.reducer';
-import * as Loading from 'app/store/actions/loading.actions';
 import { UserService } from './core/services/user.service';
 import { User } from './store/models/user.model';
-import {from, Observable} from 'rxjs';
-
 
 @Component({
   selector: 'app-root',
@@ -16,7 +13,6 @@ import {from, Observable} from 'rxjs';
 export class AppComponent implements OnInit {
   title = 'tasker-client';
   name: string;
-  isLoading$: Observable<boolean>;
   constructor(private _userService: UserService, private store: Store<fromRoot.State>) {
     this._userService.getCurrentUser().subscribe( (user: User) => {
       console.log(user);
