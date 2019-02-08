@@ -1,20 +1,20 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { UserActions, UserActionTypes } from '../actions/user.actions';
-import { IUser } from 'app/store/models/user';
+import {User} from '../models/user.model';
 
 
 // State for this feature (User)
 export interface UserState {
-  currentUser: IUser;
+  users: User[];
 }
 
 const initialState: UserState = {
-  currentUser: null
+  users: null
 };
 
 export function userReducer(state = initialState, action: UserActions): UserState {
   switch (action.type) {
-    case UserActionTypes.GetCurrentUser:
+    case UserActionTypes.GetUsers:
       return {
         ...state,
       };
