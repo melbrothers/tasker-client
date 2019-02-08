@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as Auth from 'app/store/actions/auth.actions';
 import * as fromRoot from 'app/store/reducers/app.reducer';
+import * as Loading from 'app/store/actions/loading.actions';
 import { UserService } from './core/services/user.service';
 import { User } from './store/models/user.model';
 import {from, Observable} from 'rxjs';
@@ -26,7 +27,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isLoading$ = this.store.select(fromRoot.getLoadingStatus);
     window.addEventListener('scroll', this.stickyHeader);
   }
   stickyHeader(): void {

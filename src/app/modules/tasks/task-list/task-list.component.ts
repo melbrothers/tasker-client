@@ -30,7 +30,6 @@ export class TaskListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new Loading.ShowLoading());
     this.activatedRoute.data.subscribe(data => {
       this.tasks = data['tasks'].data;
       this.store.dispatch(new Loading.HideLoading());
