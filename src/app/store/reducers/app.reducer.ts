@@ -7,13 +7,15 @@ import {User} from '../models/user.model';
 import {AuthState} from 'app/store/reducers/auth.reducer';
 
 export interface State {
-    auth: fromAuth.AuthState;
-    tasks: fromTask.TaskState;
+  user: fromUser.UserState;
+  auth: fromAuth.AuthState;
+  tasks: fromTask.TaskState;
 }
 
 export const reducers: ActionReducerMap<State> = {
-    auth: fromAuth.authReducer,
-    tasks: fromTask.taskReducer,
+  user: fromUser.userReducer,
+  auth: fromAuth.authReducer,
+  tasks: fromTask.taskReducer,
 };
 
 export const getAuthState = fromAuth.getAuthFeatureState;
