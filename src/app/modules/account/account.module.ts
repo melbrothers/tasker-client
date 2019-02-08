@@ -8,6 +8,11 @@ import { SideNavComponent } from 'app/modules/account/side-nav/side-nav.componen
 import { ProfileComponent } from './profile/profile.component';
 import {UserService} from '../../core/services/user.service';
 import {StoreModule} from '@ngrx/store';
+import {authReducer, getAuthFeatureState} from '../../store/reducers/auth.reducer';
+import {EffectsModule} from '@ngrx/effects';
+import {AuthEffects} from '../../store/effects/auth.effects';
+import {AuthComponent} from '../../shared/components/auth/auth.component';
+import {SharedModule} from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,18 +20,23 @@ import {StoreModule} from '@ngrx/store';
     DashboardComponent,
     AccountComponent,
     SideNavComponent,
-    ProfileComponent
+    ProfileComponent,
+    AuthComponent
   ],
   imports: [
     CommonModule,
+    SharedModule,
     AccountRoutingModule,
-    StoreModule.forFeature('users')
+    StoreModule.forFeature('auth', authReducer),
+    EffectsModule.forFeature([AuthEffects]),
   ],
   exports: [
+    AuthComponent,
     DashboardComponent
   ],
   providers: [
     UserService
-  ]
+  ],
+  entryComponents: [AuthComponent]
 })
 export class AccountModule { }
