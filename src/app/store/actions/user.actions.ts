@@ -1,12 +1,12 @@
 import { Action } from '@ngrx/store';
-import {IUser} from '../models/user';
+import {User} from '../models/user.model';
 
 export enum UserActionTypes {
   GetUsers = '[User] Get Users'
 }
 
 export class GetUsers implements Action {
-  readonly type = UserActionTypes.SetLoginStatus;
+  readonly type = UserActionTypes.GetUsers;
   constructor(public payload: {users: User}) { }
 }
 
