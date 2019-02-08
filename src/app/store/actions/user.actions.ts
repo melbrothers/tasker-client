@@ -2,12 +2,12 @@ import { Action } from '@ngrx/store';
 import {IUser} from '../models/user';
 
 export enum UserActionTypes {
-  SetLoginStatus = '[User] Login Status'
+  GetCurrentUser = '[User] Get Current User'
 }
 
-export class SetLoginStatus implements Action {
+export class GetCurrentUser implements Action {
   readonly type = UserActionTypes.SetLoginStatus;
-  constructor(public payload: {isLoggedIn: boolean, user: IUser}) { }
+  constructor(public payload: {user: IUser}) { }
 }
 
-export type UserActions = SetLoginStatus;
+export type UserActions = GetCurrentUser;
