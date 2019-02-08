@@ -13,7 +13,7 @@ const initialState: UserState = {
 };
 
 // Selector functions
-const getUserFeatureState = createFeatureSelector<UserState>('users');
+export const getUserFeatureState = createFeatureSelector<UserState>('users');
 
 // export const getCurrentUser = createSelector(
 //   getUserFeatureState,

@@ -7,6 +7,7 @@ import { AccountComponent } from './account.component';
 import { SideNavComponent } from 'app/modules/account/side-nav/side-nav.component';
 import { ProfileComponent } from './profile/profile.component';
 import {UserService} from '../../core/services/user.service';
+import {StoreModule} from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {UserService} from '../../core/services/user.service';
   imports: [
     CommonModule,
     AccountRoutingModule,
+    StoreModule.forFeature('users')
   ],
   exports: [
     DashboardComponent

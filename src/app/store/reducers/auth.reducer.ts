@@ -1,5 +1,7 @@
 import {AuthActions, AuthActionTypes} from '../actions/auth.actions';
 import { User } from 'app/store/models/user.model';
+import {createFeatureSelector} from '@ngrx/store';
+import {UserState} from './user.reducer';
 
 export interface AuthState {
     isAuthenticated: boolean;
@@ -31,7 +33,9 @@ export function authReducer(state = initialState, action: AuthActions ): AuthSta
     }
 }
 
+export const getAuthFeatureState = createFeatureSelector<AuthState>('auth');
+
 export const getIsAuthenticated = (state: AuthState): boolean => state.isAuthenticated;
-export const getUser = (state: AuthState): User => state.user;
+
 
 
