@@ -11,23 +11,19 @@ import { AuthComponent } from './components/auth/auth.component';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from '../store/effects/auth.effects';
 import {LoadingComponent} from './components/loading/loading.component';
-import {StoreModule} from '@ngrx/store';
 
 @NgModule({
     imports: [
       CommonModule,
       MaterialModule,
       ReactiveFormsModule,
-      RouterModule,
-      StoreModule.forFeature('auth'),
-      EffectsModule.forFeature([AuthEffects]),
+      RouterModule
     ],
     declarations: [
       HomeComponent,
       Error404Component,
       HeaderComponent,
       FooterComponent,
-      AuthComponent,
       LoadingComponent
     ],
     exports: [
@@ -35,10 +31,8 @@ import {StoreModule} from '@ngrx/store';
       MaterialModule,
       HeaderComponent,
       FooterComponent,
-      AuthComponent,
       LoadingComponent
     ],
-    entryComponents: [AuthComponent],
   })
 export class SharedModule {
 }

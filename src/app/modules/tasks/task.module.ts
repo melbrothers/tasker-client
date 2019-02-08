@@ -8,6 +8,7 @@ import { TaskDataResolver } from 'app/modules/tasks/tasks-resolver.service';
 import {TaskMapComponent} from './task-map/task-map.component';
 import {SharedModule} from '../../shared/shared.module';
 import {StoreModule} from '@ngrx/store';
+import {taskReducer} from '../../store/reducers/task.reducer';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import {StoreModule} from '@ngrx/store';
     CommonModule,
     TaskRoutingModule,
     SharedModule,
-    StoreModule.forFeature('tasks')
+    StoreModule.forFeature('tasks', taskReducer)
   ],
   providers: [
     TaskService,
