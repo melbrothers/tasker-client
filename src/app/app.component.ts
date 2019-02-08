@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import * as fromRoot from 'app/store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
 import * as Auth from 'app/store/actions/auth.actions';
+import * as fromRoot from 'app/store/reducers/app.reducer';
 import { UserService } from './core/services/user.service';
 import { User } from './store/models/user.model';
+import {from, Observable} from 'rxjs';
+
 
 @Component({
   selector: 'app-root',
@@ -13,6 +15,7 @@ import { User } from './store/models/user.model';
 export class AppComponent implements OnInit {
   title = 'tasker-client';
   name: string;
+  isLoading$: Observable<boolean>;
   constructor(private _userService: UserService, private store: Store<fromRoot.State>) {
     this._userService.getCurrentUser().subscribe( (user: User) => {
       console.log(user);
@@ -23,6 +26,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading$ = this.store.select(fromRoot.getLoadingStatus);
     window.addEventListener('scroll', this.stickyHeader);
   }
   stickyHeader(): void {

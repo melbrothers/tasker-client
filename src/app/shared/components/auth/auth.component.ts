@@ -4,14 +4,13 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from 'app/core/services/auth.service';
 import {Router} from '@angular/router';
-import {select, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import * as Auth from 'app/store/actions/auth.actions';
-import * as UserAction from 'app/store/actions/user.actions';
 import * as fromRoot from 'app/store/reducers/app.reducer';
 import { Observable } from 'rxjs';
 import * as googleAuthService from 'angularx-social-login';
-import {SocialUser} from 'angularx-social-login';
 import {User} from 'app/store/models/user.model';
+import * as Loading from 'app/store/actions/loading.actions';
 
 
 @Component({
@@ -34,9 +33,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     credentialErrorMsg: ''
   };
   componentActive = true;
-  inProcess = false;
   isAuthenticated$: Observable<boolean>;
-  googleUser$: Observable<SocialUser>;
 
   constructor( public dialogRef: MatDialogRef<AuthComponent>,
                private iconRegistry: MatIconRegistry,
@@ -112,13 +109,14 @@ export class AuthComponent implements OnInit, OnDestroy {
   signup(): void {
     const self  = this;
     self.isEmailTaken = false;
+    // start loading
+    this.store.dispatch(new Loading.ShowLoading());
     if (this.registerForm.valid) {
       if (this.registerForm.value.password === this.registerForm.value.password_confirmation) {
         this.registerForm.value.email = this.registerForm.value.email.toLowerCase();
         this.registerForm.value.name = this.registerForm.value.email;
-        this.inProcess = true;
         this.authService.register(this.registerForm.value).subscribe((user: User) => {
-          this.inProcess = false;
+          this.store.dispatch(new Loading.HideLoading());
           this.store.dispatch(new Auth.SetAuthenticated({user}));
           self.dialogRef.close();
           if (self.authService.redirectUrl) {
@@ -127,7 +125,6 @@ export class AuthComponent implements OnInit, OnDestroy {
             this.router.navigate(['/account/dashboard']);
           }
         }, error => {
-          self.inProcess = false;
           if (error.status === 422) {
             self.isEmailTaken = true;
             self.errorMsgs.emailErrorMsg = 'This email is already taken!';
@@ -135,7 +132,6 @@ export class AuthComponent implements OnInit, OnDestroy {
         });
       } else {
         this.isPassMatch = false;
-        this.inProcess = false;
         this.errorMsgs.cPasswordErrorMsg = 'Passwords do not match!';
       }
     }
@@ -144,11 +140,12 @@ export class AuthComponent implements OnInit, OnDestroy {
   login(): void {
     const self  = this;
     self.isEmailTaken = false;
+    this.store.dispatch(new Loading.ShowLoading());
     if (this.loginForm.valid) {
       this.loginForm.value.email = this.loginForm.value.email.toLowerCase();
-      this.inProcess = true;
       this.authService.login(this.loginForm.value).subscribe((user: User) => {
         this.store.dispatch(new Auth.SetAuthenticated({user}));
+        this.store.dispatch(new Loading.HideLoading());
         self.dialogRef.close();
         if (self.authService.redirectUrl) {
           this.router.navigateByUrl(this.authService.redirectUrl);
@@ -157,7 +154,7 @@ export class AuthComponent implements OnInit, OnDestroy {
         }
       }, error => {
         console.log(error);
-        this.inProcess = false;
+        this.store.dispatch(new Loading.HideLoading());
         this.errorMsgs.credentialErrorMsg = error.error.message;
       });
     }

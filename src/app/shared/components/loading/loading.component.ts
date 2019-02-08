@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import * as fromRoot from '../../../store/reducers/app.reducer';
 
 @Component({
   selector: 'app-loading',
@@ -11,10 +13,10 @@ export class LoadingComponent implements OnInit {
   // @Input() value: number;
   // @Input() strokeWidth: number;
   // @Input() diameter: number;
-  @Input() isLoading: boolean;
-  constructor() { }
+  @Input() isLoading;
+  constructor(
+  ) { }
 
   ngOnInit() {
   }
-
 }
