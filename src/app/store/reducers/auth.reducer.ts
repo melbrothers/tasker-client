@@ -1,44 +1,30 @@
-import {Action, ActionReducer, ActionReducerMap} from '@ngrx/store';
-
-import * as Auth from '../actions/auth.actions';
-import { IUser } from 'app/store/models/user';
 import {AuthActions, AuthActionTypes} from '../actions/auth.actions';
-import {SocialUser} from 'angularx-social-login';
+import { User } from 'app/store/models/user.model';
 
 export interface AuthState {
-    isAuthenticated?: boolean;
-    user?: IUser;
-    guser?: SocialUser;
+    isAuthenticated: boolean;
+    user: User;
 }
 
 const initialState: AuthState = {
   isAuthenticated: false,
-  user: undefined,
-  guser: undefined
+  user: null,
 };
 
-export function authReducer(state = initialState, action: Auth.AuthActions ): AuthState {
+export function authReducer(state = initialState, action: AuthActions ): AuthState {
     switch (action.type) {
         case AuthActionTypes.SET_AUTHENTICATED: {
             return {
-                ...state,
                 isAuthenticated: true,
+                user: action.payload.user
             };
         }
-        case Auth.AuthActionTypes.SET_UNAUTHENTICATED: {
+        case AuthActionTypes.SET_UNAUTHENTICATED: {
             return {
-                ...state,
                 isAuthenticated: false,
-                user: undefined
+                user: null
             };
         }
-      case Auth.AuthActionTypes.SET_GOOGLEUSER: {
-        return {
-          ...state,
-          isAuthenticated: true,
-          guser: action.payload.user
-        };
-      }
         default: {
             return state;
         }
@@ -46,7 +32,6 @@ export function authReducer(state = initialState, action: Auth.AuthActions ): Au
 }
 
 export const getIsAuthenticated = (state: AuthState): boolean => state.isAuthenticated;
-export const getUser = (state: AuthState): IUser => state.user;
-export const getGoogleUser = (state: AuthState): SocialUser => state.guser;
+export const getUser = (state: AuthState): User => state.user;
 
 

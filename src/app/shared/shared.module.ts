@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { AuthComponent } from './components/auth/auth.component';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from '../store/effects/auth.effects';
+import {LoadingComponent} from './components/loading/loading.component';
 
 @NgModule({
     imports: [
@@ -25,13 +26,15 @@ import { AuthEffects } from '../store/effects/auth.effects';
       HeaderComponent,
       FooterComponent,
       AuthComponent,
+      LoadingComponent
     ],
     exports: [
       CommonModule,
       MaterialModule,
       HeaderComponent,
       FooterComponent,
-      AuthComponent
+      AuthComponent,
+      LoadingComponent
     ],
     entryComponents: [AuthComponent],
   })

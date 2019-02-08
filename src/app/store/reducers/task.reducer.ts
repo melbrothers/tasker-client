@@ -1,29 +1,35 @@
-import {Action, ActionReducer, ActionReducerMap} from '@ngrx/store';
+import {createFeatureSelector} from '@ngrx/store';
 
-import * as Task from '../actions/task.actions';
-import { IUser } from 'app/store/models/user';
-import {AuthActions, AuthActionTypes} from '../actions/auth.actions';
-import {SocialUser} from 'angularx-social-login';
+import {TaskActions, TaskActionTypes} from '../actions/task.actions';
+import { Task } from 'app/store/models/task.model';
 
 export interface TaskState {
-    isAuthenticated?: boolean;
-    user?: IUser;
-    guser?: SocialUser;
+    tasks: Task[];
+    selectedTask: Task;
 }
 
 const initialState: TaskState = {
-  isAuthenticated: false,
-  user: undefined,
-  guser: undefined
+    tasks: [],
+    selectedTask: null,
 };
 
-export function taskReducer(state = initialState, action: Task.FetchTasks ): TaskState {
+export function taskReducer(state = initialState, action: TaskActions ): TaskState {
     switch (action.type) {
+        case TaskActionTypes.LOAD_TASKS:
+            const tasks = [...state.tasks, ...action.payload.tasks];
+            return {...state, tasks: tasks};
+        case TaskActionTypes.SELECT_TASK:
+            return  {
+                ...state,
+                selectedTask: action.payload.task
+            };
         default: {
             return state;
         }
     }
 }
+
+export const getTasksState = createFeatureSelector<TaskState>('tasks');
 
 
 

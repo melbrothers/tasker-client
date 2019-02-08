@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../../../core/services/task.service';
 import { ActivatedRoute } from '@angular/router';
 import { Task } from 'app/store/models/task.model';
+import {ITask} from '../../../store/models/task';
 
 @Component({
   selector: 'app-task-list',
@@ -9,25 +10,24 @@ import { Task } from 'app/store/models/task.model';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit {
+  isLoading = true;
   selectedTask: Task;
   tasks: Task[];
-  constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute) { }
+  constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute) {
+  }
 
   viewTask(task: Task): void {
-    // get task details
-    // TODO: need a task model to type the returned data
+    this.isLoading = true;
     this.taskService.getTask(task.slug).subscribe((t: Task) => {
       this.selectedTask = t;
+      this.isLoading = false;
     });
   }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
+      this.isLoading = false;
       this.tasks = data['tasks'].data;
-      // if (this.tasks.length > 0) {
-      //   this.selectedTask = this.tasks[0];
-      // }
     });
   }
-
 }
