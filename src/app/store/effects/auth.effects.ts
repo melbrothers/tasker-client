@@ -3,7 +3,8 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {AuthActions, AuthActionTypes, SetAuthenticated, SetUnauthenticated} from '../actions/auth.actions';
 import {mapTo, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {defer, of} from 'rxjs';
+import {defer} from 'rxjs';
+import {of} from 'rxjs';
 
 
 @Injectable()

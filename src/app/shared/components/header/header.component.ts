@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {AuthComponent} from '../auth/auth.component';
+import {AuthComponent} from '../../../modules/account/auth/auth.component';
 import {MatDialog} from '@angular/material';
 import {ActivatedRoute} from '@angular/router';
 import {IUser} from 'app/store/models/user';
