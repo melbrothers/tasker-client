@@ -1,7 +1,7 @@
 .loading {
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, .5);
+  background: rgba(255, 255, 255, .5);
   z-index: 9990;
   display: flex;
   align-items: center;
@@ -12,6 +12,6 @@
   top: 0;
   .loading-text {
     z-index: 9999;
-    color: #ffffff;
+    color: #000000;
   }
 }
