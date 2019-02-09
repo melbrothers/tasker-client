@@ -11,7 +11,7 @@ import {StoreModule} from '@ngrx/store';
 import {authReducer, getAuthFeatureState} from '../../store/reducers/auth.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from '../../store/effects/auth.effects';
-import {AuthComponent} from '../../shared/components/auth/auth.component';
+import {AuthComponent} from './auth/auth.component';
 import {SharedModule} from '../../shared/shared.module';
 
 @NgModule({
