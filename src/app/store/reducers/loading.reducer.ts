@@ -7,7 +7,7 @@ export interface LoadingState {
 }
 
 export const initialState: LoadingState = {
-  isLoading: true,
+  isLoading: false,
 };
 
 export function loadingReducer(state = initialState, action: LoadingActions): LoadingState {
