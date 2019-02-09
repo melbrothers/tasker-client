@@ -6,7 +6,7 @@ import {HeaderComponent} from './components/header/header.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HomeComponent} from './pages/home/home.component';
 import {Error404Component} from './pages/error-404/error-404.component';
-import { RouterModule } from '@angular/router';
+import {RouterModule} from '@angular/router';
 import {LoadingComponent} from './components/loading/loading.component';
 
 @NgModule({
