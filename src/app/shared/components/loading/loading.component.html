@@ -1,0 +1,7 @@
+<ng-content *ngIf="!(isLoading$ | async); else spinner"></ng-content>
+<ng-template #spinner>
+  <div class="loading">
+    <mat-spinner></mat-spinner>
+    <div class="loading-text">Loading...</div>
+  </div>
+</ng-template>

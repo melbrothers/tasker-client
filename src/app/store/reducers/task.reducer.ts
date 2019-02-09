@@ -29,7 +29,7 @@ export function taskReducer(state = initialState, action: TaskActions ): TaskSta
     }
 }
 
-export const getTasksState = createFeatureSelector<TaskState>('tasks');
+export const getTasksFeatureState = createFeatureSelector<TaskState>('tasks');
 
 
 

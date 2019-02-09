@@ -54,8 +54,8 @@ export class AuthService {
             this.googleAuth.signOut();
           }
         });
-        this.store.dispatch(new Auth.SetUnauthenticated());
       }
+      this.store.dispatch(new Auth.SetUnauthenticated());
     });
   }
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import * as fromRoot from 'app/store/reducers/app.reducer';
 import { Store } from '@ngrx/store';
 import * as Auth from 'app/store/actions/auth.actions';
+import * as fromRoot from 'app/store/reducers/app.reducer';
 import { UserService } from './core/services/user.service';
 import { User } from './store/models/user.model';
 

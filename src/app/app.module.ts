@@ -22,6 +22,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { TokenInterceptorService } from './core/interceptors/token-interceptor.service';
 import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from './store/effects/auth.effects';
+import {TaskModule} from './modules/tasks/task.module';
 
 registerLocaleData(localeZh, 'zh-Hans');
 
@@ -49,10 +50,11 @@ export function provideConfig() {
     BrowserAnimationsModule,
     SharedModule,
     AccountModule,
+    TaskModule,
     SocialLoginModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     StoreModule.forRoot(reducers, {metaReducers}),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [
