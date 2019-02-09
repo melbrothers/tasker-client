@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {AuthActions, AuthActionTypes, SetAuthenticated, SetUnauthenticated} from '../actions/auth.actions';
-import {tap} from 'rxjs/operators';
+import {mapTo, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {defer, of} from 'rxjs';
 
 
 @Injectable()
@@ -22,6 +23,15 @@ export class AuthEffects {
       this.router.navigateByUrl('');
     })
   );
+  @Effect()
+  init$ = defer(() => {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      return of(new SetAuthenticated(JSON.parse(userData)));
+    } else {
+      return of(new SetUnauthenticated());
+    }
+  });
 
   constructor(private actions$: Actions, private router: Router) {}
 }
