@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
       console.log(user);
       this.store.dispatch(new Auth.SetAuthenticated({user}));
     }, () => {
+      this.store.dispatch(new HideLoading);
       this.store.dispatch(new Auth.SetUnauthenticated());
     }, () => {
       this.store.dispatch(new HideLoading);
