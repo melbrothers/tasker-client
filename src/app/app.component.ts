@@ -4,7 +4,7 @@ import * as Auth from 'app/store/actions/auth.actions';
 import * as fromRoot from 'app/store/reducers/app.reducer';
 import { UserService } from './core/services/user.service';
 import { User } from './store/models/user.model';
-import { ShowLoading } from 'app/store/actions/loading.actions';
+import { ShowLoading, HideLoading } from 'app/store/actions/loading.actions';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +15,9 @@ export class AppComponent implements OnInit {
   title = 'tasker-client';
   name: string;
   constructor(private _userService: UserService, private store: Store<fromRoot.State>) {
+  }
+
+  ngOnInit(): void {
     this.store.dispatch(new ShowLoading);
     this._userService.getCurrentUser().subscribe( (user: User) => {
       console.log(user);
@@ -22,11 +25,10 @@ export class AppComponent implements OnInit {
     }, () => {
       this.store.dispatch(new Auth.SetUnauthenticated());
     });
-  }
-
-  ngOnInit(): void {
     window.addEventListener('scroll', this.stickyHeader);
+    this.store.dispatch(new HideLoading);
   }
+  
   stickyHeader(): void {
     const number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
     const header = document.getElementById('header-container');
