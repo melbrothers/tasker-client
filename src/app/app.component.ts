@@ -24,11 +24,11 @@ export class AppComponent implements OnInit {
       this.store.dispatch(new Auth.SetAuthenticated({user}));
     }, () => {
       this.store.dispatch(new Auth.SetUnauthenticated());
+    }, () => {
+      this.store.dispatch(new HideLoading);
     });
     window.addEventListener('scroll', this.stickyHeader);
-    this.store.dispatch(new HideLoading);
   }
-  
   stickyHeader(): void {
     const number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
     const header = document.getElementById('header-container');
