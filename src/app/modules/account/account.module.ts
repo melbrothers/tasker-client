@@ -13,6 +13,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from '../../store/effects/auth.effects';
 import {AuthComponent} from './auth/auth.component';
 import {SharedModule} from '../../shared/shared.module';
+import {AuthService} from '../../core/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {SharedModule} from '../../shared/shared.module';
     DashboardComponent
   ],
   providers: [
-    UserService
+    UserService,
+    AuthService
   ],
   entryComponents: [AuthComponent]
 })
