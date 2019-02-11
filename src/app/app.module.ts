@@ -23,6 +23,8 @@ import { TokenInterceptorService } from './core/interceptors/token-interceptor.s
 import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from './store/effects/auth.effects';
 import {TaskModule} from './modules/tasks/task.module';
+import {RouterStateSerializer, StoreRouterConnectingModule} from '@ngrx/router-store';
+import {CustomSerializer} from './core/utils/utils';
 
 registerLocaleData(localeZh, 'zh-Hans');
 
@@ -55,6 +57,7 @@ export function provideConfig() {
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot({serializer: CustomSerializer}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [
