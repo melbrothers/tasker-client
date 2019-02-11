@@ -30,6 +30,7 @@ speed-measure-plugin.json
 
 # misc
 /.sass-cache
+/src/.sass-cache
 /connect.lock
 /coverage
 /libpeerconnection.log
@@ -41,3 +42,11 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# sass cache
+
+# environment config
+# environment.prod.ts
+# environment.ts
+
+
