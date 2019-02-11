@@ -7,7 +7,6 @@ import { environment } from '../environments/environment';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import localeZh from '@angular/common/locales/zh-Hans';
 import {CommonModule, registerLocaleData} from '@angular/common';
-import {MaterialModule} from './shared/modules/material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {StoreModule} from '@ngrx/store';
 import {SharedModule} from './shared/shared.module';
@@ -23,6 +22,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { TokenInterceptorService } from './core/interceptors/token-interceptor.service';
 import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from './store/effects/auth.effects';
+import {TaskModule} from './modules/tasks/task.module';
 
 registerLocaleData(localeZh, 'zh-Hans');
 
@@ -48,13 +48,13 @@ export function provideConfig() {
     CommonModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule,
     SharedModule,
     AccountModule,
+    TaskModule,
     SocialLoginModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     StoreModule.forRoot(reducers, {metaReducers}),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [

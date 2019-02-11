@@ -46,7 +46,7 @@
               </ul> -->
             </li>
 
-            <li><a [routerLink]="['/tasks']">My tasks</a>
+            <li><a [routerLink]="['/account/dashboard']">My tasks</a>
               <!-- <ul class="dropdown-nav">
                 <li><a href="#">Find a Freelancer</a>
                   <ul class="dropdown-nav">
@@ -284,7 +284,7 @@
               <ul class="user-menu-small-nav">
                 <li><a href="dashboard.html"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
                 <li><a href="dashboard-settings.html"><i class="icon-material-outline-settings"></i> Settings</a></li>
-                <li><a href="index-logged-out.html"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+                <li><a (click)="logout()"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
               </ul>
 
             </div>

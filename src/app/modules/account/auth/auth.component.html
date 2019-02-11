@@ -27,8 +27,6 @@
         <button class="google-login ripple-effect"><i class="icon-brand-google-plus-g" (click)="googleSignIn()"></i> Log In via Google+</button>
       </div>
       <mat-divider></mat-divider>
-
-      <mat-progress-spinner class="spinner justify-center text-center mx-auto" mode="indeterminate" color="accent" value="10" diameter="20" *ngIf="inProcess"></mat-progress-spinner>
     </form>
 
   </mat-tab>
@@ -66,7 +64,7 @@
               <!--(click)="signup();">Register</button>-->
       <p *ngIf="isEmailTaken" class="mat-error">This email is already taken, please choose another one.</p>
 
-      <mat-progress-spinner class="spinner justify-center text-center mx-auto" mode="indeterminate" color="accent" value="10" diameter="20" *ngIf="inProcess"></mat-progress-spinner>
+      <!--<mat-progress-spinner class="spinner justify-center text-center mx-auto" mode="indeterminate" color="accent" value="10" diameter="20"></mat-progress-spinner>-->
     </form>
 
     <div class="social-login-separator"><span>or</span></div>
