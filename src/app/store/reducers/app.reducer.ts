@@ -4,6 +4,7 @@ import * as fromLoading from 'app/store/reducers/loading.reducer';
 import * as fromUser from 'app/store/reducers/user.reducer';
 import * as fromTask from 'app/store/reducers/task.reducer';
 import {environment} from 'environments/environment';
+import {storeFreeze} from 'ngrx-store-freeze';
 
 export interface State {
   loading: fromLoading.LoadingState;
@@ -26,4 +27,4 @@ export const getTaskState = fromTask.getTasksFeatureState;
 export const getLoadingState = fromLoading.getLoadingFeatureState;
 export const getLoadingStatus = createSelector(getLoadingState, fromLoading.getLoadingStatus);
 export const getIsAuthenticated = createSelector(getAuthState, fromAuth.getIsAuthenticated);
-export const metaReducers: MetaReducer<State>[] = !environment.production  ? [] : [];
+export const metaReducers: MetaReducer<State>[] = !environment.production  ? [storeFreeze] : [];
