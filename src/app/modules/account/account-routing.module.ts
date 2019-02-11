@@ -6,6 +6,7 @@ import { AccountComponent } from 'app/modules/account/account.component';
 import { ProfileComponent } from 'app/modules/account/profile/profile.component';
 import {AccountDataResolver} from './account-resolver.service';
 import { AuthGuard } from 'app/core/services/auth.guard';
+import {PostTaskComponent} from './post-task/post-task.component';
 
 const routes: Routes = [
     {
@@ -15,14 +16,18 @@ const routes: Routes = [
           account: AccountDataResolver
         },
         children: [
-            {
-                path: 'dashboard',
-                component: DashboardComponent
-            },
-            {
-                path: 'profile',
-                component: ProfileComponent
-            }
+          {
+            path: 'dashboard',
+            component: DashboardComponent
+          },
+          {
+            path: 'post-task',
+            component: PostTaskComponent
+          },
+          {
+            path: 'profile',
+            component: ProfileComponent
+          }
         ],
         canActivate: [AuthGuard]
     }

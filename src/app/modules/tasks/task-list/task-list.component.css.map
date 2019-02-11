@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,oBAAqB;EACnB,MAAM,EAAE,IAAI;EACZ,UAAU,EAAE,IAAI;EAChB,2BAAO;IACL,QAAQ,EAAE,KAAK",
+"sources": ["task-list.component.scss"],
+"names": [],
+"file": "task-list.component.css"
+}
