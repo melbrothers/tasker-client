@@ -99,8 +99,13 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   googleSignIn(): void {
-    this.authService.signInWithGoogle().subscribe((user: User) => {
-      this.store.dispatch(new Auth.SetAuthenticated({user}));
+    this.dialogRef.close();
+    this.dialogRef.afterClosed().subscribe(() => {
+      this.store.dispatch(new Loading.ShowLoading());
+      this.authService.signInWithGoogle().subscribe((user: User) => {
+        this.store.dispatch(new Auth.SetAuthenticated({user}));
+        this.store.dispatch(new Loading.HideLoading());
+      });
     });
   }
 
