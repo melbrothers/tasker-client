@@ -8,12 +8,10 @@ import {SelectiveStrategyService} from './core/services/selective-strategy.servi
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent,
+    path: '',
+    component: HomeComponent,
+    pathMatch: 'full'
   },
-  {
-    path: 'welcome', component: HomeComponent,
-  },
-  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: '**', component: Error404Component }
 ];
 
