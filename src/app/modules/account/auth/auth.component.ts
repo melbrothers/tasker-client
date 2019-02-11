@@ -143,24 +143,27 @@ export class AuthComponent implements OnInit, OnDestroy {
   login(): void {
     const self  = this;
     self.isEmailTaken = false;
-    this.store.dispatch(new Loading.ShowLoading());
-    if (this.loginForm.valid) {
-      this.loginForm.value.email = this.loginForm.value.email.toLowerCase();
-      this.authService.login(this.loginForm.value).subscribe((user: User) => {
-        this.store.dispatch(new Auth.SetAuthenticated({user}));
-        this.store.dispatch(new Loading.HideLoading());
-        self.dialogRef.close();
-        if (self.authService.redirectUrl) {
-          this.router.navigateByUrl(this.authService.redirectUrl);
-        } else {
-          this.router.navigate(['/account/dashboard']);
-        }
-      }, error => {
-        console.log(error);
-        this.store.dispatch(new Loading.HideLoading());
-        this.errorMsgs.credentialErrorMsg = error.error.message;
-      });
-    }
+    this.dialogRef.close();
+    this.dialogRef.afterClosed().subscribe(() => {
+      this.store.dispatch(new Loading.ShowLoading());
+      if (this.loginForm.valid) {
+        this.loginForm.value.email = this.loginForm.value.email.toLowerCase();
+        this.authService.login(this.loginForm.value).subscribe((user: User) => {
+          this.store.dispatch(new Auth.SetAuthenticated({user}));
+          this.store.dispatch(new Loading.HideLoading());
+          self.dialogRef.close();
+          if (self.authService.redirectUrl) {
+            this.router.navigateByUrl(this.authService.redirectUrl);
+          } else {
+            this.router.navigate(['/account/dashboard']);
+          }
+        }, error => {
+          console.log(error);
+          this.store.dispatch(new Loading.HideLoading());
+          this.errorMsgs.credentialErrorMsg = error.error.message;
+        });
+      }
+    });
   }
 
   onNoClick(): void {
