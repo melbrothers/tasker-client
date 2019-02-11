@@ -46,7 +46,7 @@ Thumbs.db
 # sass cache
 
 # environment config
-# environment.prod.ts
-# environment.ts
+/environments
+
 
 
