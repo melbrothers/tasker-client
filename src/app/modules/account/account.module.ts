@@ -13,15 +13,17 @@ import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from '../../store/effects/auth.effects';
 import {AuthComponent} from './auth/auth.component';
 import {SharedModule} from '../../shared/shared.module';
+import {PostTaskComponent} from './post-task/post-task.component';
 
 @NgModule({
   declarations: [
+    AuthComponent,
     MyTasksComponent,
     DashboardComponent,
     AccountComponent,
     SideNavComponent,
     ProfileComponent,
-    AuthComponent
+    PostTaskComponent,
   ],
   imports: [
     CommonModule,

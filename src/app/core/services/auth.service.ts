@@ -10,6 +10,7 @@ import * as Auth from '../../store/actions/auth.actions';
 import * as fromAuth from '../../store/reducers/auth.reducer';
 import {Store} from '@ngrx/store';
 import { User } from 'app/store/models/user.model';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,26 +18,27 @@ import { User } from 'app/store/models/user.model';
 export class AuthService {
   redirectUrl: string;
   constructor(
-    private api: HttpClient,
+    private http: HttpClient,
     private store: Store<fromAuth.AuthState>,
     private googleAuth: googleAuthService.AuthService
               ) { }
   register(signinForm): Observable<any> {
-    const endpointTag = 'register';
+    const endpointTag = `${environment.apiUrl}/register`;
     const body = new HttpParams({fromObject: signinForm });
-    return  this.api.post<User>(endpointTag, body).pipe(shareReplay(1));
+    return  this.http.post<User>(endpointTag, body).pipe(shareReplay(1));
   }
 
   login(loginForm): Observable<any> {
-    const endpointTag = 'login';
+    const endpointTag = `${environment.apiUrl}/login`;
     const body = new HttpParams({fromObject: loginForm });
-    return  this.api.post(endpointTag, body).pipe(shareReplay(1));
+    return  this.http.post(endpointTag, body).pipe(shareReplay(1));
   }
 
   signInWithGoogle(): Observable<User> {
+    const requestUrl = `${environment.apiUrl}/social/google/login`;
     return Observable.create((observer) => {
        this.googleAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then((socialUser: SocialUser) => {
-        this.api.post('/social/google/login', {token: socialUser.authToken})
+        this.http.post(requestUrl, {token: socialUser.authToken})
         .pipe(shareReplay(1)).subscribe(user => {
           observer.next(user);
         });
