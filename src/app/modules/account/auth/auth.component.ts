@@ -99,10 +99,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   googleSignIn(): void {
-    this.authService.signInWithGoogle().then((user$: Observable<User>) => {
-      user$.subscribe((user: User) => {
-        this.store.dispatch(new Auth.SetAuthenticated({user}));
-      });
+    this.authService.signInWithGoogle().subscribe((user: User) => {
+      this.store.dispatch(new Auth.SetAuthenticated({user}));
     });
   }
 

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpHeaders, HttpParams, HttpClient} from '@angular/common/http';
 import {ApiService} from './api.service';
 import {shareReplay} from 'rxjs/operators';
 import {Observable} from 'rxjs';
@@ -17,14 +17,14 @@ import { User } from 'app/store/models/user.model';
 export class AuthService {
   redirectUrl: string;
   constructor(
-    private api: ApiService,
+    private api: HttpClient,
     private store: Store<fromAuth.AuthState>,
     private googleAuth: googleAuthService.AuthService
               ) { }
   register(signinForm): Observable<any> {
     const endpointTag = 'register';
     const body = new HttpParams({fromObject: signinForm });
-    return  this.api.post(endpointTag, body).pipe(shareReplay(1));
+    return  this.api.post<User>(endpointTag, body).pipe(shareReplay(1));
   }
 
   login(loginForm): Observable<any> {
@@ -33,10 +33,15 @@ export class AuthService {
     return  this.api.post(endpointTag, body).pipe(shareReplay(1));
   }
 
-  signInWithGoogle(): Promise<any> {
-   return this.googleAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then((user: SocialUser) => {
-      return this.api.post('/social/google/login', {token: user.authToken}).pipe(shareReplay(1));
-   });
+  signInWithGoogle(): Observable<User> {
+    return Observable.create((observer) => {
+       this.googleAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then((socialUser: SocialUser) => {
+        this.api.post('/social/google/login', {token: socialUser.authToken})
+        .pipe(shareReplay(1)).subscribe(user => {
+          observer.next(user);
+        });
+     });
+    });
   }
 
   logout(): void  {
