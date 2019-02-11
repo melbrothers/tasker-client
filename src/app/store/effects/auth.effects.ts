@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import { AuthActionTypes, SetAuthenticated, SetUnauthenticated} from '../actions/auth.actions';
-import {tap} from 'rxjs/operators';
+import {mapTo, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {defer, Observable, of} from 'rxjs';
 import {Action} from '@ngrx/store';
+import {HideLoading} from '../actions/loading.actions';
 
 
 @Injectable()
