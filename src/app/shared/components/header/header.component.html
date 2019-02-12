@@ -266,9 +266,9 @@
 
                 <!-- User Name / Avatar -->
                 <div class="user-details">
-                  <div class="user-avatar status-online"><img [src]="avatarUrl" [alt]="socialUser?.name"></div>
+                  <div class="user-avatar status-online"><img [src]="avatarUrl" [alt]="currentUser?.name || socialUser?.name"></div>
                   <div class="user-name">
-                    Tom Smith <span>Freelancer</span>
+                    {{currentUser.name || socialUser?.name}} <span>Freelancer</span>
                   </div>
                 </div>
 
@@ -282,7 +282,7 @@
               </div>
 
               <ul class="user-menu-small-nav">
-                <li><a href="dashboard.html"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
+                <li [routerLink]="['/account/dashboard']"><a><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
                 <li><a href="dashboard-settings.html"><i class="icon-material-outline-settings"></i> Settings</a></li>
                 <li (click)="logout();"  *ngIf="(isAuthenticated$ | async)"><a><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
               </ul>
