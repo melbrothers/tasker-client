@@ -188,7 +188,7 @@
           <textarea matInput placeholder="Be as specific as you can about what needs doing" formControlName="description" rows="10" required></textarea>
         </mat-form-field>
         <div class="nav-btns">
-          <button mat-button class="nav-btn" matStepperNext>Next</button>
+          <button mat-button class="nav-btn full-width-btn" matStepperNext>Next</button>
         </div>
   </mat-step>
   <mat-step [stepControl]="taskFormGroup">
@@ -198,8 +198,8 @@
         <input matInput placeholder="Be as specific as you can about what needs doing" formControlName="description" required>
       </mat-form-field>
       <div class="nav-btns">
-        <button mat-button color="primary" class="nav-btn" matStepperPrevious>Back</button>
-        <button mat-button color="accent" class="nav-btn" matStepperNext>Next</button>
+        <button mat-button  class="nav-btn percent-25" matStepperPrevious>Back</button>
+        <button mat-button class="nav-btn percent-25 primary" matStepperNext>Next</button>
       </div>
   </mat-step>
   <mat-step>
