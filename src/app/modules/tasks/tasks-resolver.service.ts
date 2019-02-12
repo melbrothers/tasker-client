@@ -5,9 +5,9 @@ import {Observable} from 'rxjs';
 import {Task} from '../../store/models/task.model';
 
 @Injectable()
-export class TaskDataResolver implements Resolve<Task> {
+export class TaskDataResolver implements Resolve<Task[]> {
     constructor(private taskService: TaskService) {}
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Task> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Task[]> {
         return this.taskService.listTasks();
     }
 }
