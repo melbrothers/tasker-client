@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   avatarUrl = '../assets/images/avatar.png';
   socialUser: SocialUser;
   componentActive = true;
+  isVisible = false;
   constructor(private dialog: MatDialog,
               private activatedRouter: ActivatedRoute,
               private store: Store<fromRoot.State>,
@@ -77,6 +78,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  toggleVisibility(): void {
+    this.isVisible = !this.isVisible;
   }
 
 }

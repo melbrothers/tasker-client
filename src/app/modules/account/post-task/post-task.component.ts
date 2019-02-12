@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-post-task',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-task.component.scss']
 })
 export class PostTaskComponent implements OnInit {
-
-  constructor() { }
+  isLinear = true;
+  taskFormGroup: FormGroup;
+  constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.taskFormGroup = this._formBuilder.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required]
+    });
   }
 
 }

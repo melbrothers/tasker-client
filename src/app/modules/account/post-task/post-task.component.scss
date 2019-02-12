@@ -1,0 +1,40 @@
+
+
+.next-btn {
+  background: #f0f0f0;
+  color: #666;
+  padding: 4px 0;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  &:hover {
+    background: #2A41F5;
+    color: #ffffff;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -ms-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+  }
+}
+
+.task-form {
+  .task-input-field {
+    width: 100%;
+    input {
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}

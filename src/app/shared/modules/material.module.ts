@@ -5,7 +5,7 @@ import {
   MatFormFieldModule, MatIconModule,
   MatInputModule, MatListModule,
   MatOptionModule, MatProgressSpinnerModule,
-  MatSelectModule, MatTabsModule
+  MatSelectModule, MatStepperModule, MatTabsModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -28,7 +28,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatOptionModule,
     MatTabsModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatStepperModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -46,7 +47,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatOptionModule,
     MatTabsModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatStepperModule
   ]
 })
 export class MaterialModule { }

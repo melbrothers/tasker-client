@@ -250,7 +250,7 @@
         <!--  User Notifications / End -->
 
         <!-- User Menu -->
-        <div class="header-widget">
+        <div class="header-widget" (click)="toggleVisibility();">
 
           <!-- Messages -->
           <div class="header-notifications user-menu" *ngIf="(isAuthenticated$ | async)">
@@ -259,7 +259,7 @@
             </div>
 
             <!-- Dropdown -->
-            <div class="header-notifications-dropdown" >
+            <div class="header-notifications-dropdown" [ngClass]="{'visible': isVisible}">
 
               <!-- User Status -->
               <div class="user-status">
@@ -284,7 +284,7 @@
               <ul class="user-menu-small-nav">
                 <li><a href="dashboard.html"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
                 <li><a href="dashboard-settings.html"><i class="icon-material-outline-settings"></i> Settings</a></li>
-                <li><a (click)="logout()"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+                <li (click)="logout();"  *ngIf="(isAuthenticated$ | async)"><a><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
               </ul>
 
             </div>
@@ -292,7 +292,6 @@
 
           <!-- login/register-->
           <a class="popup-with-zoom-anim log-in-button" (click)="openDialog();" *ngIf="!(isAuthenticated$ | async)"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
-          <a class="popup-with-zoom-anim log-in-button" (click)="logout();"  *ngIf="(isAuthenticated$ | async)">Logout</a>
         </div>
         <!-- User Menu / End -->
 

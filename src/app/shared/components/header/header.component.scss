@@ -13,3 +13,19 @@
 
 }
 
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: all;
+}
+
+.user-menu-small-nav {
+  li {
+    &:hover {
+      cursor: pointer;
+      color: #2a41e8;
+    }
+  }
+}
+
