@@ -18,7 +18,7 @@
         <nav id="navigation">
           <ul id="responsive">
 
-            <li><a href="#" class="current">Home</a>
+            <li><a routerLink="" >Home</a>
               <!-- <ul class="dropdown-nav">
                 <li><a href="index.html">Home 1</a></li>
                 <li><a href="index-2.html">Home 2</a></li>
@@ -26,7 +26,7 @@
               </ul> -->
             </li>
 
-            <li><a [routerLink]="['/tasks']">Browse Tasks</a>
+            <li><a routerLink="/tasks" routerLinkActive="current">Browse Tasks</a>
               <!-- <ul class="dropdown-nav">
                 <li routerLinkActive="active">
                   <a [routerLink]="['/tasks']">Browse Tasks</a>
@@ -46,7 +46,7 @@
               </ul> -->
             </li>
 
-            <li><a [routerLink]="['/account/dashboard']">My tasks</a>
+            <li><a routerLink="/account/dashboard" routerLinkActive="current">My tasks</a>
               <!-- <ul class="dropdown-nav">
                 <li><a href="#">Find a Freelancer</a>
                   <ul class="dropdown-nav">
