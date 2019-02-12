@@ -4,6 +4,7 @@ import {HomeComponent} from './shared/pages/home/home.component';
 import {Error404Component} from './shared/pages/error-404/error-404.component';
 import { TaskModule } from 'app/modules/tasks/task.module';
 import { AccountModule } from 'app/modules/account/account.module';
+import {SelectiveStrategyService} from './core/services/selective-strategy.service';
 
 const routes: Routes = [
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
   imports: [
     TaskModule,
     AccountModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {preloadingStrategy: SelectiveStrategyService})
   ],
   exports: [RouterModule]
 })
