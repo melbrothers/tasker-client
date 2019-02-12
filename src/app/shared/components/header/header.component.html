@@ -273,18 +273,18 @@
                 </div>
 
                 <!-- User Status Switcher -->
-                <div class="status-switch" id="snackbar-user-status">
-                  <label class="user-online current-status">Online</label>
-                  <label class="user-invisible">Invisible</label>
-                  <!-- Status Indicator -->
-                  <span class="status-indicator" aria-hidden="true"></span>
-                </div>
+                <!--<div class="status-switch" id="snackbar-user-status">-->
+                  <!--<label class="user-online current-status">Online</label>-->
+                  <!--<label class="user-invisible">Invisible</label>-->
+                  <!--&lt;!&ndash; Status Indicator &ndash;&gt;-->
+                  <!--<span class="status-indicator" aria-hidden="true"></span>-->
+                <!--</div>-->
               </div>
 
               <ul class="user-menu-small-nav">
-                <li routerLink="/account/dashboard"><a><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-                <li><a><i class="icon-material-outline-settings"></i> Settings</a></li>
-                <li (click)="logout();"  *ngIf="(isAuthenticated$ | async)"><a><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+                <li routerLink="/account/dashboard"><button mat-button><i class="icon-material-outline-dashboard"></i> Dashboard</button></li>
+                <li><button mat-button><i class="icon-material-outline-settings"></i> Settings</button></li>
+                <li (click)="logout();"  *ngIf="(isAuthenticated$ | async)"><button mat-button><i class="icon-material-outline-power-settings-new"></i> Logout</button></li>
               </ul>
 
             </div>
