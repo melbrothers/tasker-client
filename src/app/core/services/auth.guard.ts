@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {MatDialog} from '@angular/material';
 import {AuthComponent} from '../../modules/account/auth/auth.component';
+import {SetUnauthenticated} from '../../store/actions/auth.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,7 @@ export class AuthGuard implements CanActivate {
       tap(isAuthentcated => {
         console.log(isAuthentcated);
         if (!isAuthentcated) {
+          this.store.dispatch(new SetUnauthenticated());
           this.router.navigateByUrl('').then(() => {
             const dialogRef = this.authDialog.open(AuthComponent, {
               width: '540px',
