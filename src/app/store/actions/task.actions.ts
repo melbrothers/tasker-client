@@ -6,8 +6,9 @@ import { Task } from 'app/store/models/task.model';
  * enum object for all of this group's action types.
  */
 export enum TaskActionTypes {
-    LOAD_TASKS = '[Task] LOAD_TASKS',
-    SELECT_TASK = '[Task] SELECT_TASK',
+    LOAD_TASKS = '[Load Tasks] from API',
+    REQUEST_TASK = '[Request Task Detail] from Store',
+    SELECT_TASK = '[View Task Detail] Select a task',
 }
 
 /**
@@ -25,12 +26,13 @@ export class SelectTask implements Action {
     constructor (public payload: {task: Task}) {}
 }
 
-// export class SetUnauthenticated implements Action {
-//     readonly type = AuthActionTypes.SET_UNAUTHENTICATED;
-// }
+export class RequestTask implements Action {
+  readonly type = TaskActionTypes.REQUEST_TASK;
+  constructor(public payload: {taskId: number}) {}
+}
 
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
  */
-export type TaskActions = LoadTasks | SelectTask;
+export type TaskActions = LoadTasks | SelectTask | RequestTask;
