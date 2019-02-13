@@ -174,34 +174,107 @@
   <!--</div>-->
 <!--</div>-->
 <!--&lt;!&ndash; Dashboard Content / End &ndash;&gt;-->
-<form [formGroup]="taskFormGroup" class="task-form">
+<form [formGroup]="taskForm" class="task-form">
 
-<mat-horizontal-stepper [linear]="isLinear" #stepper>
-  <mat-step [stepControl]="taskFormGroup">
+<mat-horizontal-stepper [linear]="isLinear" #stepper selectedIndex="2">
+  <mat-step [stepControl]="taskForm">
         <ng-template matStepLabel>Tell us what you need done?</ng-template>
         <h3>What do you need done?</h3>
         <mat-form-field class="task-input-field">
-          <input matInput placeholder="This'll be the title of your task - e.g. Help move my sofa" formControlName="title" required >
+          <input matInput placeholder="This'll be the title of your task - e.g. Help move my sofa" formControlName="title" required [errorStateMatcher]="matcher">
         </mat-form-field>
         <h3>What are the details?</h3>
         <mat-form-field class="task-input-field">
-          <textarea matInput placeholder="Be as specific as you can about what needs doing" formControlName="description" rows="10" required></textarea>
+          <textarea matInput placeholder="Be as specific as you can about what needs doing" formControlName="description" rows="10" required [errorStateMatcher]="matcher"></textarea>
+          <mat-hint>Please enter at least 25 characters description for your task.</mat-hint>
+          <mat-error *ngIf="!this.taskForm.controls.description.valid">
+            Please enter at 25 characters.
+          </mat-error>
         </mat-form-field>
         <div class="nav-btns">
-          <button mat-button class="nav-btn" matStepperNext>Next</button>
+          <button mat-button class="nav-btn full-width-btn" matStepperNext>Next</button>
         </div>
   </mat-step>
-  <mat-step [stepControl]="taskFormGroup">
+  <mat-step [stepControl]="taskForm">
       <ng-template matStepLabel>Say where & when?</ng-template>
       <h3>Where do you need it done?</h3>
-      <mat-form-field class="task-input-field">
-        <input matInput placeholder="Be as specific as you can about what needs doing" formControlName="description" required>
+      <mat-radio-group class="option-group" formControlName="onlineOrPhone" (change)="getSelectedRadio()">
+
+          <mat-radio-button [value]="false" checked color="primary" class="option">
+            <div class="option-detail">
+              <h3> In Person</h3>
+              <p>Select this if you need the Tasker physically here.</p>
+              <mat-icon>place</mat-icon>
+            </div>
+          </mat-radio-button>
+
+        <mat-radio-button [value]="true" color="primary" class="option">
+          <div class="option-detail">
+            <h3>Online</h3>
+            <p>Select this if you need the Tasker can do it from home.</p>
+            <mat-icon>smartphone</mat-icon>
+          </div>
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <!-- location -->
+      <div class="location-box" *ngIf="!this.taskForm.get('onlineOrPhone').value">
+        <mat-form-field>
+          <input type="text" matInput placeholder="Enter a suburb">
+        </mat-form-field>
+      </div>
+      <!-- date -->
+      <h3>When do you need it done?</h3>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <div class="nav-btns">
-        <button mat-button color="primary" class="nav-btn" matStepperPrevious>Back</button>
-        <button mat-button color="accent" class="nav-btn" matStepperNext>Next</button>
+        <button mat-button  class="nav-btn percent-25" matStepperPrevious>Back</button>
+        <button mat-button class="nav-btn percent-25 primary" matStepperNext>Next</button>
       </div>
   </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Suggest how much</ng-template>
+    <h3>What is your budget?</h3>
+    <p>Please enter the price you're comfortable to pay to get your task done. Taskers will use this as a guide for how much to offer.</p>
+    <mat-radio-group class="option-group space-around" formControlName="totalOrHourly" (change)="getSelectedRadio()">
+
+      <mat-radio-button [value]="true" checked color="primary" class="option">
+        Total
+      </mat-radio-button>
+
+      <mat-radio-button [value]="false" color="accent" class="option">
+        Hourly
+      </mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field *ngIf="this.taskForm.get('totalOrHourly').value">
+      <input matInput placeholder="Amount" type="number" class="text-align-right">
+      <span matPrefix>$&nbsp;</span>
+      <span matSuffix>AUD</span>
+    </mat-form-field>
+
+    <div *ngIf="!this.taskForm.get('totalOrHourly').value" class="budget-fields">
+      <mat-form-field>
+        <input matInput placeholder="/hr" type="number" class="text-align-right">
+        <span matPrefix>$&nbsp;</span>
+        <span matSuffix>AUD</span>
+      </mat-form-field>
+      <mat-icon>clear</mat-icon>
+
+      <mat-form-field>
+        <input matInput placeholder="/hr" type="number" class="text-align-right">
+        <span matSuffix>hrs</span>
+      </mat-form-field>
+    </div>
+    <div class="nav-btns">
+      <button mat-button  class="nav-btn percent-25" matStepperPrevious>Back</button>
+      <button mat-button class="nav-btn percent-25 primary" matStepperNext>Next</button>
+    </div>
+  </mat-step>
+
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     You are now done.

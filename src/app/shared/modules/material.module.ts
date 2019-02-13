@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import {
-  MatButtonModule, MatCardModule, MatChipsModule,
+  MatButtonModule, MatCardModule, MatChipsModule, MatDatepickerModule,
   MatDialogModule, MatDividerModule,
   MatFormFieldModule, MatIconModule,
-  MatInputModule, MatListModule,
-  MatOptionModule, MatProgressSpinnerModule,
+  MatInputModule, MatListModule, MatNativeDateModule,
+  MatOptionModule, MatProgressSpinnerModule, MatRadioModule,
   MatSelectModule, MatStepperModule, MatTabsModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -19,6 +19,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,
@@ -29,7 +31,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatTabsModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatStepperModule
+    MatStepperModule,
+    MatRadioModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -38,6 +41,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,
@@ -48,7 +53,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatTabsModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatStepperModule
+    MatStepperModule,
+    MatRadioModule
   ]
 })
 export class MaterialModule { }
