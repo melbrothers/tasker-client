@@ -57,9 +57,10 @@ h3 {
     justify-content: space-around;
   }
   .option {
-    background-color: rgba(42, 65, 232, 0.04);;
+    background-color: rgba(42, 65, 232, 0.04);
     padding: 20px;
-    border-radius: 25px 20px;
+    border-radius: 10px;
+    width: 45%;
     .option-detail {
       margin-left: 20px;
     }
@@ -82,5 +83,64 @@ h3 {
   margin-top: 30px;
   .location {
     width: 50vw;
+  }
+}
+
+.certain-times {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  .certain-time-box {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background-color: #E0F3FF;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    transition: .3s;
+    padding: 15px;
+
+    .certain-time-desc {
+      position: relative;
+      top: 50px;
+      text-align: center;
+      h5 {
+        font-weight: bold;
+        font-size: 16px;
+      }
+      p {
+        font-size: 12px;
+      }
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+      background-color: #ff5111;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,.15);
+      .certain-time-check {
+        ::ng-deep {
+          .mat-checkbox-frame {
+            border-color: white;
+          }
+        }
+
+      }
+
+      .certain-time-desc {
+        h5, p {
+          color: white;
+        }
+      }
+    }
+
+    .mat-icon {
+      //color: white;
+      //fill: white;
+      position: absolute;
+      left: 85px;
+      top: 50px;
+    }
+
+
   }
 }
