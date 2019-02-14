@@ -21,10 +21,11 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import { CookieService } from 'ngx-cookie-service';
 import { TokenInterceptorService } from './core/interceptors/token-interceptor.service';
 import {EffectsModule} from '@ngrx/effects';
-import {AuthEffects} from './store/effects/auth.effects';
 import {TaskModule} from './modules/tasks/task.module';
-import {RouterStateSerializer, StoreRouterConnectingModule} from '@ngrx/router-store';
+import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import {CustomSerializer} from './core/utils/utils';
+import {MatGoogleMapsAutocompleteModule} from '@angular-material-extensions/google-maps-autocomplete';
+import {AgmCoreModule} from '@agm/core';
 
 registerLocaleData(localeZh, 'zh-Hans');
 
@@ -45,16 +46,22 @@ export function provideConfig() {
     AppComponent,
   ],
   imports: [
+    AgmCoreModule,
     BrowserModule,
     AppRoutingModule,
     CommonModule,
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule,
+    MatGoogleMapsAutocompleteModule,
     AccountModule,
     TaskModule,
     SocialLoginModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    AgmCoreModule.forRoot({
+      apiKey: environment.googlePlacesAPIKey, libraries: ["places"]
+    }),
+    MatGoogleMapsAutocompleteModule.forRoot(),
     StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot({serializer: CustomSerializer}),

@@ -72,3 +72,15 @@ h3 {
   justify-content: space-around;
   align-items: center;
 }
+
+.task-duedate {
+  display: flex;
+  flex-direction: column;
+}
+
+.location-box {
+  margin-top: 30px;
+  .location {
+    width: 50vw;
+  }
+}

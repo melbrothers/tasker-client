@@ -8,12 +8,13 @@ import { SideNavComponent } from 'app/modules/account/side-nav/side-nav.componen
 import { ProfileComponent } from './profile/profile.component';
 import {UserService} from '../../core/services/user.service';
 import {StoreModule} from '@ngrx/store';
-import {authReducer, getAuthFeatureState} from '../../store/reducers/auth.reducer';
+import {authReducer} from '../../store/reducers/auth.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from '../../store/effects/auth.effects';
 import {AuthComponent} from './auth/auth.component';
 import {SharedModule} from '../../shared/shared.module';
 import {PostTaskComponent} from './post-task/post-task.component';
+import {MatGoogleMapsAutocompleteModule} from '@angular-material-extensions/google-maps-autocomplete';
 
 @NgModule({
   declarations: [
@@ -29,10 +30,12 @@ import {PostTaskComponent} from './post-task/post-task.component';
     CommonModule,
     SharedModule,
     AccountRoutingModule,
+    MatGoogleMapsAutocompleteModule,
     StoreModule.forFeature('auth', authReducer),
     EffectsModule.forFeature([AuthEffects]),
   ],
   exports: [
+    MatGoogleMapsAutocompleteModule,
     AuthComponent,
     DashboardComponent
   ],

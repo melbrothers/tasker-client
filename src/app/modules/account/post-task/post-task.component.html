@@ -176,7 +176,7 @@
 <!--&lt;!&ndash; Dashboard Content / End &ndash;&gt;-->
 <form [formGroup]="taskForm" class="task-form">
 
-<mat-horizontal-stepper [linear]="isLinear" #stepper selectedIndex="2">
+<mat-horizontal-stepper [linear]="isLinear" #stepper selectedIndex="1">
   <mat-step [stepControl]="taskForm">
         <ng-template matStepLabel>Tell us what you need done?</ng-template>
         <h3>What do you need done?</h3>
@@ -198,15 +198,14 @@
   <mat-step [stepControl]="taskForm">
       <ng-template matStepLabel>Say where & when?</ng-template>
       <h3>Where do you need it done?</h3>
-      <mat-radio-group class="option-group" formControlName="onlineOrPhone" (change)="getSelectedRadio()">
-
-          <mat-radio-button [value]="false" checked color="primary" class="option">
-            <div class="option-detail">
-              <h3> In Person</h3>
-              <p>Select this if you need the Tasker physically here.</p>
-              <mat-icon>place</mat-icon>
-            </div>
-          </mat-radio-button>
+      <mat-radio-group class="option-group" formControlName="online_or_phone" (change)="getSelectedRadio()">
+        <mat-radio-button [value]="false" checked color="primary" class="option">
+          <div class="option-detail">
+            <h3> In Person</h3>
+            <p>Select this if you need the Tasker physically here.</p>
+            <mat-icon>place</mat-icon>
+          </div>
+        </mat-radio-button>
 
         <mat-radio-button [value]="true" color="primary" class="option">
           <div class="option-detail">
@@ -218,18 +217,32 @@
       </mat-radio-group>
 
       <!-- location -->
-      <div class="location-box" *ngIf="!this.taskForm.get('onlineOrPhone').value">
-        <mat-form-field>
-          <input type="text" matInput placeholder="Enter a suburb">
+      <div class="location-box" *ngIf="!this.taskForm.get('online_or_phone').value">
+        <mat-form-field class="location">
+          <mat-label>Select suburb</mat-label>
+          <input matInput
+                 matGoogleMapsAutocomplete
+                 type="address"
+                 country="au"
+                 formControlName="geo"
+                 (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                 (onLocationSelected)="onLocationSelected($event)">
         </mat-form-field>
       </div>
       <!-- date -->
       <h3>When do you need it done?</h3>
-      <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+      <div class="task-duedate">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="deadline" [ngModelOptions]="{standalone: true}">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+      </div>
+      <div class="task-certain-time">
+        <mat-checkbox class="example-margin" [(ngModel)]="isCertainDay" [ngModelOptions]="{standalone: true}">I need a certain time of day</mat-checkbox>
+      </div>
+
       <div class="nav-btns">
         <button mat-button  class="nav-btn percent-25" matStepperPrevious>Back</button>
         <button mat-button class="nav-btn percent-25 primary" matStepperNext>Next</button>
@@ -284,4 +297,5 @@
     </div>
   </mat-step>
 </mat-horizontal-stepper>
+
 </form>
