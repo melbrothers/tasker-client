@@ -6,7 +6,7 @@ import {
   MatFormFieldModule, MatIconModule,
   MatInputModule, MatListModule, MatNativeDateModule,
   MatOptionModule, MatProgressSpinnerModule, MatRadioModule,
-  MatSelectModule, MatStepperModule, MatTabsModule
+  MatSelectModule, MatSnackBarModule, MatStepperModule, MatTabsModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -29,6 +29,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
+    MatSnackBarModule,
     MatSelectModule,
     MatOptionModule,
     MatTabsModule,
@@ -54,6 +55,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatInputModule,
     MatListModule,
     MatSelectModule,
+    MatSnackBarModule,
     MatOptionModule,
     MatTabsModule,
     MatIconModule,
