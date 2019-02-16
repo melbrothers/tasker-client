@@ -176,12 +176,12 @@
 <!--&lt;!&ndash; Dashboard Content / End &ndash;&gt;-->
 <form [formGroup]="taskForm" class="task-form">
 
-<mat-horizontal-stepper [linear]="isLinear" #stepper selectedIndex="1">
+<mat-horizontal-stepper [linear]="isLinear" #stepper selectedIndex="selectedIndex">
   <mat-step [stepControl]="taskForm">
         <ng-template matStepLabel>Tell us what you need done?</ng-template>
         <h3>What do you need done?</h3>
         <mat-form-field class="task-input-field">
-          <input matInput placeholder="This'll be the title of your task - e.g. Help move my sofa" formControlName="title" required [errorStateMatcher]="matcher">
+          <input matInput placeholder="This'll be the title of your task - e.g. Help move my sofa" formControlName="name" required [errorStateMatcher]="matcher">
         </mat-form-field>
         <h3>What are the details?</h3>
         <mat-form-field class="task-input-field">
@@ -198,7 +198,7 @@
   <mat-step [stepControl]="taskForm">
       <ng-template matStepLabel>Say where & when?</ng-template>
       <h3>Where do you need it done?</h3>
-      <mat-radio-group class="option-group" formControlName="online_or_phone" (change)="getSelectedRadio()">
+      <mat-radio-group class="option-group" formControlName="online_or_phone" (change)="getSelectedWorkingType()">
         <mat-radio-button [value]="false" checked color="primary" class="option">
           <div class="option-detail">
             <h3> In Person</h3>
@@ -224,9 +224,10 @@
                  matGoogleMapsAutocomplete
                  type="address"
                  country="au"
-                 formControlName="geo"
+                 formControlName="default_location"
                  (onAutocompleteSelected)="onAutocompleteSelected($event)"
-                 (onLocationSelected)="onLocationSelected($event)">
+                 (onLocationSelected)="onLocationSelected($event)"
+                  [value]="selectedSuburb.display_name">
         </mat-form-field>
       </div>
       <!-- date -->
@@ -237,47 +238,49 @@
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-
       </div>
-      <div class="task-certain-time">
-        <mat-checkbox class="certain-time-check" color="warn" [(ngModel)]="isCertainDay" [ngModelOptions]="{standalone: true}"></mat-checkbox>
-        <h3>What time(s) do you need the Tasker?</h3>
-        <div class="certain-times">
-          <div class="certain-time-box">
-            <mat-icon svgIcon="sunrise-icon"></mat-icon>
-            <mat-checkbox class="certain-time-check" [(ngModel)]="morning" [ngModelOptions]="{standalone: true}"></mat-checkbox>
-            <div class="certain-time-desc">
-              <h5>Morning</h5>
-              <p>Before 10am</p>
-            </div>
-          </div>
-          <div class="certain-time-box">
-            <mat-icon>wb_sunny</mat-icon>
-            <mat-checkbox class="certain-time-check" [(ngModel)]="midday" [ngModelOptions]="{standalone: true}"></mat-checkbox>
-            <div class="certain-time-desc">
-              <h5>Midday</h5>
-              <p>10am - 2pm</p>
-            </div>
-          </div>
-          <div class="certain-time-box">
-            <mat-icon svgIcon="sunset-icon"></mat-icon>
-            <mat-checkbox class="certain-time-check" [(ngModel)]="afternoon" [ngModelOptions]="{standalone: true}"></mat-checkbox>
-            <div class="certain-time-desc">
-              <h5>Afternoon</h5>
-              <p>2pm - 6pm</p>
-            </div>
-          </div>
-          <div class="certain-time-box">
-            <mat-icon svgIcon="moon-icon"></mat-icon>
-            <mat-checkbox class="certain-time-check" [(ngModel)]="evening" [ngModelOptions]="{standalone: true}"></mat-checkbox>
-            <div class="certain-time-desc">
-              <h5>Morning</h5>
-              <p>Before 10am</p>
-            </div>
-          </div>
 
+      <div class="task-certain-time">
+        <mat-checkbox class="certain-time-check" color="warn" [(ngModel)]="isCertainDay" [ngModelOptions]="{standalone: true}"><span>I need a certain time of day</span></mat-checkbox>
+        <div class="certain-times-container" *ngIf="isCertainDay">
+          <h3>What time(s) do you need the Tasker?</h3>
+          <div class="certain-times">
+            <div class="certain-time-box" (click)="checkCertainTime($event,'morning')">
+              <mat-icon svgIcon="sunrise-icon"></mat-icon>
+              <mat-checkbox class="certain-time-check" [(ngModel)]="specified_times.morning" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+              <div class="certain-time-desc">
+                <h5>Morning</h5>
+                <p>Before 10am</p>
+              </div>
+            </div>
+            <div class="certain-time-box" (click)="checkCertainTime($event,'midday')">
+              <mat-icon>wb_sunny</mat-icon>
+              <mat-checkbox class="certain-time-check" [(ngModel)]="specified_times.midday" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+              <div class="certain-time-desc">
+                <h5>Midday</h5>
+                <p>10am - 2pm</p>
+              </div>
+            </div>
+            <div class="certain-time-box" (click)="checkCertainTime($event, 'afternoon')">
+              <mat-icon svgIcon="sunset-icon"></mat-icon>
+              <mat-checkbox class="certain-time-check" [(ngModel)]="specified_times.afternoon" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+              <div class="certain-time-desc">
+                <h5>Afternoon</h5>
+                <p>2pm - 6pm</p>
+              </div>
+            </div>
+            <div class="certain-time-box" (click)="checkCertainTime($event,'evening')" >
+              <mat-icon svgIcon="moon-icon"></mat-icon>
+              <mat-checkbox class="certain-time-check" [(ngModel)]="specified_times.evening" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+              <div class="certain-time-desc">
+                <h5>Evening</h5>
+                <p>Before 10am</p>
+              </div>
+            </div>
+
+          </div>
+          <h3>It's ok, you can sort out exact times later.</h3>
         </div>
-        <h3>It's ok, you can sort out exact times later.</h3>
       </div>
 
       <div class="nav-btns">
@@ -290,7 +293,7 @@
     <ng-template matStepLabel>Suggest how much</ng-template>
     <h3>What is your budget?</h3>
     <p>Please enter the price you're comfortable to pay to get your task done. Taskers will use this as a guide for how much to offer.</p>
-    <mat-radio-group class="option-group space-around" formControlName="totalOrHourly" (change)="getSelectedRadio()">
+    <mat-radio-group class="option-group space-around" (change)="getSelectedPayType()" [(ngModel)]="totalOrhourly" [ngModelOptions]="{standalone: true}">
 
       <mat-radio-button [value]="true" checked color="primary" class="option">
         Total
@@ -300,24 +303,30 @@
         Hourly
       </mat-radio-button>
     </mat-radio-group>
-    <mat-form-field *ngIf="this.taskForm.get('totalOrHourly').value">
-      <input matInput placeholder="Amount" type="number" class="text-align-right">
+
+    <mat-form-field *ngIf="totalOrhourly">
+      <input matInput placeholder="Amount" type="number" class="text-align-right" formControlName="price" [(ngModel)]="price" required min="0" step="5" (keyup)="getBudgetAmount()">
       <span matPrefix>$&nbsp;</span>
       <span matSuffix>AUD</span>
     </mat-form-field>
 
-    <div *ngIf="!this.taskForm.get('totalOrHourly').value" class="budget-fields">
+    <div *ngIf="!totalOrhourly" class="budget-fields">
       <mat-form-field>
-        <input matInput placeholder="/hr" type="number" class="text-align-right">
+        <input matInput placeholder="/hr" type="number" class="text-align-right" formControlName="price" [(ngModel)]="price" min="0" step="5" required (keyup)="getBudgetAmount()">
         <span matPrefix>$&nbsp;</span>
         <span matSuffix>AUD</span>
       </mat-form-field>
       <mat-icon>clear</mat-icon>
 
       <mat-form-field>
-        <input matInput placeholder="/hr" type="number" class="text-align-right">
+        <input matInput placeholder="/hr" type="number" class="text-align-right" [(ngModel)]="hours" [ngModelOptions]="{standalone: true}" min="0" step=".5" [pattern]='validHours' (keyup)="getBudgetAmount()">
         <span matSuffix>hrs</span>
       </mat-form-field>
+    </div>
+    <div class="estimated-budget">
+      <h1 class="budget-title">Estimated budget</h1>
+      <p class="budget-note">Final payment will be agreed later.</p>
+      <p class="budget-amount"><sup>$</sup>{{amount}}</p>
     </div>
     <div class="nav-btns">
       <button mat-button  class="nav-btn percent-25" matStepperPrevious>Back</button>
@@ -327,10 +336,10 @@
 
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
-    You are now done.
+      Nearly done! Are you sure to publish this task?
     <div>
       <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button (click)="postTask()">OK</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>
