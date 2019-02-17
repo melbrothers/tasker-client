@@ -11,5 +11,10 @@ export class Task {
     price: number;
     bids: Array<Bid>;
     user: User;
-    specified_times: object;
+    specified_times: {
+      morning: boolean,
+      midday: boolean,
+      afternoon: boolean,
+      evening: boolean
+    };
 }
