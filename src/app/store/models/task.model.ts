@@ -11,4 +11,5 @@ export class Task {
     price: number;
     bids: Array<Bid>;
     user: User;
+    specified_times: object;
 }
