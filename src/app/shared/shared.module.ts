@@ -8,6 +8,7 @@ import {HomeComponent} from './pages/home/home.component';
 import {Error404Component} from './pages/error-404/error-404.component';
 import {RouterModule} from '@angular/router';
 import {LoadingComponent} from './components/loading/loading.component';
+import {ConvertDateTimeToFromNowPipe} from './pipe/convert-date-time-to-from-now.pipe';
 
 @NgModule({
     imports: [
@@ -21,14 +22,16 @@ import {LoadingComponent} from './components/loading/loading.component';
       Error404Component,
       HeaderComponent,
       FooterComponent,
-      LoadingComponent
+      LoadingComponent,
+      ConvertDateTimeToFromNowPipe
     ],
     exports: [
       CommonModule,
       MaterialModule,
       HeaderComponent,
       FooterComponent,
-      LoadingComponent
+      LoadingComponent,
+      ConvertDateTimeToFromNowPipe
     ],
   })
 export class SharedModule {
