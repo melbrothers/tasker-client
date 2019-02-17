@@ -4,7 +4,7 @@
   justify-content: space-around;
   margin-top: 30px;
   padding-top: 10px;
-  border-top: 1px solid #2a41e8;
+  //border-top: 1px solid #2a41e8;
   .nav-btn {
     background: #f0f0f0;
     color: #666;
@@ -168,5 +168,20 @@ h3 {
       font-weight: normal;
       top: -1.5em;
     }
+  }
+}
+
+::ng-deep {
+  .mat-stepper-horizontal {
+    background: transparent;
+  }
+  .mat-horizontal-content-container {
+    //border: 1px solid #2a41e8;
+    margin: 15px;
+    padding: 15px!important;
+    background-color: rgba(42, 65, 232, 0.04);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
   }
 }

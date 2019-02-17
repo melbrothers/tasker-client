@@ -2,6 +2,8 @@
     <div class="task-content">
       <div class="row justify-content-between">
         <div class="col col-xl-8 col-sm-12">
+          <h3>{{task.name}}</h3>
+
           <div class="details-panel">
 
             <mat-chip-list class="top-actions">
@@ -21,8 +23,8 @@
               <h3 mat-subheader class="task-subheader">POSTED BY</h3>
               <mat-list-item class="task-post-item">
                 <mat-icon mat-list-icon class="task-post-icon">face</mat-icon>
-                <h4 mat-line>Ryan Smith</h4>
-                <p mat-line> 2 hours ago</p>
+                <h4 mat-line>{{task.user.name}}</h4>
+                <p mat-line>{{task.created_at | convertDateTimeToFromNow: task.created_at}}</p>
               </mat-list-item>
               <mat-divider></mat-divider>
               <h3 mat-subheader class="task-subheader">LOCATION</h3>
@@ -35,8 +37,13 @@
               <h3 mat-subheader class="task-subheader">DUE DATE</h3>
               <mat-list-item class="task-post-item">
                 <mat-icon mat-list-icon class="task-post-icon">date_range</mat-icon>
-                <h4 mat-line>Sunday, 10th Feb 2019</h4>
-                <p mat-line> Afternoon (2pm - 6pm)</p>
+                <h4 mat-line>{{task.deadline | date:'fullDate'}}</h4>
+                <p mat-line>
+                  <span  *ngIf="task.specified_times.morning">Morning (before 10am)</span>
+                  <span  *ngIf="task.specified_times.midday">Midday (10am - 2pm)</span>
+                  <span  *ngIf="task.specified_times.afternoon">Afternoon (2pm - 6pm)</span>
+                  <span  *ngIf="task.specified_times.evening">Evening (After 6pm)</span>
+                </p>
               </mat-list-item>
               <mat-divider></mat-divider>
             </mat-list>
@@ -45,7 +52,7 @@
         <div class="col-xl-auto col-sm-12 side-option">
           <div class="budget-box">
             <h3>Task budget</h3>
-            <span class="budget-number">$400</span>
+            <span class="budget-number">{{task.price}}</span>
             <button mat-raised-button class="offer-btn" color="primary">Make an offer</button>
           </div>
           <div class="task-options">
@@ -87,12 +94,7 @@
       <div class="row justify-content-around">
         <div class="col task-detail">
           <h3 class="section-title">DETAILS</h3>
-          <p class="task-detail-description">
-            The budget on this task is based on Airtasker's cleaning price calculator. You can still ask questions and make offers as you would on standard tasks.
-          </p>
-          <p class="task-detail-description">
-            The budget on this task is based on Airtasker's cleaning price calculator. You can still ask questions and make offers as you would on standard tasks.
-          </p>
+          <p>{{task.description}}</p>
         </div>
 
       </div>

@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import { Task } from 'app/store/models/task.model';
 import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-task',
@@ -41,6 +42,7 @@ export class TaskComponent implements OnInit {
     this.currentCompletedRate = 8 / 10 * 100;
     this.taskQuestionsCount = 3;
     console.log(this.task);
+    // this.task.deadline = moment(this.task.deadline).format('dddd, Do of MMM YYYY');
   }
 
 }

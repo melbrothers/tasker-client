@@ -59,7 +59,7 @@ export function provideConfig() {
     SocialLoginModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     AgmCoreModule.forRoot({
-      apiKey: environment.googlePlacesAPIKey, libraries: ["places"]
+      apiKey: environment.googlePlacesAPIKey, libraries: ['places']
     }),
     MatGoogleMapsAutocompleteModule.forRoot(),
     StoreModule.forRoot(reducers, {metaReducers}),
