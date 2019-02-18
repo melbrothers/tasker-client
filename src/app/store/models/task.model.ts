@@ -11,6 +11,11 @@ export class Task {
     price: number;
     bids: Array<Bid>;
     user: User;
+    location: {
+      display_name: string;
+      longitude: number;
+      latitude: number;
+    };
     specified_times: {
       morning: boolean,
       midday: boolean,

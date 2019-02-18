@@ -33,7 +33,14 @@ export class TaskComponent implements OnInit {
   iconRegistry.addSvgIcon(
     'wechat',
     sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/wechat-logo.svg'));
-}
+  }
+
+  viewOnMap(): void {
+    const queryParams = this.task.location.display_name.replace(/\s+/g, '+');
+    const queryUrl = `https://www.google.com/maps/search/?api=1&query=${queryParams}`;
+    const win = window.open(queryUrl, '_blank');
+    win.focus();
+  }
 
   ngOnInit() {
     this.isFollowed = false;
