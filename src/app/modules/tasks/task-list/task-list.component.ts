@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Store} from '@ngrx/store';
 import * as fromRoot from 'app/store/reducers/app.reducer';
 import * as Loading from 'app/store/actions/loading.actions';
-
+import * as TaskAction from 'app/store/actions/task.actions';
 import {TaskService} from '../../../core/services/task.service';
 import { ActivatedRoute } from '@angular/router';
 import { Task } from 'app/store/models/task.model';
@@ -25,6 +25,7 @@ export class TaskListComponent implements OnInit {
     this.store.dispatch(new Loading.ShowLoading());
     this.taskService.getTask(task.slug).subscribe((t: Task) => {
       this.selectedTask = t;
+      this.store.dispatch(new TaskAction.SelectTask({task: this.selectedTask}));
       this.store.dispatch(new Loading.HideLoading());
     });
   }
@@ -32,6 +33,7 @@ export class TaskListComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
       this.tasks = data['tasks'].data;
+      this.store.dispatch(new TaskAction.LoadTasks({tasks: this.tasks}));
       this.store.dispatch(new Loading.HideLoading());
     });
   }
