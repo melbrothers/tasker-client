@@ -6,6 +6,7 @@ import * as TaskAction from 'app/store/actions/task.actions';
 import {TaskService} from '../../../core/services/task.service';
 import { ActivatedRoute } from '@angular/router';
 import { Task } from 'app/store/models/task.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-task-list',
