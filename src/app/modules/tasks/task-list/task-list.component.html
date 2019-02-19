@@ -165,7 +165,7 @@
         <div class="listings-container compact-list-layout margin-top-35 margin-bottom-25">
 
           <!-- Job Listing -->
-          <a class="job-listing" *ngFor="let task of tasks" (click)="viewTask(task);">
+          <a class="job-listing d-flex align-items-center justify-content-between" *ngFor="let task of tasks" (click)="viewTask(task);">
 
             <!-- Job Listing Details -->
             <div class="job-listing-details">
@@ -182,16 +182,20 @@
                 <!-- Job Listing Footer -->
                 <div class="job-listing-footer">
                   <ul>
-                    <li><i class="icon-material-outline-business"></i> Hexagon <div class="verified-badge" title="Verified Employer" data-tippy-placement="top"></div></li>
-                    <li><i class="icon-material-outline-location-on"></i> San Francisco</li>
+                    <!--<li><i class="icon-material-outline-business"></i> Hexagon <div class="verified-badge" title="Verified Employer" data-tippy-placement="top"></div></li>-->
+                    <li><i class="icon-material-outline-location-on"></i> {{task.location?.display_name}}</li>
                     <li><i class="icon-material-outline-business-center"></i> Full Time</li>
-                    <li><i class="icon-material-outline-access-time"></i> 2 days ago</li>
+                    <li><i class="icon-material-outline-access-time"></i>{{ task.created_at | convertDateTimeToFromNow: task.created_at}}</li>
                   </ul>
                 </div>
               </div>
 
               <!-- Bookmark -->
               <!-- <span class="bookmark-icon"></span> -->
+            </div>
+            <div class="task-bid-price d-flex flex-column align-items-center">
+              ${{task.price}}
+              <img class="user-avatar" [src]="task.user.avatar" alt="avatar" >
             </div>
           </a>
         </div>
