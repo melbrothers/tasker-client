@@ -8,10 +8,15 @@ import {SelectiveStrategyService} from './core/services/selective-strategy.servi
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HomeComponent,
-    pathMatch: 'full'
   },
+  {
+    path: 'tasks',
+    data: { preload: false },
+    loadChildren: 'app/modules/tasks/task.module#TaskModule'
+  },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: Error404Component }
 ];
 
@@ -19,8 +24,9 @@ const routes: Routes = [
   imports: [
     TaskModule,
     AccountModule,
-    RouterModule.forRoot(routes, {preloadingStrategy: SelectiveStrategyService})
+    RouterModule.forRoot(routes, {preloadingStrategy: SelectiveStrategyService, enableTracing: true})
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [SelectiveStrategyService]
 })
 export class AppRoutingModule { }

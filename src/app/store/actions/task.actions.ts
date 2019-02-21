@@ -9,6 +9,7 @@ export enum TaskActionTypes {
     LOAD_TASKS = '[Load Tasks] from API',
     REQUEST_TASK = '[Request Task Detail] from Store',
     SELECT_TASK = '[View Task Detail] Select a task',
+    REQUEST_TASKS = '[Tasks API] All tasks loaded'
 }
 
 /**
@@ -31,8 +32,14 @@ export class RequestTask implements Action {
   constructor(public payload: {taskId: number}) {}
 }
 
+export class RequestTasks implements Action {
+  readonly type = TaskActionTypes.REQUEST_TASKS;
+}
+
+
+
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
  */
-export type TaskActions = LoadTasks | SelectTask | RequestTask;
+export type TaskActions = LoadTasks | SelectTask | RequestTask | RequestTasks;

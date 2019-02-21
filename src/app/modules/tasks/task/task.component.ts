@@ -3,6 +3,8 @@ import { Task } from 'app/store/models/task.model';
 import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import * as moment from 'moment';
+import {Store} from '@ngrx/store';
+import {RequestTask} from '../../../store/actions/task.actions';
 
 @Component({
   selector: 'app-task',
@@ -17,7 +19,7 @@ export class TaskComponent implements OnInit {
   rateCount: number;
   taskQuestionsCount: number;
   inputCountForQuestion = 1500;
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private store: Store<Task>) {
   iconRegistry.addSvgIcon(
   'fb-logo',
   sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/facebook-logo.svg'));
@@ -49,6 +51,7 @@ export class TaskComponent implements OnInit {
     this.currentCompletedRate = 8 / 10 * 100;
     this.taskQuestionsCount = 3;
     console.log(this.task);
+    this.store.dispatch(new RequestTask({taskId: this.task.id}));
     // this.task.deadline = moment(this.task.deadline).format('dddd, Do of MMM YYYY');
   }
 
