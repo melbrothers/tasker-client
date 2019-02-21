@@ -11,3 +11,46 @@
   font-size: 24px;
   color: #292b32;
 }
+.notify-box {
+  padding: 10px 15px;
+  .sort-by {
+    display: block;
+    float: none;
+  }
+}
+.task-filter-row {
+  padding: 0;
+  .task-filter-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    transition: .4s 0ms;
+    background-color: #fff;
+    border-top: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    width: 100%;
+    white-space: normal;
+
+  }
+}
+
+::ng-deep {
+  .mat-menu-panel {
+    width: auto;
+    max-width: none!important;
+  }
+}
+
+.filter-menu {
+  padding: 10px 20px;
+  min-width: 300px;
+  h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    margin: 15px 0;
+  }
+  .mat-stroked-button {
+    margin: 2px 4px 2px 0;
+  }
+}
+

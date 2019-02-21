@@ -23,14 +23,8 @@ export class TaskListComponent implements OnInit {
   }
 
   viewTask(task: Task): void {
-    // this.store.dispatch(new Loading.ShowLoading());
     this.store.dispatch(new Loading.HideLoading());
     this.selectedTask = task;
-    // this.taskService.getTask(task.slug).subscribe((t: Task) => {
-    //   this.selectedTask = t;
-    //   this.store.dispatch(new TaskAction.SelectTask({task: this.selectedTask}));
-    //   this.store.dispatch(new Loading.HideLoading());
-    // });
   }
 
   ngOnInit() {
