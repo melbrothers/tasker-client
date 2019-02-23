@@ -30,16 +30,7 @@ export class TaskService {
   postTask(taskForm): Observable<Response> {
     const requestUrl = `${environment.apiUrl}/v1/tasks`;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    // const body = new HttpParams({fromObject: task});
     const body = taskForm.getRawValue();
-    // body.set('name', task.name);
-    // body.set('description', task.description);
-    // body.set('price', task.price);
-    // body.set('deadline', task.deadline);
-    // body.set('online_or_phone', task.online_or_phone);
-    // body.set('specified_times', task.specified_times);
-    // body.set('default_location', task.default_location);
-
     return this.http.post<Response>(requestUrl, body, {headers: headers});
   }
 }

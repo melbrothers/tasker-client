@@ -18,7 +18,6 @@ import {ConvertDateTimeToFromNowPipe} from './pipe/convert-date-time-to-from-now
       RouterModule
     ],
     declarations: [
-      HomeComponent,
       Error404Component,
       HeaderComponent,
       FooterComponent,

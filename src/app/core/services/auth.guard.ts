@@ -24,16 +24,13 @@ export class AuthGuard implements CanActivate {
         console.log(isAuthentcated);
         if (!isAuthentcated) {
           this.store.dispatch(new SetUnauthenticated());
-          this.router.navigateByUrl('').then(() => {
-            const dialogRef = this.authDialog.open(AuthComponent, {
-              width: '540px',
-              height: '600px',
-              panelClass: 'registerDialog'
-            });
-
-            dialogRef.afterClosed().subscribe(result => {
-              console.log('The dialog was closed');
-            });
+          const dialogRef = this.authDialog.open(AuthComponent, {
+            width: '540px',
+            height: '600px',
+            panelClass: 'registerDialog'
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
           });
         }
       }));

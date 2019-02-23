@@ -6,24 +6,29 @@ import {TaskComponent} from './task/task.component';
 
 const routes = [
   {
-    path: 'tasks',
+    path: '',
     component: TaskListComponent,
     resolve: {
         tasks: TaskDataResolver
-    }
+    },
+    children: [
+      {
+        path: ':slug',
+        component: TaskComponent
+      }
+    ]
   },
-  {
-    path: 'tasks/:slug',
-    component: TaskComponent
-  }
 ];
 @NgModule({
-    imports: [
-      RouterModule.forChild(routes),
-    ],
-    exports: [
-      RouterModule
-    ]
+  imports: [
+    RouterModule.forChild(routes),
+  ],
+  exports: [
+    RouterModule
+  ],
+  providers: [
+    TaskDataResolver
+  ]
 })
 export class TaskRoutingModule {
 

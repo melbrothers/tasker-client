@@ -1,0 +1,41 @@
+<div mat-dialog-content>
+  <div class="filter-task-type">
+    <h3>To be done</h3>
+    <mat-button-toggle-group name="task-type" aria-label="Task Type">
+      <mat-button-toggle class="task-type-btn" checked>In Person</mat-button-toggle>
+      <mat-button-toggle class="task-type-btn">Remotely</mat-button-toggle>
+      <mat-button-toggle class="task-type-btn">All</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="filter-location">
+    <h3>Surburb</h3>
+    <mat-form-field class="example-full-width">
+      <input type="text" matInput [(ngModel)]="data.location.display_name">
+    </mat-form-field>
+  </div>
+
+  <!--<div class="filter-distance">-->
+    <!--<h3>Distance - {{distance}}KM</h3>-->
+    <!--<div class="filter-distance-slider">-->
+      <!--<mat-slider max="100" min="5" step="5" thumbLabel="true" [(ngModel)]="distance"></mat-slider>-->
+    <!--</div>-->
+  <!--</div> -->
+
+  <div class="filter-price">
+    <h3>Price Range ${{minPrice}} - ${{maxPrice}}</h3>
+    <div class="filter-price-slider">
+      <mat-slider color="accent" class="min-price-slider" max="999" min="5" [step]="stepGap" thumbLabel="true" [(ngModel)]="maxPrice" (change)="updateStepGap()"></mat-slider>
+      <mat-slider color="primary" class="max-price-slider" max="999" min="5" [step]="stepGap" thumbLabel="true" [(ngModel)]="minPrice" (change)="updateStepGap()"></mat-slider>
+    </div>
+  </div>
+
+  <div class="hide-assigned-task-toggle">
+    <mat-slide-toggle class="task-assigned-toggle" color="primary" [checked]="assigned">
+      Hide tasks that are already assigned
+    </mat-slide-toggle>
+  </div>
+</div>
+<div mat-dialog-actions class="action-row">
+  <button mat-raised-button (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>Apply</button>
+</div>

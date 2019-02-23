@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import {
   MatAutocompleteModule,
-  MatButtonModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
+  MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
   MatDialogModule, MatDividerModule,
   MatFormFieldModule, MatIconModule,
-  MatInputModule, MatListModule, MatNativeDateModule,
+  MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule,
   MatOptionModule, MatProgressSpinnerModule, MatRadioModule,
-  MatSelectModule, MatSnackBarModule, MatStepperModule, MatTabsModule
+  MatSelectModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatStepperModule, MatTabsModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -28,15 +28,19 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
+    MatMenuModule,
     MatListModule,
     MatSnackBarModule,
+    MatSliderModule,
+    MatSlideToggleModule,
     MatSelectModule,
     MatOptionModule,
     MatTabsModule,
     MatIconModule,
     MatProgressSpinnerModule,
     MatStepperModule,
-    MatRadioModule
+    MatRadioModule,
+    MatButtonToggleModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -53,9 +57,13 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
+    MatMenuModule,
     MatListModule,
     MatSelectModule,
+    MatSliderModule,
+    MatSlideToggleModule,
     MatSnackBarModule,
+    MatButtonToggleModule,
     MatOptionModule,
     MatTabsModule,
     MatIconModule,

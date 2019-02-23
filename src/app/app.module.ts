@@ -26,6 +26,7 @@ import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import {CustomSerializer} from './core/utils/utils';
 import {MatGoogleMapsAutocompleteModule} from '@angular-material-extensions/google-maps-autocomplete';
 import {AgmCoreModule} from '@agm/core';
+import {HomeComponent} from './shared/pages/home/home.component';
 
 registerLocaleData(localeZh, 'zh-Hans');
 
@@ -44,6 +45,7 @@ export function provideConfig() {
   entryComponents: [],
   declarations: [
     AppComponent,
+    HomeComponent,
   ],
   imports: [
     AgmCoreModule,
