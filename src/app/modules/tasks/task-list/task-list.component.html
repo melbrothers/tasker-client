@@ -3,22 +3,10 @@
   <!-- Full Page Sidebar / End -->
   <div class="row no-gutters col-xl-12 task-filter-row">
     <div class="task-filter-search">
-      <button mat-button [matMenuTriggerFor]="menu">
-        <span>50km Tarneit VIC & remotely</span>
+      <button mat-button (click)="openFilterDialog()">
+        <span>{{this.selectedTask?.location?.display_name || 'Location'}}</span>
         <mat-icon>keyboard_arrow_down</mat-icon>
       </button>
-      <mat-menu #menu="matMenu">
-        <div class="filter-menu">
-          <h3>To be done</h3>
-          <mat-button-toggle-group name="task-type" aria-label="Task Type">
-            <mat-button-toggle>In Person</mat-button-toggle>
-            <mat-button-toggle>Remotely</mat-button-toggle>
-            <mat-button-toggle>All</mat-button-toggle>
-          </mat-button-toggle-group>
-          <h3>Surburb</h3>
-          <input type="text">
-        </div>
-      </mat-menu>
     </div>
   </div>
 

@@ -9,12 +9,14 @@ import {TaskMapComponent} from './task-map/task-map.component';
 import {SharedModule} from '../../shared/shared.module';
 import {StoreModule} from '@ngrx/store';
 import {taskReducer} from '../../store/reducers/task.reducer';
+import {TaskFilterDialogComponent} from './task-filter-dialog/task-filter-dialog.component';
 
 @NgModule({
   declarations: [
     TaskListComponent,
     TaskComponent,
     TaskMapComponent,
+    TaskFilterDialogComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,11 @@ import {taskReducer} from '../../store/reducers/task.reducer';
     TaskDataResolver
   ],
   exports: [
-    TaskListComponent
+    TaskListComponent,
+    TaskFilterDialogComponent
+  ],
+  entryComponents: [
+    TaskFilterDialogComponent
   ]
 })
 export class TaskModule { }

@@ -24,7 +24,7 @@ const routes: Routes = [
   imports: [
     TaskModule,
     AccountModule,
-    RouterModule.forRoot(routes, {preloadingStrategy: SelectiveStrategyService, enableTracing: true})
+    RouterModule.forRoot(routes, {preloadingStrategy: SelectiveStrategyService})
   ],
   exports: [RouterModule],
   providers: [SelectiveStrategyService]
