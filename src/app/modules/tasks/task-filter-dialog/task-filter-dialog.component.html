@@ -10,7 +10,7 @@
   <div class="filter-location">
     <h3>Surburb</h3>
     <mat-form-field class="example-full-width">
-      <input type="text" matInput [(ngModel)]="data.location.display_name">
+      <input type="text" matInput [(ngModel)]="data.selectedTask.location.display_name">
     </mat-form-field>
   </div>
 
@@ -37,5 +37,5 @@
 </div>
 <div mat-dialog-actions class="action-row">
   <button mat-raised-button (click)="onNoClick()">Cancel</button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>Apply</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial (click)="filterTask()">Apply</button>
 </div>

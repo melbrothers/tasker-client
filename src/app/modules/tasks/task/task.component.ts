@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import { Task } from 'app/store/models/task.model';
 import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
-import * as moment from 'moment';
 import {Store} from '@ngrx/store';
 import {RequestTask} from '../../../store/actions/task.actions';
 
