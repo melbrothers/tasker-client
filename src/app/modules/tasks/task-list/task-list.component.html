@@ -47,8 +47,8 @@
             </div>
             <div class="task-bid-price d-flex flex-column align-items-center">
               ${{task.price}}
-              <img *ngIf="task.user.avatar" class="user-avatar" [src]="task.user.avatar" alt="avatar" >
-              <img *ngIf="!task.user.avatar" class="user-avatar" src="assets/images/avatar.png" alt="avatar" >
+              <img *ngIf="task?.sender?.avatar" class="user-avatar" [src]="task?.sender?.avatar" alt="avatar" >
+              <img *ngIf="!task.sender.avatar" class="user-avatar" src="assets/images/avatar.png" alt="avatar" >
             </div>
           </a>
         </div>

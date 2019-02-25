@@ -23,6 +23,11 @@ export class TaskService {
     return this.http.get<Task>(requestUrl);
   }
 
+  filterTask(limit = 50, minPrice = 5, maxPrice = 999, taskState = 'posted', sortBy = 'recent'): Observable<Task[]> {
+    const requestUrl = `${environment.apiUrl}/v1/tasks?limit=${limit}&sort=${sortBy}&max_price=${maxPrice}&min_price=${minPrice}&task_states=${taskState}`;
+    return this.http.get<Task[]>(requestUrl);
+  }
+
   /**
    * POST task
    * @param task form
@@ -33,4 +38,5 @@ export class TaskService {
     const body = taskForm.getRawValue();
     return this.http.post<Response>(requestUrl, body, {headers: headers});
   }
+
 }

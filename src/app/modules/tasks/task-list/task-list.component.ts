@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import {Store} from '@ngrx/store';
 import * as fromRoot from 'app/store/reducers/app.reducer';
 import * as Loading from 'app/store/actions/loading.actions';
-import * as TaskAction from 'app/store/actions/task.actions';
 import {TaskService} from '../../../core/services/task.service';
 import { ActivatedRoute } from '@angular/router';
 import { Task } from 'app/store/models/task.model';
 import {MatDialog} from '@angular/material';
 import {TaskFilterDialogComponent} from '../task-filter-dialog/task-filter-dialog.component';
+import {Observable} from 'rxjs';
+import {LoadTasks, TaskActions} from '../../../store/actions/task.actions';
+import {ITask} from '../../../store/models/task';
 
 @Component({
   selector: 'app-task-list',
@@ -33,20 +35,25 @@ export class TaskListComponent implements OnInit {
     const dialogRef = this.dialog.open(TaskFilterDialogComponent, {
       width: '500px',
       height: 'auto',
-      data: this.selectedTask
+      data: {
+        selectedTask: this.selectedTask,
+      },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log('The dialog was closed', result);
       // this.animal = result;
+      this.store.select(fromRoot.getTasks).subscribe((tasks) => {
+        this.tasks = tasks;
+      });
     });
   }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
       this.tasks = data['tasks'].data;
-      this.selectedTask = this.tasks[0];
-      this.store.dispatch(new TaskAction.LoadTasks({tasks: this.tasks}));
+      this.selectedTask = data['tasks'].data[0];
+      this.store.dispatch(new LoadTasks({tasks: data['tasks'].data}));
       this.store.dispatch(new Loading.HideLoading());
     });
   }

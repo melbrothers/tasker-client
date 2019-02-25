@@ -1,5 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {TaskService} from '../../../core/services/task.service';
+import * as fromRoot from 'app/store/reducers/app.reducer';
+import {Store} from '@ngrx/store';
+import {FilterTasks, LoadTasks} from '../../../store/actions/task.actions';
 
 
 @Component({
@@ -14,9 +18,14 @@ export class TaskFilterDialogComponent implements OnInit {
   maxPrice = 999;
   stepGap = 5;
   assigned = false;
+  taskState = 'posted';
+  query = '';
+  sortBy = 'recent';
   constructor(
     public dialogRef: MatDialogRef<TaskFilterDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private taskService: TaskService,
+    private store: Store<fromRoot.State>
   ) { }
 
   onNoClick(): void {
@@ -48,4 +57,18 @@ export class TaskFilterDialogComponent implements OnInit {
       this.maxPrice = minPrice;
     }
   }
+
+  filterTask() {
+    if (this.assigned) {
+      this.taskState = 'open';
+    }
+
+    this.taskService
+      .filterTask(50, this.minPrice, this.maxPrice, this.taskState, this.sortBy)
+      .subscribe( (filteredTask: any ) => {
+        console.log(filteredTask);
+        this.store.dispatch(new FilterTasks({tasks: filteredTask.data}));
+      });
+  }
 }
+

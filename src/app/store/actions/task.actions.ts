@@ -6,10 +6,10 @@ import { Task } from 'app/store/models/task.model';
  * enum object for all of this group's action types.
  */
 export enum TaskActionTypes {
-    LOAD_TASKS = '[Load Tasks] from API',
-    REQUEST_TASK = '[Request Task Detail] from Store',
-    SELECT_TASK = '[View Task Detail] Select a task',
-    REQUEST_TASKS = '[Tasks API] All tasks loaded'
+  LOAD_TASKS = '[Load Tasks] from API',
+  REQUEST_TASK = '[Request Task Detail] from Store',
+  SELECT_TASK = '[View Task Detail] Select a task',
+  FILTER_TASK = '[Tasks API] Filter tasks',
 }
 
 /**
@@ -18,13 +18,13 @@ export enum TaskActionTypes {
  * type checking in reducer functions.
  */
 export class LoadTasks implements Action {
-    readonly type = TaskActionTypes.LOAD_TASKS;
-    constructor (public payload: {tasks: Task[]}) {}
+  readonly type = TaskActionTypes.LOAD_TASKS;
+  constructor (public payload: {tasks: Task[]}) {}
 }
 
 export class SelectTask implements Action {
-    readonly type = TaskActionTypes.SELECT_TASK;
-    constructor (public payload: {task: Task}) {}
+  readonly type = TaskActionTypes.SELECT_TASK;
+  constructor (public payload: {task: Task}) {}
 }
 
 export class RequestTask implements Action {
@@ -32,14 +32,13 @@ export class RequestTask implements Action {
   constructor(public payload: {taskId: number}) {}
 }
 
-export class RequestTasks implements Action {
-  readonly type = TaskActionTypes.REQUEST_TASKS;
+export class FilterTasks implements Action {
+  readonly type = TaskActionTypes.FILTER_TASK;
+  constructor (public payload: {tasks: Task[]}) {}
 }
-
-
 
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
  */
-export type TaskActions = LoadTasks | SelectTask | RequestTask | RequestTasks;
+export type TaskActions = LoadTasks | SelectTask | RequestTask | FilterTasks;
