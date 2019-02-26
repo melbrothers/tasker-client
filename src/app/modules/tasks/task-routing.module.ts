@@ -6,7 +6,7 @@ import {TaskComponent} from './task/task.component';
 
 const routes = [
   {
-    path: '',
+    path: 'tasks',
     component: TaskListComponent,
     resolve: {
         tasks: TaskDataResolver

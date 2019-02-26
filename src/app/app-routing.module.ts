@@ -8,15 +8,15 @@ import {SelectiveStrategyService} from './core/services/selective-strategy.servi
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: HomeComponent,
+    pathMatch: 'full'
   },
   {
     path: 'tasks',
     data: { preload: false },
     loadChildren: 'app/modules/tasks/task.module#TaskModule'
   },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: Error404Component }
 ];
 
