@@ -10,7 +10,8 @@ export class Task {
     created_at: number;
     price: number;
     bids: Array<Bid>;
-    user: User;
+    sender: User;
+    runner: User;
     location: {
       display_name: string;
       longitude: number;

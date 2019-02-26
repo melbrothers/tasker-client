@@ -43,9 +43,11 @@ export class TaskListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
       // this.animal = result;
-      this.store.select(fromRoot.getTasks).subscribe((tasks) => {
-        this.tasks = tasks;
-      });
+      if (result) {
+        this.store.select(fromRoot.getTasks).subscribe((tasks) => {
+          this.tasks = tasks;
+        });
+      }
     });
   }
 
