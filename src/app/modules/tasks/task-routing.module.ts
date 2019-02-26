@@ -13,7 +13,7 @@ const routes = [
     },
     children: [
       {
-        path: ':slug',
+        path: 'tasks/:slug',
         component: TaskComponent
       }
     ]

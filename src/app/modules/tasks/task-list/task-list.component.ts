@@ -3,7 +3,7 @@ import {Store} from '@ngrx/store';
 import * as fromRoot from 'app/store/reducers/app.reducer';
 import * as Loading from 'app/store/actions/loading.actions';
 import {TaskService} from '../../../core/services/task.service';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Task } from 'app/store/models/task.model';
 import {MatDialog} from '@angular/material';
 import {TaskFilterDialogComponent} from '../task-filter-dialog/task-filter-dialog.component';
@@ -23,12 +23,14 @@ export class TaskListComponent implements OnInit {
     private store: Store<fromRoot.State>,
     private taskService: TaskService,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog) {
-  }
+    private dialog: MatDialog,
+    private router: Router
+  ) {}
 
   viewTask(task: Task): void {
     this.store.dispatch(new Loading.HideLoading());
     this.selectedTask = task;
+    this.router.navigate(['tasks', task.slug]);
   }
 
   openFilterDialog(): void {
