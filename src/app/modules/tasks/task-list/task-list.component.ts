@@ -7,9 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { Task } from 'app/store/models/task.model';
 import {MatDialog} from '@angular/material';
 import {TaskFilterDialogComponent} from '../task-filter-dialog/task-filter-dialog.component';
-import {Observable} from 'rxjs';
 import {LoadTasks, TaskActions} from '../../../store/actions/task.actions';
-import {ITask} from '../../../store/models/task';
 
 @Component({
   selector: 'app-task-list',
@@ -30,7 +28,7 @@ export class TaskListComponent implements OnInit {
   viewTask(task: Task): void {
     this.store.dispatch(new Loading.HideLoading());
     this.selectedTask = task;
-    this.router.navigate(['tasks', task.slug]);
+    this.router.navigate(['tasks', task.slug])
   }
 
   openFilterDialog(): void {
