@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'tasks',
-    data: { preload: false },
+    data: { preload: true },
     loadChildren: 'app/modules/tasks/task.module#TaskModule'
   },
   { path: '**', component: Error404Component }
