@@ -10,13 +10,15 @@ import {SharedModule} from '../../shared/shared.module';
 import {StoreModule} from '@ngrx/store';
 import {taskReducer} from '../../store/reducers/task.reducer';
 import {TaskFilterDialogComponent} from './task-filter-dialog/task-filter-dialog.component';
+import {BidComponent} from './bid/bid.component';
 
 @NgModule({
   declarations: [
     TaskListComponent,
     TaskComponent,
     TaskMapComponent,
-    TaskFilterDialogComponent
+    TaskFilterDialogComponent,
+    BidComponent
   ],
   imports: [
     CommonModule,
