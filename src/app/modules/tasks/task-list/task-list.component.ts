@@ -7,7 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { Task } from 'app/store/models/task.model';
 import {MatDialog} from '@angular/material';
 import {TaskFilterDialogComponent} from '../task-filter-dialog/task-filter-dialog.component';
-import {LoadTasks, TaskActions} from '../../../store/actions/task.actions';
+import {LoadTasks} from '../../../store/actions/task.actions';
 
 @Component({
   selector: 'app-task-list',
@@ -17,6 +17,7 @@ import {LoadTasks, TaskActions} from '../../../store/actions/task.actions';
 export class TaskListComponent implements OnInit {
   selectedTask: Task;
   tasks: Task[];
+  taskSlug: string;
   constructor(
     private store: Store<fromRoot.State>,
     private taskService: TaskService,
@@ -27,8 +28,10 @@ export class TaskListComponent implements OnInit {
 
   viewTask(task: Task): void {
     this.store.dispatch(new Loading.HideLoading());
-    this.selectedTask = task;
-    this.router.navigate(['tasks', task.slug])
+    this.taskService.getTask(task.slug).subscribe(thisTask => {
+      this.selectedTask = thisTask;
+      this.router.navigate(['tasks', task.slug]);
+    });
   }
 
   openFilterDialog(): void {
@@ -52,9 +55,17 @@ export class TaskListComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.activatedRoute.data.subscribe(data => {
       this.tasks = data['tasks'].data;
-      this.selectedTask = data['tasks'].data[0];
+      this.taskSlug = this.activatedRoute.firstChild.snapshot.paramMap.get('slug');
+      if (this.taskSlug) {
+        this.taskService.getTask(this.taskSlug).subscribe(thisTask => {
+          this.selectedTask = thisTask;
+        });
+      } else {
+        this.selectedTask = data['tasks'].data[0];
+      }
       this.store.dispatch(new LoadTasks({tasks: data['tasks'].data}));
       this.store.dispatch(new Loading.HideLoading());
     });

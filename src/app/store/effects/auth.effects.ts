@@ -22,7 +22,7 @@ export class AuthEffects {
     ofType<SetUnauthenticated>(AuthActionTypes.SET_UNAUTHENTICATED),
     tap(action => {
       localStorage.removeItem('user');
-      this.router.navigateByUrl('');
+      // this.router.navigateByUrl('');
     })
   );
   @Effect()

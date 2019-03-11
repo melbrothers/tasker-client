@@ -19,8 +19,11 @@ export class PostTaskComponent implements OnInit {
   taskForm: FormGroup;
   matcher = new TheErrorStateMatcher();
   selectedIndex = 0;
+  selectedAddress = '';
   selectedSuburb = {
-    display_name: null,
+    state: null,
+    postcode: null,
+    suburb: null,
     longitude: 0,
     latitude: 0
   };
@@ -62,7 +65,10 @@ export class PostTaskComponent implements OnInit {
   onAutocompleteSelected(ev) {
     console.log(ev);
     if (ev && ev.formatted_address) {
-      this.selectedSuburb.display_name = ev.formatted_address;
+      this.selectedAddress = ev.formatted_address;
+      this.selectedSuburb.state = ev.address_components[2].long_name;
+      this.selectedSuburb.postcode = ev.address_components[4].long_name;
+      this.selectedSuburb.suburb = ev.address_components[0].long_name;
       this.selectedSuburb.latitude = ev.geometry.location.lat();
       this.selectedSuburb.longitude = ev.geometry.location.lng();
       this.taskForm.controls['default_location'].setValue(this.selectedSuburb);
