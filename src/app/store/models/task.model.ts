@@ -1,5 +1,6 @@
 import { Bid } from 'app/store/models/bid.model';
 import { User } from 'app/store/models/user.model';
+import {Comment} from './comment.model';
 
 export class Task {
     id: number;
@@ -12,6 +13,8 @@ export class Task {
     bids: Array<Bid>;
     sender: User;
     runner: User;
+    state: string;
+    comments: Comment[];
     location: {
       display_name: string;
       longitude: number;
