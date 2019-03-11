@@ -7,9 +7,10 @@
           <div class="details-panel">
 
             <mat-chip-list class="top-actions">
-              <mat-chip color="primary" selected>Open</mat-chip>
-              <mat-chip>Assigned</mat-chip>
-              <mat-chip>Completed</mat-chip>
+              <mat-chip [selected]="task.state === 'posted'">Open</mat-chip>
+              <mat-chip [selected]="task.state === 'assigned'">Assigned</mat-chip>
+              <mat-chip [selected]="task.state === 'completed'">Completed</mat-chip>
+              <mat-chip [selected]="task.state === 'expired'">Expired</mat-chip>
             </mat-chip-list>
 
             <button mat-button class="follow-btn">
@@ -23,7 +24,9 @@
               <h3 mat-subheader class="task-subheader">POSTED BY</h3>
               <mat-list-item class="task-post-item">
                 <mat-icon mat-list-icon class="task-post-icon">face</mat-icon>
+                <ngb-rating [rate]="task.sender.sender_review_statistics.average_rating" [readonly]="true" max="5"></ngb-rating> &#40;<span class="rate-number">{{task.sender.sender_review_statistics.received_reviews}}</span>&#41;
                 <h4 mat-line>{{task.sender.name}}</h4>
+
                 <p mat-line>{{task.created_at | convertDateTimeToFromNow: task.created_at}}</p>
               </mat-list-item>
               <mat-divider></mat-divider>
@@ -53,14 +56,14 @@
           <div class="budget-box">
             <h3>Task budget</h3>
             <span class="budget-number">{{task.price}}</span>
-            <button mat-raised-button class="offer-btn" color="primary">Make an offer</button>
+            <button mat-raised-button class="offer-btn" color="primary" (click)="openBid()">Make an offer</button>
           </div>
-          <div class="task-options">
-            <mat-select placeholder="More options" class="task-options-select">
-              <mat-option value="1">Post a similar task</mat-option>
-              <mat-option value="2">Set up alerts</mat-option>
-            </mat-select>
-          </div>
+          <!--<div class="task-options">-->
+            <!--<mat-select placeholder="More options" class="task-options-select">-->
+              <!--<mat-option value="1">Post a similar task</mat-option>-->
+              <!--<mat-option value="2">Set up alerts</mat-option>-->
+            <!--</mat-select>-->
+          <!--</div>-->
           <div class="task-share">
             <p class="share-text">SHARE</p>
             <div class="share-buttons">
@@ -114,48 +117,23 @@
       <div class="row justify-content-around">
         <div class="col task-offers">
           <h3 class="section-title">OFFERS</h3>
-          <mat-card class="offer">
+          <mat-card class="offer" *ngFor="let bid of task.bids">
             <mat-card-header>
-              <div mat-card-avatar class="user-avatar"></div>
-              <ngb-rating [(rate)]="currentRate"></ngb-rating> &#40;<span class="rate-number">{{rateCount}}</span>&#41;
+              <div mat-card-avatar class="user-avatar" [style.background-image]="'url('+bid.runner.avatar+')'" *ngIf="bid.runner.avatar"></div>
+              <div mat-card-avatar class="user-avatar" *ngIf="!bid.runner.avatar"></div>
+              <ngb-rating [rate]="bid.runner.runner_review_statistics.average_rating" [readonly]="true" max="5"></ngb-rating> &#40;<span class="rate-number">{{bid.runner.received_reviews || 0}}</span>&#41;
               <hr>
               <pre>Completed rate: <b>{{currentCompletedRate}}%</b></pre>
 
               <mat-card-title class="task-offer-name">
-                Ann Stephanie
+                {{bid.runner?.name}}
               </mat-card-title>
-              <mat-card-subtitle class="offer-time">1 hours ago</mat-card-subtitle>
+              <mat-card-subtitle class="offer-time">{{bid.created_at | convertDateTimeToFromNow: bid.created_at}}</mat-card-subtitle>
             </mat-card-header>
             <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
             <mat-card-content>
               <p class="offer-description">
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
-              </p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-button class="reply-btn">
-                <mat-icon>reply</mat-icon>
-                Reply
-              </button>
-            </mat-card-actions>
-          </mat-card>
-          <mat-card class="offer">
-            <mat-card-header>
-              <div mat-card-avatar class="user-avatar"></div>
-              <ngb-rating [(rate)]="currentRate"></ngb-rating> &#40;<span class="rate-number">{{rateCount}}</span>&#41;
-              <hr>
-              <pre>Completed rate: <b>{{currentCompletedRate}}%</b></pre>
-              <mat-card-title class="task-offer-name">Ryan Smith</mat-card-title>
-              <mat-card-subtitle class="offer-time">3 hours ago</mat-card-subtitle>
-            </mat-card-header>
-            <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
-            <mat-card-content>
-              <p class="offer-description">
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
+                {{bid?.comments[0]?.body}}
               </p>
             </mat-card-content>
             <mat-card-actions>
@@ -174,8 +152,10 @@
         <div class="col task-questions">
           <h3 class="section-title">Questions &#40;<span>{{taskQuestionsCount}}</span>&#41;</h3>
           <p class="notice">Please don't share personal info – insurance won't apply to tasks not done through Tasker!</p>
+          <app-comments [comments]="task.comments"></app-comments>
           <mat-form-field class="task-question">
             <textarea matInput placeholder="Ask Ryan a question" class="task-question-input"></textarea>
+
             <div class="footer">
               <button mat-icon-button class="attach_file">
                 <mat-icon >attach_file</mat-icon>

@@ -1,9 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Task } from 'app/store/models/task.model';
-import {MatIconRegistry} from '@angular/material';
+import {MatDialog, MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Store} from '@ngrx/store';
 import {RequestTask} from '../../../store/actions/task.actions';
+import {TaskFilterDialogComponent} from '../task-filter-dialog/task-filter-dialog.component';
+import {BidComponent} from '../bid/bid.component';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-task',
@@ -18,7 +21,8 @@ export class TaskComponent implements OnInit {
   rateCount: number;
   taskQuestionsCount: number;
   inputCountForQuestion = 1500;
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private store: Store<Task>) {
+  constructor(
+    iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private bidDialogRef: MatDialog, private store: Store<Task>, private activatedRoute: ActivatedRoute) {
   iconRegistry.addSvgIcon(
   'fb-logo',
   sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/facebook-logo.svg'));
@@ -42,10 +46,17 @@ export class TaskComponent implements OnInit {
     const win = window.open(queryUrl, '_blank');
     win.focus();
   }
-
+  openBid(): void {
+    this.bidDialogRef.open(BidComponent, {
+      width: '50vw',
+      height: 'auto',
+      data: {
+        slug: this.task.slug,
+      },
+    });
+  }
   ngOnInit() {
     this.isFollowed = false;
-    this.currentRate = 8;
     this.rateCount = 47;
     this.currentCompletedRate = 8 / 10 * 100;
     this.taskQuestionsCount = 3;

@@ -24,7 +24,9 @@
 
               <!-- Logo -->
               <div class="job-listing-company-logo">
-                <img src="../../../assets/images/company-logo-01.png" alt="">
+                <!--<img src="../../../assets/images/company-logo-01.png" alt="">-->
+                <img *ngIf="task?.sender?.avatar" class="user-avatar" [src]="task?.sender?.avatar" alt="avatar" >
+                <img *ngIf="!task.sender.avatar" class="user-avatar" src="assets/images/avatar.png" alt="avatar" >
               </div>
 
               <!-- Details -->
@@ -36,7 +38,7 @@
                   <ul>
                     <!--<li><i class="icon-material-outline-business"></i> Hexagon <div class="verified-badge" title="Verified Employer" data-tippy-placement="top"></div></li>-->
                     <li><i class="icon-material-outline-location-on"></i> {{task.location?.display_name}}</li>
-                    <li><i class="icon-material-outline-business-center"></i> Full Time</li>
+                    <!--<li><i class="icon-material-outline-business-center"></i> Full Time</li>-->
                     <li><i class="icon-material-outline-access-time"></i>{{ task.created_at | convertDateTimeToFromNow: task.created_at}}</li>
                   </ul>
                 </div>
@@ -47,8 +49,7 @@
             </div>
             <div class="task-bid-price d-flex flex-column align-items-center">
               ${{task.price}}
-              <img *ngIf="task?.sender?.avatar" class="user-avatar" [src]="task?.sender?.avatar" alt="avatar" >
-              <img *ngIf="!task.sender.avatar" class="user-avatar" src="assets/images/avatar.png" alt="avatar" >
+
             </div>
           </a>
         </div>

@@ -1,0 +1,28 @@
+<div class="row justify-content-around">
+  <div class="col task-offers">
+    <h3 class="section-title">Comments</h3>
+    <mat-card class="offer" *ngFor="let comment of comments">
+      <mat-card-header>
+        <div mat-card-avatar class="user-avatar" [style.background-image]="'url('+comment.author.avatar+')'" *ngIf="comment.author.avatar"></div>
+        <div mat-card-avatar class="user-avatar" *ngIf="!comment.author.avatar"></div>
+        <hr>
+        <mat-card-title class="task-offer-name">
+          {{comment.author?.name}}
+        </mat-card-title>
+        <mat-card-subtitle class="offer-time">{{comment.created_at | convertDateTimeToFromNow: comment.created_at}}</mat-card-subtitle>
+      </mat-card-header>
+      <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
+      <mat-card-content>
+        <p class="offer-description">
+          {{comment.body}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button class="reply-btn" (click)="reply()">
+          <mat-icon>reply</mat-icon>
+          Reply
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

@@ -11,6 +11,7 @@ import {StoreModule} from '@ngrx/store';
 import {taskReducer} from '../../store/reducers/task.reducer';
 import {TaskFilterDialogComponent} from './task-filter-dialog/task-filter-dialog.component';
 import {BidComponent} from './bid/bid.component';
+import {CommentsComponent} from './comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {BidComponent} from './bid/bid.component';
     TaskComponent,
     TaskMapComponent,
     TaskFilterDialogComponent,
-    BidComponent
+    BidComponent,
+    CommentsComponent,
   ],
   imports: [
     CommonModule,
@@ -32,10 +34,12 @@ import {BidComponent} from './bid/bid.component';
   ],
   exports: [
     TaskListComponent,
-    TaskFilterDialogComponent
+    TaskFilterDialogComponent,
+    BidComponent
   ],
   entryComponents: [
-    TaskFilterDialogComponent
+    TaskFilterDialogComponent,
+    BidComponent,
   ]
 })
 export class TaskModule { }

@@ -1,12 +1,38 @@
-<div class="example-container">
-  <mat-form-field>
-    <input matInput placeholder="Input">
-  </mat-form-field>
+<form class="bid-form d-flex flex-column" [formGroup]="bidForm">
+  <mat-horizontal-stepper>
+  <mat-step label="Make an offer" state="phone">
+    <h3>Why are you the best person for this task?</h3>
+    <p>For your safety, please do not share personal information, e.g., email, phone or address.</p>
+    <mat-form-field class="comment">
+      <textarea maxlength="1500" matInput placeholder="e.g. I will be great for this task. I have the necessary experience, skills and equipment required to get this done." formControlName="comment"></textarea>
+    </mat-form-field>
+    <p>1500 characters remaining</p>
+    <div class="bottom-line">
+      <h3>You'll receive <span>$7.8</span></h3>
+    </div>
+    <div>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="Step 2" state="chat">
+    <mat-form-field class="price-input">
+      <input matInput placeholder="price" formControlName="price"/>
+    </mat-form-field>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="Step 3">
+    <p>You're welcome.</p>
+  </mat-step>
 
-  <mat-form-field>
-    <mat-select placeholder="Select">
-      <mat-option value="option">Option</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-
+  <!-- Icon overrides. -->
+  <ng-template matStepperIcon="phone">
+    <mat-icon>call_end</mat-icon>
+  </ng-template>
+  <ng-template matStepperIcon="chat">
+    <mat-icon>forum</mat-icon>
+  </ng-template>
+</mat-horizontal-stepper>
+</form>
