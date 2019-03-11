@@ -6,5 +6,6 @@ export class User implements IUser {
   email: string;
   avatar: string;
   created_at: string;
+  sender_review_statistics: object;
   locale: string;
 }
