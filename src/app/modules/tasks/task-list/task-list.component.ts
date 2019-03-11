@@ -58,7 +58,9 @@ export class TaskListComponent implements OnInit {
 
     this.activatedRoute.data.subscribe(data => {
       this.tasks = data['tasks'].data;
-      this.taskSlug = this.activatedRoute.firstChild.snapshot.paramMap.get('slug');
+      if (this.activatedRoute.firstChild) {
+        this.taskSlug = this.activatedRoute.firstChild.snapshot.paramMap.get('slug');
+      }
       if (this.taskSlug) {
         this.taskService.getTask(this.taskSlug).subscribe(thisTask => {
           this.selectedTask = thisTask;
