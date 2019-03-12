@@ -55,8 +55,9 @@ export class TaskListComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.store.dispatch(new Loading.ShowLoading());
     this.activatedRoute.data.subscribe(data => {
+      this.store.dispatch(new Loading.HideLoading());
       if (data['tasks'].data) {
         this.tasks = data['tasks'].data;
       }
@@ -64,14 +65,15 @@ export class TaskListComponent implements OnInit {
         this.taskSlug = this.activatedRoute.firstChild.snapshot.paramMap.get('slug');
       }
       if (this.taskSlug) {
+        this.store.dispatch(new Loading.ShowLoading());
         this.taskService.getTask(this.taskSlug).subscribe(thisTask => {
           this.selectedTask = thisTask;
+          this.store.dispatch(new Loading.HideLoading());
         });
       } else {
         this.selectedTask = data['tasks'].data[0];
       }
       this.store.dispatch(new LoadTasks({tasks: data['tasks'].data}));
-      this.store.dispatch(new Loading.HideLoading());
     });
   }
 }
