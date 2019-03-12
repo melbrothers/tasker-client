@@ -22,13 +22,12 @@ export class AuthEffects {
     ofType<SetUnauthenticated>(AuthActionTypes.SET_UNAUTHENTICATED),
     tap(action => {
       localStorage.removeItem('user');
-      // this.router.navigateByUrl('');
+      this.router.navigateByUrl('');
     })
   );
   @Effect()
   init$ = defer( (): Observable<Action> => {
     const userData = localStorage.getItem('user');
-    console.log(userData);
     if (userData) {
       return of(new SetAuthenticated(JSON.parse(userData)));
     } else {

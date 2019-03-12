@@ -14,6 +14,11 @@ export class TaskService {
     return this.http.get<Task[]>(requestUrl);
   }
 
+  listMyTasks(): Observable<Task[]> {
+    const requestUrl = `${environment.apiUrl}/v1/tasks?my_tasks=true`;
+    return this.http.get<Task[]>(requestUrl);
+  }
+
   /**
    * GET task
    * @param slug of the task

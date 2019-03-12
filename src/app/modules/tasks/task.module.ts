@@ -4,7 +4,7 @@ import { TaskListComponent } from 'app/modules/tasks/task-list/task-list.compone
 import { TaskRoutingModule } from 'app/modules/tasks/task-routing.module';
 import {TaskComponent} from './task/task.component';
 import { TaskService } from 'app/core/services/task.service';
-import { TaskDataResolver } from 'app/modules/tasks/tasks-resolver.service';
+import { TaskDataResolver } from './resolver/tasks-resolver.service';
 import {TaskMapComponent} from './task-map/task-map.component';
 import {SharedModule} from '../../shared/shared.module';
 import {StoreModule} from '@ngrx/store';
@@ -30,7 +30,7 @@ import {CommentsComponent} from './comments/comments.component';
   ],
   providers: [
     TaskService,
-    TaskDataResolver
+    TaskDataResolver,
   ],
   exports: [
     TaskListComponent,

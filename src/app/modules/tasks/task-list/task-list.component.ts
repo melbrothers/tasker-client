@@ -57,7 +57,9 @@ export class TaskListComponent implements OnInit {
   ngOnInit() {
 
     this.activatedRoute.data.subscribe(data => {
-      this.tasks = data['tasks'].data;
+      if (data['tasks'].data) {
+        this.tasks = data['tasks'].data;
+      }
       if (this.activatedRoute.firstChild) {
         this.taskSlug = this.activatedRoute.firstChild.snapshot.paramMap.get('slug');
       }

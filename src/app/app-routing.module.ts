@@ -17,6 +17,11 @@ const routes: Routes = [
     data: { preload: true },
     loadChildren: 'app/modules/tasks/task.module#TaskModule'
   },
+  {
+    path: 'my-tasks',
+    data: { preload: true },
+    loadChildren: 'app/modules/tasks/task.module#TaskModule'
+  },
   { path: '**', component: Error404Component }
 ];
 
