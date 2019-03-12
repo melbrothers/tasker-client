@@ -10,26 +10,26 @@ import {PostTaskComponent} from './post-task/post-task.component';
 
 const routes: Routes = [
     {
-        path: 'account',
-        component: AccountComponent,
-        resolve: {
-          account: AccountDataResolver
+      path: 'account',
+      component: AccountComponent,
+      resolve: {
+        account: AccountDataResolver
+      },
+      children: [
+        {
+          path: 'dashboard',
+          component: DashboardComponent
         },
-        children: [
-          {
-            path: 'dashboard',
-            component: DashboardComponent
-          },
-          {
-            path: 'post-task',
-            component: PostTaskComponent
-          },
-          {
-            path: 'profile',
-            component: ProfileComponent
-          }
-        ],
-        canActivate: [AuthGuard]
+        {
+          path: 'post-task',
+          component: PostTaskComponent
+        },
+        {
+          path: 'profile',
+          component: ProfileComponent
+        }
+      ],
+      canActivate: [AuthGuard]
     }
 ];
 

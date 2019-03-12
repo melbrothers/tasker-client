@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule} from '@angular/router';
 import { TaskListComponent } from 'app/modules/tasks/task-list/task-list.component';
-import { TaskDataResolver } from 'app/modules/tasks/tasks-resolver.service';
+import {TaskDataResolver} from './resolver/tasks-resolver.service';
+import {MyTasksDataResolver} from './resolver/my-tasks-resolver.service';
 import {TaskComponent} from './task/task.component';
 
 const routes = [
@@ -18,6 +19,13 @@ const routes = [
       }
     ]
   },
+  {
+    path: 'my-tasks',
+    component: TaskListComponent,
+    resolve: {
+      tasks: MyTasksDataResolver
+    }
+  }
 ];
 @NgModule({
   imports: [
@@ -27,7 +35,8 @@ const routes = [
     RouterModule
   ],
   providers: [
-    TaskDataResolver
+    TaskDataResolver,
+    MyTasksDataResolver
   ]
 })
 export class TaskRoutingModule {
