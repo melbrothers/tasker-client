@@ -1,4 +1,5 @@
 import {IUser} from './user';
+import {Review} from './review.model';
 
 export class User implements IUser {
   id: string;
@@ -6,6 +7,7 @@ export class User implements IUser {
   email: string;
   avatar: string;
   created_at: string;
-  sender_review_statistics: object;
+  average_rating: number;
+  sender_review_statistics: Review;
   locale: string;
 }
