@@ -8,6 +8,7 @@ import {TaskService} from '../../../core/services/task.service';
 import * as moment from 'moment';
 import {GeneralService} from '../../../core/services/general.service';
 import {Router} from '@angular/router';
+import * as Loading from '../../../store/actions/loading.actions';
 
 @Component({
   selector: 'app-post-task',
@@ -135,8 +136,10 @@ export class PostTaskComponent implements OnInit {
     console.log(moment(this.deadline).utc().format('YYYY-MM-DDTHH:mm:ssZ'));
     this.taskForm.controls['deadline'].setValue(moment(this.deadline).utc().format('YYYY-MM-DDTHH:mm:ssZ'));
     if (this.taskForm.valid) {
+      this.store.dispatch(new Loading.ShowLoading());
       this._taskService.postTask(this.taskForm).subscribe(res => {
         console.log(res);
+        this.store.dispatch(new Loading.HideLoading());
         const message = 'Your task has been successfully created.';
         const notification = this._snackBar.open(message, 'done');
         notification.afterDismissed().subscribe(() => {
