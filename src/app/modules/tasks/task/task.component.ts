@@ -64,5 +64,4 @@ export class TaskComponent implements OnInit {
     this.store.dispatch(new RequestTask({taskId: this.task.id}));
     // this.task.deadline = moment(this.task.deadline).format('dddd, Do of MMM YYYY');
   }
-
 }

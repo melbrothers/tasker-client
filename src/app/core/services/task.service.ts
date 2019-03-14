@@ -44,4 +44,13 @@ export class TaskService {
     return this.http.post<Response>(requestUrl, body, {headers: headers});
   }
 
+  postComment(id, commentForm): Observable<Response> {
+    const requestUrl = `${environment.apiUrl}/v1/comments/${id}/replies`;
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const comment = {body: commentForm.getRawValue().commentText};
+    console.log(comment);
+    console.log(commentForm);
+    return this.http.post<Response>(requestUrl, comment, {headers});
+  }
+
 }
