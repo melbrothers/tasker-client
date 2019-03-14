@@ -25,7 +25,7 @@
           Reply
         </button>
       </mat-card-actions>
-        <section class="comment-reply" >
+      <section class="comment-reply" >
           <mat-form-field class="reply-input">
             <input matInput placeholder="Add comment..."  class="comment-reply-input" formControlName="commentText" required>
             <mat-error *ngIf="!this.commentForm.controls.commentText.valid">
@@ -33,7 +33,8 @@
             </mat-error>
           </mat-form-field>
           <button mat-button  class="reply-btn btn-xs" (click)="reply(comment.id)">Reply</button>
-        </section>
+      </section>
+      <app-comments [comments]="comment.replies" *ngIf="comment.replies"></app-comments>
     </mat-card>
   </div>
 </div>
