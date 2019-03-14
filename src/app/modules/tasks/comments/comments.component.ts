@@ -13,7 +13,7 @@ import * as fromRoot from '../../../store/reducers/app.reducer';
 export class CommentsComponent implements OnInit {
   @Input() comments;
   commentForm: FormGroup;
-  isReplyVisible: false;
+  isReplyVisible = false;
   constructor(
     public formBuilder: FormBuilder,
     private _taskService: TaskService,
