@@ -9,6 +9,8 @@ import * as moment from 'moment';
 import {GeneralService} from '../../../core/services/general.service';
 import {Router} from '@angular/router';
 import * as Loading from '../../../store/actions/loading.actions';
+import {Store} from '@ngrx/store';
+import * as fromRoot from '../../../store/reducers/app.reducer';
 
 @Component({
   selector: 'app-post-task',
@@ -50,6 +52,7 @@ export class PostTaskComponent implements OnInit {
     private _generalService: GeneralService,
     private _snackBar: MatSnackBar,
     private _router: Router,
+    private store: Store<fromRoot.State>,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon(
