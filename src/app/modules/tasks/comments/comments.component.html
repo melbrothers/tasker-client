@@ -1,6 +1,8 @@
+<form [formGroup]="commentForm">
+
 <div class="row justify-content-around">
   <div class="col task-offers">
-    <h3 class="section-title">Comments</h3>
+    <!--<h3 class="section-title">Comments</h3>-->
     <mat-card class="offer" *ngFor="let comment of comments">
       <mat-card-header>
         <div mat-card-avatar class="user-avatar" [style.background-image]="'url('+comment.author.avatar+')'" *ngIf="comment.author.avatar"></div>
@@ -18,11 +20,22 @@
         </p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button class="reply-btn" (click)="reply()">
+        <button mat-button color="primary" class="reply-btn" (click)="toggleReply()">
           <mat-icon>reply</mat-icon>
           Reply
         </button>
       </mat-card-actions>
+        <section class="comment-reply" >
+          <mat-form-field class="reply-input">
+            <input matInput placeholder="Add comment..."  class="comment-reply-input" formControlName="commentText" required>
+            <mat-error *ngIf="!this.commentForm.controls.commentText.valid">
+              Please enter at 20 characters.
+            </mat-error>
+          </mat-form-field>
+          <button mat-button  class="reply-btn btn-xs" (click)="reply(comment.id)">Reply</button>
+        </section>
     </mat-card>
   </div>
 </div>
+</form>
+
