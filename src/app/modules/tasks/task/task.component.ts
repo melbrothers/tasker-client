@@ -7,6 +7,8 @@ import {RequestTask} from '../../../store/actions/task.actions';
 import {TaskFilterDialogComponent} from '../task-filter-dialog/task-filter-dialog.component';
 import {BidComponent} from '../bid/bid.component';
 import {ActivatedRoute} from '@angular/router';
+import * as fromAuth from '../../../store/reducers/auth.reducer';
+import * as fromRoot from '../../../store/reducers/app.reducer';
 
 @Component({
   selector: 'app-task',
@@ -21,6 +23,7 @@ export class TaskComponent implements OnInit {
   rateCount: number;
   taskQuestionsCount: number;
   inputCountForQuestion = 1500;
+  isLoggedIn = false;
   constructor(
     iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private bidDialogRef: MatDialog, private store: Store<Task>, private activatedRoute: ActivatedRoute) {
   iconRegistry.addSvgIcon(
@@ -63,5 +66,10 @@ export class TaskComponent implements OnInit {
     console.log(this.task);
     this.store.dispatch(new RequestTask({taskId: this.task.id}));
     // this.task.deadline = moment(this.task.deadline).format('dddd, Do of MMM YYYY');
+    this.store.select(fromRoot.getIsAuthenticated).subscribe(isAuth => {
+      if (isAuth) {
+        this.isLoggedIn = true;
+      }
+    });
   }
 }

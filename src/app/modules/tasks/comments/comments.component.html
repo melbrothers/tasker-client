@@ -25,7 +25,7 @@
           Reply
         </button>
       </mat-card-actions>
-      <section class="comment-reply" >
+      <section class="comment-reply" *ngIf="isLoggedIn" >
           <mat-form-field class="reply-input">
             <input matInput placeholder="Add comment..."  class="comment-reply-input" formControlName="commentText" required>
             <mat-error *ngIf="!this.commentForm.controls.commentText.valid">

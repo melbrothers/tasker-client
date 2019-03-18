@@ -4,6 +4,7 @@ import * as Loading from '../../../store/actions/loading.actions';
 import {TaskService} from '../../../core/services/task.service';
 import {Store} from '@ngrx/store';
 import * as fromRoot from '../../../store/reducers/app.reducer';
+import {from} from 'rxjs';
 
 @Component({
   selector: 'app-comments',
@@ -12,6 +13,7 @@ import * as fromRoot from '../../../store/reducers/app.reducer';
 })
 export class CommentsComponent implements OnInit {
   @Input() comments;
+  @Input() isLoggedIn;
   commentForm: FormGroup;
   isReplyVisible = false;
   constructor(
@@ -42,6 +44,7 @@ export class CommentsComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
 }
