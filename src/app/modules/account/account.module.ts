@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from 'app/modules/account/dashboard/dashboard.component';
-import { AccountRoutingModule } from 'app/modules/account/account-routing.module';
 import { AccountComponent } from './account.component';
 import { SideNavComponent } from 'app/modules/account/side-nav/side-nav.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -15,6 +13,9 @@ import {SharedModule} from '../../shared/shared.module';
 import {PostTaskComponent} from './post-task/post-task.component';
 import {MatGoogleMapsAutocompleteModule} from '@angular-material-extensions/google-maps-autocomplete';
 import {MyTasksDataResolver} from '../tasks/resolver/my-tasks-resolver.service';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import { AccountRoutingModule } from 'app/modules/account/account-routing.module';
+
 
 @NgModule({
   declarations: [
