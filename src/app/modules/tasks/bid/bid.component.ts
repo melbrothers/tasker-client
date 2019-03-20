@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import {Task} from '../../../store/models/task.model';
 
 @Component({
   selector: 'app-bid',
@@ -12,8 +13,9 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
   }]
 })
 export class BidComponent implements OnInit {
-  slug: string;
+  task: Task;
   bidForm: FormGroup;
+  receivedPay: number;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
@@ -22,8 +24,9 @@ export class BidComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data.slug);
-    this.slug = this.data.slug;
+    console.log(this.data.task);
+    this.task = this.data.task;
+    this.receivedPay = this.task.price - 2.2;
   }
 
   createBigForm(): void {

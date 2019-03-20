@@ -28,6 +28,7 @@ export class MyTasksDataResolver implements Resolve<Task[]> {
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed');
         });
+        return null;
       }
     });
   }

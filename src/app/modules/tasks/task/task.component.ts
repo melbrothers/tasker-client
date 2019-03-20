@@ -54,7 +54,7 @@ export class TaskComponent implements OnInit {
       width: '50vw',
       height: 'auto',
       data: {
-        slug: this.task.slug,
+        task: this.task,
       },
     });
   }
