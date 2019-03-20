@@ -14,10 +14,28 @@
       <button mat-button matStepperNext>Next</button>
     </div>
   </mat-step>
-  <mat-step label="Step 2" state="chat">
-    <mat-form-field class="price-input">
-      <input matInput placeholder="price" formControlName="price"/>
-    </mat-form-field>
+  <mat-step label="Preview Offer" state="chat" class="preview-offer">
+    <!--<mat-form-field class="price-input">-->
+      <!--<input matInput placeholder="price" formControlName="price"/>-->
+    <!--</mat-form-field>-->
+    <div class="avatar">
+      {{task.sender.avatar}}
+    </div>
+    <h3>{{task.sender.name}}</h3>
+    <button mat-flat-button class="total-price">Total <br/> <span class="price">${{task.price}}</span></button>
+    <div class="service-fee">
+      <span>Service Fee</span>
+      <span>-$2.00</span>
+    </div>
+    <div class="gst">
+      <span>GST</span>
+      <span>-$0.20</span>
+    </div>
+    <hr>
+    <div class="received-pay">
+      <span>You'll receive</span> &nbsp;
+      <span>{{receivedPay}}</span>
+    </div>
     <div>
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button matStepperNext>Next</button>
