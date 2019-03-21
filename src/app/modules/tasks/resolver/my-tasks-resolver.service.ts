@@ -9,13 +9,13 @@ import {AuthComponent} from '../../account/auth/auth.component';
 import {MatDialog} from '@angular/material';
 
 @Injectable()
-export class MyTasksDataResolver implements Resolve<Task[]> {
+export class MyTasksDataResolver implements Resolve<any> {
   constructor(
     private taskService: TaskService,
     private store: Store<fromRoot.State>,
     private authDialog: MatDialog,
   ) {}
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
     this.store.select(fromRoot.getIsAuthenticated).subscribe(isAuthenticated => {
       if (!isAuthenticated) {
         const dialogRef = this.authDialog.open(AuthComponent, {
