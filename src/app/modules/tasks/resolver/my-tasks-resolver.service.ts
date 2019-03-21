@@ -17,9 +17,7 @@ export class MyTasksDataResolver implements Resolve<Task[]> {
   ) {}
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Task[]> {
     this.store.select(fromRoot.getIsAuthenticated).subscribe(isAuthenticated => {
-      if (isAuthenticated) {
-        return this.taskService.listMyTasks();
-      } else {
+      if (!isAuthenticated) {
         const dialogRef = this.authDialog.open(AuthComponent, {
           width: '540px',
           height: '600px',
@@ -28,8 +26,8 @@ export class MyTasksDataResolver implements Resolve<Task[]> {
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed');
         });
-        return null;
       }
+      return this.taskService.listMyTasks();
     });
   }
 }
