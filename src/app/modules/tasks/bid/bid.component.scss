@@ -33,4 +33,13 @@
     font-weight: bold;
     fong-size: 24px;
   }
+  .step-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    button {
+      width: 100%;
+      margin: 10px;
+    }
+  }
 }
