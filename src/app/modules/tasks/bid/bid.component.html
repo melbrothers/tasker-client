@@ -10,8 +10,8 @@
     <div class="bottom-line">
       <h3>You'll receive <span>$7.8</span></h3>
     </div>
-    <div>
-      <button mat-button matStepperNext>Next</button>
+    <div class="step-action">
+      <button mat-raised-button color="primary" matStepperNext>Next</button>
     </div>
   </mat-step>
   <mat-step label="Preview Offer" state="chat" class="preview-offer">
@@ -36,9 +36,9 @@
       <span>You'll receive</span> &nbsp;
       <span>{{receivedPay}}</span>
     </div>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Next</button>
+    <div class="step-action">
+      <button mat-raised-button color="accent" matStepperPrevious>Back</button>
+      <button mat-raised-button color="primary" matStepperNext>Next</button>
     </div>
   </mat-step>
   <mat-step label="Step 3">

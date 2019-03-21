@@ -15,7 +15,7 @@ export class MyTasksDataResolver implements Resolve<Task[]> {
     private store: Store<fromRoot.State>,
     private authDialog: MatDialog,
   ) {}
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Task[]> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     this.store.select(fromRoot.getIsAuthenticated).subscribe(isAuthenticated => {
       if (!isAuthenticated) {
         const dialogRef = this.authDialog.open(AuthComponent, {
@@ -26,8 +26,10 @@ export class MyTasksDataResolver implements Resolve<Task[]> {
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed');
         });
+      } else {
+        return this.taskService.listMyTasks();
       }
-      return this.taskService.listMyTasks();
     });
+
   }
 }
