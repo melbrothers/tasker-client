@@ -4,11 +4,10 @@ import {MatDialog, MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Store} from '@ngrx/store';
 import {RequestTask} from '../../../store/actions/task.actions';
-import {TaskFilterDialogComponent} from '../task-filter-dialog/task-filter-dialog.component';
 import {BidComponent} from '../bid/bid.component';
 import {ActivatedRoute} from '@angular/router';
-import * as fromAuth from '../../../store/reducers/auth.reducer';
 import * as fromRoot from '../../../store/reducers/app.reducer';
+import {AuthComponent} from '../../account/auth/auth.component';
 
 @Component({
   selector: 'app-task',
@@ -18,14 +17,18 @@ import * as fromRoot from '../../../store/reducers/app.reducer';
 export class TaskComponent implements OnInit {
   @Input() task: Task;
   isFollowed: boolean;
-  currentRate: number;
   currentCompletedRate: number;
   rateCount: number;
   taskQuestionsCount: number;
   inputCountForQuestion = 1500;
   isLoggedIn = false;
   constructor(
-    iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private bidDialogRef: MatDialog, private store: Store<Task>, private activatedRoute: ActivatedRoute) {
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer,
+    private bidDialogRef: MatDialog,
+    private store: Store<Task>,
+    private authDialog: MatDialog,
+    private activatedRoute: ActivatedRoute) {
   iconRegistry.addSvgIcon(
   'fb-logo',
   sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/facebook-logo.svg'));
@@ -50,13 +53,24 @@ export class TaskComponent implements OnInit {
     win.focus();
   }
   openBid(): void {
-    this.bidDialogRef.open(BidComponent, {
-      width: '50vw',
-      height: 'auto',
-      data: {
-        task: this.task,
-      },
-    });
+    if (!this.isLoggedIn) {
+      const dialogRef = this.authDialog.open(AuthComponent, {
+        width: '540px',
+        height: '600px',
+        panelClass: 'registerDialog'
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+    } else {
+      this.bidDialogRef.open(BidComponent, {
+        width: '50vw',
+        height: 'auto',
+        data: {
+          task: this.task,
+        },
+      });
+    }
   }
   ngOnInit() {
     this.isFollowed = false;

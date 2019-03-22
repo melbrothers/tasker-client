@@ -56,7 +56,7 @@
           <div class="budget-box">
             <h3>Task budget</h3>
             <span class="budget-number">{{task.price}}</span>
-            <button mat-raised-button class="offer-btn" color="primary" (click)="openBid()">Make an offer</button>
+            <button mat-raised-button class="offer-btn" color="primary" (click)="openBid()" >Make an offer</button>
           </div>
           <!--<div class="task-options">-->
             <!--<mat-select placeholder="More options" class="task-options-select">-->
@@ -103,14 +103,14 @@
       </div>
       <!-- End of Task details -->
       <!-- Task attachment -->
-      <div class="row justify-content-around">
-        <div class="col task-attachment">
-          <h3 class="section-title">Attachments</h3>
-          <div class="attachments-container">
-            <a href="#" class="attachment-box ripple-effect"><span>Project Brief</span><i>PDF</i></a>
-          </div>
-        </div>
-      </div>
+      <!--<div class="row justify-content-around">-->
+        <!--<div class="col task-attachment">-->
+          <!--<h3 class="section-title">Attachments</h3>-->
+          <!--<div class="attachments-container">-->
+            <!--<a href="#" class="attachment-box ripple-effect"><span>Project Brief</span><i>PDF</i></a>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
       <!-- End of task attachment -->
 
       <!-- Task offers -->
@@ -136,7 +136,7 @@
                 {{bid?.comments[0]?.body}}
               </p>
             </mat-card-content>
-            <mat-card-actions>
+            <mat-card-actions *ngIf="isLoggedIn">
               <button mat-button class="reply-btn">
                 <mat-icon>reply</mat-icon>
                 Reply

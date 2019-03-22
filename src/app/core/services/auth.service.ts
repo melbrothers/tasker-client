@@ -10,6 +10,7 @@ import * as fromAuth from '../../store/reducers/auth.reducer';
 import {Store} from '@ngrx/store';
 import { User } from 'app/store/models/user.model';
 import {environment} from '../../../environments/environment';
+import * as fromRoot from '../../store/reducers/app.reducer';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class AuthService {
   redirectUrl: string;
   constructor(
     private http: HttpClient,
-    private store: Store<fromAuth.AuthState>,
+    private store: Store<fromRoot.State>,
     private googleAuth: googleAuthService.AuthService
               ) { }
   register(signinForm): Observable<any> {
@@ -46,17 +47,13 @@ export class AuthService {
   }
 
   logout(): void  {
-    this.store.select(fromAuth.getIsAuthenticated).subscribe(isAuth => {
-      if (isAuth) {
-        // check if google login
-        this.googleAuth.authState.subscribe((user: SocialUser) => {
-          // google login
-          if (user) {
-            this.googleAuth.signOut();
-          }
-        });
-      }
+    this.apiLogout().subscribe((res) => {
       this.store.dispatch(new Auth.SetUnauthenticated());
     });
+  }
+
+  apiLogout(): Observable<any> {
+    const requestUrl = `${environment.apiUrl}/logout`;
+    return this.http.post(requestUrl, null);
   }
 }
