@@ -82,7 +82,6 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.isAuthenticated$ = this.store.select(fromRoot.getIsAuthenticated);
-
   }
 
   ngOnDestroy(): void {

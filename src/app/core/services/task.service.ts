@@ -48,9 +48,14 @@ export class TaskService {
     const requestUrl = `${environment.apiUrl}/v1/comments/${id}/replies`;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const comment = {body: commentForm.getRawValue().commentText};
-    console.log(comment);
-    console.log(commentForm);
     return this.http.post<Response>(requestUrl, comment, {headers});
+  }
+
+  postBid(slug, bidForm): Observable<Response> {
+    const requestUrl = `${environment.apiUrl}/v1/tasks/${slug}/bids`;
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const body = bidForm.getRawValue();
+    return this.http.post<Response>(requestUrl, body, {headers});
   }
 
 }

@@ -24,6 +24,7 @@ export class SetUnauthenticated implements Action {
     readonly type = AuthActionTypes.SET_UNAUTHENTICATED;
 }
 
+
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types

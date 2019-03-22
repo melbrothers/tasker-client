@@ -1,5 +1,5 @@
 import {AuthActions, AuthActionTypes} from '../actions/auth.actions';
-import { User } from 'app/store/models/user.model';
+import {User} from 'app/store/models/user.model';
 import {createFeatureSelector} from '@ngrx/store';
 
 export interface AuthState {
@@ -17,13 +17,13 @@ export function authReducer(state = initialState, action: AuthActions ): AuthSta
         case AuthActionTypes.SET_AUTHENTICATED: {
             return {
                 isAuthenticated: true,
-                user: action.payload.user
+                user: action.payload.user,
             };
         }
         case AuthActionTypes.SET_UNAUTHENTICATED: {
             return {
-                isAuthenticated: false,
-                user: null
+              isAuthenticated: false,
+              user: null,
             };
         }
         default: {

@@ -1,8 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import {Task} from '../../../store/models/task.model';
+import {TaskService} from '../../../core/services/task.service';
+import * as Loading from '../../../store/actions/loading.actions';
+import * as fromRoot from '../../../store/reducers/app.reducer';
+import {Store} from '@ngrx/store';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-bid',
@@ -19,6 +24,11 @@ export class BidComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
+    private taskService: TaskService,
+    private store: Store<fromRoot.State>,
+    private _snackBar: MatSnackBar,
+    private _router: Router,
+    public dialogRef: MatDialogRef<BidComponent>,
   ) {
     this.createBigForm();
   }
@@ -27,6 +37,9 @@ export class BidComponent implements OnInit {
     console.log(this.data.task);
     this.task = this.data.task;
     this.receivedPay = this.task.price - 2.2;
+    if (this.task.price > 0) {
+      this.bidForm.controls['price'].setValue(this.task.price);
+    }
   }
 
   createBigForm(): void {
@@ -35,6 +48,22 @@ export class BidComponent implements OnInit {
       price: ['', [Validators.required]]
     };
     this.bidForm = this.fb.group(controlsConfig);
+  }
+
+  submitBid(slug): void {
+    this.store.dispatch(new Loading.ShowLoading());
+    this.taskService.postBid(slug, this.bidForm).subscribe(bidRes => {
+      console.log(bidRes);
+
+      this.store.dispatch(new Loading.HideLoading());
+      this.dialogRef.close();
+      const message = 'Your task bid has been successfully submitted.';
+      const notification = this._snackBar.open(message, 'done');
+
+      notification.afterDismissed().subscribe(() => {
+        // this._router.navigate(['/tasks']);
+      });
+    });
   }
 
 }
