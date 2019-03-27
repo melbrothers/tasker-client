@@ -27,8 +27,9 @@ export class TaskListComponent implements OnInit {
   ) {}
 
   viewTask(task: Task): void {
-    this.store.dispatch(new Loading.HideLoading());
+    this.store.dispatch(new Loading.ShowLoading());
     this.taskService.getTask(task.slug).subscribe(thisTask => {
+      this.store.dispatch(new Loading.HideLoading());
       this.selectedTask = thisTask;
       this.router.navigate(['tasks', task.slug]);
     });
