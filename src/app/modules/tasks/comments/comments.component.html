@@ -4,7 +4,7 @@
   <div class="col task-offers">
     <!--<h3 class="section-title">Comments</h3>-->
     <mat-card class="offer" *ngFor="let comment of comments">
-      <mat-card-header>
+      <mat-card-header *ngIf="isCommHeaderVisible">
         <div mat-card-avatar class="user-avatar" [style.background-image]="'url('+comment.author.avatar+')'" *ngIf="comment.author.avatar"></div>
         <div mat-card-avatar class="user-avatar" *ngIf="!comment.author.avatar"></div>
         <hr>

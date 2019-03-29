@@ -142,7 +142,7 @@
                 <!--Reply-->
               <!--</button>-->
             <!--</mat-card-actions>-->
-            <app-comments [isLoggedIn]="isLoggedIn" [comments]="bid?.comments"></app-comments>
+            <app-comments [isLoggedIn]="isLoggedIn" [comments]="bid?.comments" [isCommHeaderVisible]="false"></app-comments>
           </mat-card>
         </div>
       </div>
@@ -153,7 +153,7 @@
         <div class="col task-questions">
           <h3 class="section-title">Questions &#40;<span>{{taskQuestionsCount}}</span>&#41;</h3>
           <p class="notice">Please don't share personal info – insurance won't apply to tasks not done through Tasker!</p>
-          <app-comments [comments]="task.comments" [isLoggedIn]="isLoggedIn"></app-comments>
+          <app-comments [comments]="task.comments" [isLoggedIn]="isLoggedIn" [isCommHeaderVisible]="true"></app-comments>
           <mat-form-field class="task-question">
             <textarea matInput placeholder="Ask Ryan a question" class="task-question-input"></textarea>
 
