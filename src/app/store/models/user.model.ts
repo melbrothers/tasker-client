@@ -9,5 +9,6 @@ export class User implements IUser {
   created_at: string;
   average_rating: number;
   sender_review_statistics: Review;
+  runner_review_statistics: Review;
   locale: string;
 }
