@@ -8,6 +8,7 @@ import * as Loading from '../../../store/actions/loading.actions';
 import * as fromRoot from '../../../store/reducers/app.reducer';
 import {Store} from '@ngrx/store';
 import {Router} from '@angular/router';
+import {PayDialogComponent} from '../../pay/pay-dialog/pay-dialog.component';
 
 @Component({
   selector: 'app-bid',
@@ -29,6 +30,7 @@ export class BidComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private _router: Router,
     public dialogRef: MatDialogRef<BidComponent>,
+    private payDialog: MatDialog,
   ) {
     this.createBigForm();
   }
@@ -40,6 +42,17 @@ export class BidComponent implements OnInit {
     if (this.task.price > 0) {
       this.bidForm.controls['price'].setValue(this.task.price);
     }
+  }
+
+  openPay(): void {
+    const dialogRef = this.payDialog.open(PayDialogComponent, {
+      width: '540px',
+      height: '600px',
+      panelClass: 'payDialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   createBigForm(): void {

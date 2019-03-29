@@ -27,6 +27,7 @@ import {CustomSerializer} from './core/utils/utils';
 import {MatGoogleMapsAutocompleteModule} from '@angular-material-extensions/google-maps-autocomplete';
 import {AgmCoreModule} from '@agm/core';
 import {HomeComponent} from './shared/pages/home/home.component';
+import {PayModule} from './modules/pay/pay.module';
 
 registerLocaleData(localeZh, 'zh-Hans');
 
@@ -58,6 +59,7 @@ export function provideConfig() {
     MatGoogleMapsAutocompleteModule,
     AccountModule,
     TaskModule,
+    PayModule,
     SocialLoginModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     AgmCoreModule.forRoot({
