@@ -1,10 +1,17 @@
 <form [formGroup]="cardForm" (ngSubmit)="onSubmit()" class="checkout">
-  <div class="form-row">
-    <label for="card-info">Card Info</label>
-    <div id="card-info" #cardInfo></div>
+  <mat-card class="form-row">
+    <mat-card-header>
+      <label for="card-info">Fill Credit Card Info</label>
+    </mat-card-header>
+    <mat-card-content>
+      <div id="card-info" #cardInfo></div>
 
-    <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
-  </div>
+      <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
+    </mat-card-content>
 
-  <button type="submit">Pay $777</button>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Pay $99</button>
+    </mat-card-actions>
+  </mat-card>
+
 </form>

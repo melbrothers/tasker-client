@@ -31,7 +31,22 @@ export class PayDialogComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.card = elements.create('card');
+    const style = {
+      base: {
+        color: '#32325d',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+          color: '#aab7c4'
+        }
+      },
+      invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a'
+      }
+    };
+    this.card = elements.create('card', {style: style});
     this.card.mount(this.cardInfo.nativeElement);
 
     this.card.addEventListener('change', this.cardHandler);
