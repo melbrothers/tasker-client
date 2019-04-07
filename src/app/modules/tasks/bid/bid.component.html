@@ -39,11 +39,11 @@
     <div class="pay-offer">
       <p>*Tasker will include a Service Fee to cover variable insurance and transaction costs.</p>
       <div class="pay-offer-content">
-        <div class="pay-icon">
-          <i class="material-icons">
+        <button mat-fab (click)="openPay()">
+          <mat-icon>
             lock_open
-          </i>
-        </div>
+          </mat-icon>
+        </button>
 
         <div>
           <h3>Get paid securely</h3>
@@ -55,7 +55,7 @@
     </div>
     <div class="step-action">
       <button mat-raised-button color="accent" matStepperPrevious>Back</button>
-      <button mat-raised-button color="primary" matStepperNext (click)="submitBid(task.slug)">Submit Offer</button>
+      <button mat-raised-button color="primary" matStepperNext (click)="submitBid(task.slug)" [disabled]="!bidForm.valid">Submit Offer</button>
     </div>
   </mat-step>
 

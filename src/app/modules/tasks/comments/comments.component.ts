@@ -14,6 +14,7 @@ import {from} from 'rxjs';
 export class CommentsComponent implements OnInit {
   @Input() comments;
   @Input() isLoggedIn;
+  @Input() isCommHeaderVisible;
   commentForm: FormGroup;
   isReplyVisible = false;
   constructor(
