@@ -44,11 +44,12 @@ export class BidComponent implements OnInit {
     }
   }
 
-  openPay(): void {
+  openPay(price): void {
     const dialogRef = this.payDialog.open(PayDialogComponent, {
       width: '540px',
       height: '600px',
-      panelClass: 'payDialog'
+      panelClass: 'payDialog',
+      data: price
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
