@@ -131,17 +131,18 @@
               <mat-card-subtitle class="offer-time">{{bid.created_at | convertDateTimeToFromNow: bid.created_at}}</mat-card-subtitle>
             </mat-card-header>
             <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
-            <mat-card-content>
-              <p class="offer-description">
-                {{bid?.comments[0]?.body}}
-              </p>
-            </mat-card-content>
-            <mat-card-actions *ngIf="isLoggedIn">
-              <button mat-button class="reply-btn">
-                <mat-icon>reply</mat-icon>
-                Reply
-              </button>
-            </mat-card-actions>
+            <!--<mat-card-content>-->
+              <!--<p class="offer-description">-->
+                <!--{{bid?.comments[0]?.body}}-->
+              <!--</p>-->
+            <!--</mat-card-content>-->
+            <!--<mat-card-actions *ngIf="isLoggedIn">-->
+              <!--<button mat-button class="reply-btn">-->
+                <!--<mat-icon>reply</mat-icon>-->
+                <!--Reply-->
+              <!--</button>-->
+            <!--</mat-card-actions>-->
+            <app-comments [isLoggedIn]="isLoggedIn" [comments]="bid?.comments"></app-comments>
           </mat-card>
         </div>
       </div>
