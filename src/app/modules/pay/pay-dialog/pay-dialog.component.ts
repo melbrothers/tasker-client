@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnDestroy, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA} from '@angular/material';
+import {MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
+import {TaskService} from '../../../core/services/task.service';
 
 
 @Component({
@@ -18,7 +19,9 @@ export class PayDialogComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private cd: ChangeDetectorRef,
-    @Inject(MAT_DIALOG_DATA) public price: number
+    private _snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public price: number,
+    private taskService: TaskService
   ) {
     this.createCardForm();
   }
@@ -78,6 +81,16 @@ export class PayDialogComponent implements OnInit, AfterViewInit, OnDestroy {
       console.log('Something is wrong:', error);
     } else {
       console.log('Success!', token);
+      this.taskService.payBid(token.id).subscribe(res => {
+        console.log(res);
+
+        const message = 'Your payment has been successfully submitted.';
+        const notification = this._snackBar.open(message, 'done');
+
+        notification.afterDismissed().subscribe(() => {
+          // this._router.navigate(['/tasks']);
+        });
+      });
       // ...send the token to the your backend to process the charge
     }
   }

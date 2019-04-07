@@ -58,4 +58,13 @@ export class TaskService {
     return this.http.post<Response>(requestUrl, body, {headers});
   }
 
+  payBid(token): Observable<Response> {
+    const requestUrl = `${environment.apiUrl}/v1/account/payment_methods`;
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const body = {
+      'token': token
+    };
+    return this.http.post<Response>(requestUrl, body, {headers});
+  }
+
 }
