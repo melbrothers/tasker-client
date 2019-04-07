@@ -1,11 +1,14 @@
-import {Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnDestroy, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA} from '@angular/material';
+
 
 @Component({
   selector: 'app-pay-dialog',
   templateUrl: './pay-dialog.component.html',
   styleUrls: ['./pay-dialog.component.scss']
 })
+
 export class PayDialogComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('cardInfo') cardInfo: ElementRef;
   card: any;
@@ -14,7 +17,8 @@ export class PayDialogComponent implements OnInit, AfterViewInit, OnDestroy {
   cardForm: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    @Inject(MAT_DIALOG_DATA) public price: number
   ) {
     this.createCardForm();
   }
@@ -31,6 +35,7 @@ export class PayDialogComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    console.log(this.price);
     const style = {
       base: {
         color: '#32325d',
@@ -66,7 +71,7 @@ export class PayDialogComponent implements OnInit, AfterViewInit, OnDestroy {
     this.cd.detectChanges();
   }
 
-  async onSubmit(form: NgForm) {
+  async onSubmit(form: FormGroup) {
     const { token, error } = await stripe.createToken(this.card);
 
     if (error) {
