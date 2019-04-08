@@ -9,7 +9,6 @@ export const environment = {
   googleClientId: '611463719645-cvunnfjflkvike7abo38vogvjb0uapbp.apps.googleusercontent.com',
   googlePlacesAPIKey: 'AIzaSyAE861yD_u4Ig-0tpYXyJqJeXxI9QljXNo',
   googleMapsAPIKey: 'AIzaSyDmiPoETLsE4NsEQX-8suRYAlaOr2Z7790',
-  stripeAPIKey: 'pk_test_4XXnW1n37moyJMqBzBta0ZAC'
 };
 
 /*

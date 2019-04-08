@@ -1,7 +1,11 @@
 import {Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, AfterViewInit, OnDestroy, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {TaskService} from '../../../core/services/task.service';
+import {Store} from '@ngrx/store';
+import * as fromRoot from '../../../store/reducers/app.reducer';
+import * as Loading from '../../../store/actions/loading.actions';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -20,6 +24,9 @@ export class PayDialogComponent implements OnInit, AfterViewInit, OnDestroy {
     private fb: FormBuilder,
     private cd: ChangeDetectorRef,
     private _snackBar: MatSnackBar,
+    private store: Store<fromRoot.State>,
+    private payDialogRef: MatDialogRef<PayDialogComponent>,
+    private _router: Router,
     @Inject(MAT_DIALOG_DATA) public price: number,
     private taskService: TaskService
   ) {
@@ -76,20 +83,20 @@ export class PayDialogComponent implements OnInit, AfterViewInit, OnDestroy {
 
   async onSubmit(form: FormGroup) {
     const { token, error } = await stripe.createToken(this.card);
-
+    const self = this;
+    this.store.dispatch(new Loading.ShowLoading());
     if (error) {
       console.log('Something is wrong:', error);
+      this.store.dispatch(new Loading.HideLoading());
     } else {
       console.log('Success!', token);
       this.taskService.payBid(token.id).subscribe(res => {
         console.log(res);
+        this.store.dispatch(new Loading.HideLoading());
 
         const message = 'Your payment has been successfully submitted.';
         const notification = this._snackBar.open(message, 'done');
-
-        notification.afterDismissed().subscribe(() => {
-          // this._router.navigate(['/tasks']);
-        });
+        self.payDialogRef.close();
       });
       // ...send the token to the your backend to process the charge
     }
