@@ -57,7 +57,7 @@
     "@types/googlemaps": "^3.37.0",
     "@types/jasmine": "^3.3.13",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^10.12.30",
+    "@types/node": "^10.14.12",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~3.3.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -69,7 +69,7 @@
     "ngrx-store-freeze": "^0.2.4",
     "protractor": "~5.4.0",
     "tailwindcss": "^0.7.4",
-    "ts-node": "^8.0.3",
+    "ts-node": "^8.3.0",
     "tslint": "~5.12.1"
   },
   "engines": {
